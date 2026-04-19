@@ -258,13 +258,13 @@
         font-weight: 400;
         fill: var(--color-text);
         text-anchor: middle;
-        dominant-baseline: middle;
+        dominant-baseline: bottom;
         letter-spacing: -3px;
       }
 
       .logo-text__accent {
         fill: var(--color-text-alt);
-        font-size: 24px;
+        font-size: 20px;
         font-style: italic;
       }
 
@@ -1136,6 +1136,122 @@
       /* ============================================
        RESPONSIVE
        ============================================ */
+      /* ============================================
+       CONTACT MODAL
+       ============================================ */
+      .contact-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(20, 20, 20, 0.7);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-md);
+      }
+
+      .contact-modal.is-open {
+        display: flex;
+      }
+
+      .contact-modal__content {
+        background-color: var(--color-bg);
+        border-radius: 2px;
+        padding: var(--space-lg);
+        max-width: 520px;
+        width: 100%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .contact-modal__header {
+        margin-bottom: var(--space-md);
+      }
+
+      .contact-modal__title {
+        font-family: var(--font-serif);
+        font-size: clamp(1.8rem, 4vw, 2.4rem);
+        letter-spacing: -0.02em;
+        margin-bottom: var(--space-sm);
+      }
+
+      .contact-modal__subtitle {
+        font-size: 0.95rem;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+      }
+
+      .contact-form__group {
+        margin-bottom: var(--space-sm);
+      }
+
+      .contact-form__label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--color-text);
+        margin-bottom: 0.5rem;
+      }
+
+      .contact-form__input,
+      .contact-form__textarea {
+        width: 100%;
+        padding: 0.9rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0;
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        color: var(--color-text);
+        background-color: #fff;
+        transition: border-color 0.3s ease;
+      }
+
+      .contact-form__input:focus,
+      .contact-form__textarea:focus {
+        outline: none;
+        border-color: var(--color-text);
+      }
+
+      .contact-form__textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .contact-modal__actions {
+        display: flex;
+        gap: var(--space-sm);
+        margin-top: var(--space-lg);
+      }
+
+      .contact-modal__close {
+        background: transparent;
+        border: 1px solid var(--color-border);
+        padding: 0.95rem 2.2rem;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .contact-modal__close:hover {
+        border-color: var(--color-text);
+      }
+
+      .contact-modal__submit {
+        flex: 1;
+        background-color: var(--color-text);
+        color: var(--color-text-light);
+        border: none;
+        padding: 0.95rem 2.2rem;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+      }
+
+      .contact-modal__submit:hover {
+        background-color: #333;
+      }
 
       @media (max-width: 1024px) {
         .services__list {
@@ -1223,6 +1339,84 @@
           flex-direction: column;
           text-align: center;
         }
+
+        .contact-modal {
+          padding: var(--space-sm);
+        }
+
+        .contact-modal__content {
+          max-width: 100%;
+          padding: 1.2rem;
+          margin: 0 auto;
+        }
+
+        .contact-modal__header {
+          margin-bottom: var(--space-sm);
+          text-align: center;
+        }
+
+        .contact-modal__title {
+          font-size: clamp(1.45rem, 6vw, 1.9rem);
+          margin-bottom: 0.35rem;
+        }
+
+        .contact-modal__subtitle {
+          font-size: 0.88rem;
+        }
+
+        .contact-form__group {
+          margin-bottom: 0.65rem;
+        }
+
+        .contact-form__label {
+          margin-bottom: 0.35rem;
+          font-size: 0.8rem;
+        }
+
+        .contact-form__input,
+        .contact-form__textarea {
+          padding: 0.7rem 0.75rem;
+          font-size: 0.9rem;
+        }
+
+        .contact-form__textarea {
+          min-height: 96px;
+        }
+
+        .contact-modal__actions {
+          margin-top: var(--space-sm);
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 0.6rem;
+        }
+
+        .contact-modal__close,
+        .contact-modal__submit {
+          padding: 0.72rem 1rem;
+          font-size: 0.8rem;
+          min-width: 130px;
+        }
+
+        .contact-modal__submit {
+          flex: 0 0 auto;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .contact-modal__content {
+          padding: 1rem;
+        }
+
+        .contact-modal__actions {
+          flex-direction: column;
+        }
+
+        .contact-modal__close,
+        .contact-modal__submit {
+          width: 100%;
+          max-width: 220px;
+        }
       }
     </style>
   </head>
@@ -1236,11 +1430,11 @@
         <a href="#" class="header__logo">
           <svg class="logo-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
             <!-- Left bracket (horizontal at bottom extends right + vertical up) -->
-            <polyline class="logo-bracket logo-bracket--left" points="50,42 15,42 15,10 20,10" />
+            <polyline class="logo-bracket logo-bracket--left" points="50,42 15,42 15,10 18,10" />
             <!-- Right bracket (horizontal at top extends left + vertical down) -->
-            <polyline class="logo-bracket logo-bracket--right" points="40,10 65,10 65,42 60,42" />
+            <polyline class="logo-bracket logo-bracket--right" points="38,10 63,10 63,42 60,42" />
             <!-- Text -->
-            <text class="logo-text" x="40" y="28">
+            <text class="logo-text" x="38" y="35">
               P
               <tspan class="logo-text__accent">w</tspan>
               I
@@ -1312,7 +1506,13 @@
         </p>
         <div class="intro__actions">
           <a href="#work" class="btn btn--primary">What we offer <span class="btn__arrow">→</span></a>
-          <a href="#contact" class="btn btn--outline">Get in Touch</a>
+          <button
+            onclick="openContactModal()"
+            class="btn btn--outline"
+            style="border: 1px solid var(--color-border); background: transparent; cursor: pointer"
+          >
+            Get in Touch
+          </button>
         </div>
       </div>
     </section>
@@ -1665,9 +1865,9 @@
             starts with a conversation.
           </p>
           <div class="cta__actions">
-            <a href="mailto:hello@pwi.studio" class="btn btn--light">
+            <button onclick="openContactModal()" class="btn btn--light" style="border: none; cursor: pointer">
               Get in Touch <span class="btn__arrow">→</span>
-            </a>
+            </button>
             <a href="#work" class="btn btn--outline-light">View Our Work</a>
           </div>
           <div class="cta__details">
@@ -1727,6 +1927,63 @@
     <!-- ==========================================
        JAVASCRIPT
        ========================================== -->
+    <!-- CONTACT MODAL -->
+    <div class="contact-modal" id="contactModal">
+      <div class="contact-modal__content">
+        <div class="contact-modal__header">
+          <h2 class="contact-modal__title">Get in Touch</h2>
+          <p class="contact-modal__subtitle">Tell us about your project. We'll get back to you shortly.</p>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <div class="contact-form__group">
+            <label for="contactName" class="contact-form__label">Name</label>
+            <input
+              type="text"
+              id="contactName"
+              name="name"
+              class="contact-form__input"
+              placeholder="Your name"
+              required
+            />
+          </div>
+
+          <div class="contact-form__group">
+            <label for="contactEmail" class="contact-form__label">Email</label>
+            <input
+              type="email"
+              id="contactEmail"
+              name="email"
+              class="contact-form__input"
+              placeholder="your@email.com"
+              required
+            />
+          </div>
+
+          <div class="contact-form__group">
+            <label for="contactPhone" class="contact-form__label">Phone (optional)</label>
+            <input type="tel" id="contactPhone" name="phone" class="contact-form__input" placeholder="+64 21..." />
+          </div>
+
+          <div class="contact-form__group">
+            <label for="contactMessage" class="contact-form__label">Message</label>
+            <textarea
+              id="contactMessage"
+              name="message"
+              class="contact-form__textarea"
+              placeholder="Tell us about your project..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="contact-modal__actions">
+            <button type="button" class="contact-modal__close" onclick="closeContactModal()">Cancel</button>
+            <button type="submit" class="contact-modal__submit">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script>
       (function () {
         "use strict";
@@ -1827,6 +2084,34 @@
           });
         }
       })();
+    </script>
+    <script>
+      /* Contact modal functions */
+      function openContactModal() {
+        document.getElementById("contactModal").classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeContactModal() {
+        document.getElementById("contactModal").classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+
+      /* Close modal when clicking outside */
+      document.getElementById("contactModal").addEventListener("click", function (e) {
+        if (e.target === this) {
+          closeContactModal();
+        }
+      });
+
+      /* Handle form submission */
+      document.getElementById("contactForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        // For now, just show success message and reset form
+        alert("Thanks for your message! We'll be in touch soon.");
+        this.reset();
+        closeContactModal();
+      });
     </script>
   </body>
 </html>
