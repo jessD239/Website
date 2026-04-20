@@ -686,6 +686,9 @@
         background-color: var(--color-bg-dark);
         color: var(--color-text-light);
         padding: var(--space-2xl) 0;
+        --services-card-bg: var(--color-bg-dark);
+        --services-card-hover-bg: #202020;
+        --services-panel-bg: #1a1a1a;
       }
 
       .services__header {
@@ -725,14 +728,14 @@
       }
 
       .service-card {
-        background-color: var(--color-bg-dark);
+        background-color: var(--services-card-bg);
         padding: var(--space-lg) var(--space-md);
         transition: background-color 0.4s ease;
         position: relative;
       }
 
       .service-card:hover {
-        background-color: #1d1d1d;
+        background-color: var(--services-card-hover-bg);
       }
 
       .service-card__number {
@@ -755,12 +758,16 @@
         opacity: 0.55;
       }
 
+      .service-card__mobile-detail {
+        display: none;
+      }
+
       .service-card {
         cursor: pointer;
       }
 
       .service-card.is-active {
-        background-color: #1d1d1d;
+        background-color: var(--services-panel-bg);
       }
 
       /* Hover arrow at bottom of card */
@@ -796,22 +803,21 @@
 
       /* Expandable detail panel below cards */
       .services__detail {
-        max-height: 0;
+        height: 0;
         overflow: hidden;
-        transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                     opacity 0.4s ease;
         opacity: 0;
         background-color: var(--color-bg-dark);
       }
 
       .services__detail.is-open {
-        max-height: 500px;
         opacity: 1;
       }
 
       .services__detail-inner {
         padding: var(--space-lg) var(--space-md);
-        background-color: #1a1a1a;
+        background-color: var(--services-panel-bg);
         border-top: 1px solid rgba(246, 244, 240, 0.08);
       }
 
@@ -1440,6 +1446,68 @@
           grid-template-columns: 1fr;
         }
 
+        .services__intro {
+          font-size: 0.95rem;
+          line-height: 1.75;
+          opacity: 0.8;
+        }
+
+        .service-card {
+          cursor: default;
+          padding: 1.4rem 1.2rem;
+        }
+
+        .service-card:hover {
+          background-color: var(--color-bg-dark);
+        }
+
+        .service-card__title {
+          font-size: 1.25rem;
+          margin-bottom: 0.6rem;
+        }
+
+        .service-card__text {
+          font-size: 0.9rem;
+          line-height: 1.75;
+          opacity: 0.75;
+          margin-bottom: 0.9rem;
+        }
+
+        .service-card__arrow {
+          display: none;
+        }
+
+        .service-card__mobile-detail {
+          display: block;
+          margin-top: 1rem;
+          padding-top: 1rem;
+          border-top: 1px solid rgba(246, 244, 240, 0.12);
+        }
+
+        .service-card__mobile-detail .services__detail-title {
+          font-size: 1.2rem;
+          margin-bottom: 0.7rem;
+        }
+
+        .service-card__mobile-detail .services__detail-text {
+          font-size: 0.9rem;
+          line-height: 1.75;
+          opacity: 0.85;
+        }
+
+        .service-card__mobile-detail .services__detail-text ul {
+          padding-left: 1.2rem;
+          margin-bottom: 0.8rem;
+        }
+
+        .service-card__mobile-detail .services__detail-text p {
+          margin-bottom: 0.7rem;
+        }
+
+        .services__detail {
+          display: none;
+        }
+
         .work__row {
           grid-template-columns: 1fr;
         }
@@ -1799,19 +1867,16 @@
           </p>
           <h2 class="services__title">Services</h2>
           <p class="services__intro">
-            Why do you use AI? Most likely to get an idea.
-            </p>
-            What if you could just ask a human?
-            Someone who understands your business - and what's actually worth doing.
-            Maybe you've got an idea but don't know how to execute it.
-            Or you're creating content, but it's not landing.
-            We help you figure out what to make, where it should go, and how to make it work.
-            From planning to execution - we make content feel simple.
-            <br/>
-            <br/>
-            All you need is an idea.
-            We'll help you make something out of it.
-            
+            Why do you use AI? Most likely to get an idea. What if you could
+            just ask a human? Someone who understands your business and what is
+            actually worth doing. Maybe you have an idea but do not know how to
+            execute it. Or you are creating content, but it is not landing. We
+            help you figure out what to make, where it should go, and how to
+            make it work. From planning to execution, we make content feel
+            simple.
+            <br />
+            <br />
+            All you need is an idea. We will help you make something out of it.
           </p>
         </div>
 
@@ -2394,6 +2459,7 @@
         var detailTitle = document.getElementById("servicesDetailTitle");
         var detailText = document.getElementById("servicesDetailText");
         var servicesList = document.querySelector(".services__list");
+        var cards = document.querySelectorAll(".service-card[data-service]");
         var activeCard = null;
 
         function isMobile() {
@@ -2406,15 +2472,97 @@
           el.style.animation = "";
         }
 
-        document.querySelectorAll(".service-card[data-service]").forEach(function (card) {
+        function setDetailContent(id) {
+          detailTitle.textContent = serviceData[id].title;
+          detailText.innerHTML = serviceData[id].text;
+        }
+
+        function animateDetailToContentHeight() {
+          var startHeight = detail.getBoundingClientRect().height;
+
+          detail.style.height = "auto";
+          var targetHeight = detail.scrollHeight;
+          detail.style.height = startHeight + "px";
+          void detail.offsetHeight;
+          detail.style.height = targetHeight + "px";
+        }
+
+        function openDetailPanel() {
+          detail.classList.add("is-open");
+          detail.style.height = "0px";
+          void detail.offsetHeight;
+          detail.style.height = detail.scrollHeight + "px";
+        }
+
+        function closeDetailPanel() {
+          detail.style.height = detail.scrollHeight + "px";
+          void detail.offsetHeight;
+          detail.classList.remove("is-open");
+          detail.style.height = "0px";
+        }
+
+        function populateMobileDetails() {
+          cards.forEach(function (card) {
+            var id = card.getAttribute("data-service");
+            var data = serviceData[id];
+            var mobileDetail = card.querySelector(".service-card__mobile-detail");
+
+            if (!mobileDetail) {
+              mobileDetail = document.createElement("div");
+              mobileDetail.className = "service-card__mobile-detail";
+              card.appendChild(mobileDetail);
+            }
+
+            mobileDetail.innerHTML =
+              '<h4 class="services__detail-title">' +
+              data.title +
+              "</h4>" +
+              '<div class="services__detail-text">' +
+              data.text +
+              "</div>";
+          });
+        }
+
+        function resetDesktopDetailState() {
+          if (!isMobile()) {
+            return;
+          }
+
+          if (activeCard) {
+            activeCard.classList.remove("is-active");
+          }
+
+          activeCard = null;
+          detail.classList.remove("is-open");
+          detail.style.height = "0px";
+        }
+
+        detail.addEventListener("transitionend", function (event) {
+          if (event.propertyName !== "height") {
+            return;
+          }
+
+          if (detail.classList.contains("is-open")) {
+            detail.style.height = "auto";
+          }
+        });
+
+        populateMobileDetails();
+        window.addEventListener("resize", resetDesktopDetailState);
+
+        cards.forEach(function (card) {
           card.addEventListener("click", function () {
+            if (isMobile()) {
+              return;
+            }
+
             var id = this.getAttribute("data-service");
             var panelAlreadyOpen = detail.classList.contains("is-open");
 
             if (activeCard === this) {
               /* Close */
               this.classList.remove("is-active");
-              detail.classList.remove("is-open");
+              closeDetailPanel();
               activeCard = null;
               return;
             }
@@ -2425,23 +2573,26 @@
             }
 
             /* Update content */
-            detailTitle.textContent = serviceData[id].title;
-            detailText.innerHTML = serviceData[id].text;
             this.classList.add("is-active");
 
             if (panelAlreadyOpen) {
+              setDetailContent(id);
+              animateDetailToContentHeight();
+
               /* Panel stays open — punch in the new content */
               restartAnimation(detailTitle);
               restartAnimation(detailText);
             } else {
+              setDetailContent(id);
+
               /* First open — position panel and expand */
               if (isMobile()) {
                 this.after(detail);
               } else {
                 servicesList.parentNode.insertBefore(detail, servicesList.nextSibling);
               }
-              void detail.offsetHeight;
-              detail.classList.add("is-open");
+
+              openDetailPanel();
             }
 
             activeCard = this;
