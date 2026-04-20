@@ -286,11 +286,13 @@
       }
 
       .header--scrolled .logo-bracket--left {
-        animation: drawLeftBracket 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation: drawLeftBracket 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+          forwards;
       }
 
       .header--scrolled .logo-bracket--right {
-        animation: drawRightBracket 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation: drawRightBracket 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+          forwards;
         animation-delay: 0.15s;
       }
 
@@ -473,7 +475,7 @@
       /* Intro content shown after the full hero video */
       .intro {
         background-color: var(--color-bg);
-        padding: var(--space-2xl) 0;
+        padding: var(--space-1xl) 0;
         position: relative;
         z-index: 3;
       }
@@ -497,6 +499,22 @@
         max-width: 620px;
         margin-bottom: var(--space-lg);
         color: var(--color-text-muted);
+      }
+
+      .intro__highlight {
+        font-size: clamp(1rem, 1.4vw, 1.1rem);
+        font-weight: 300;
+        line-height: 1.75;
+        max-width: 620px;
+        margin-bottom: var(--space-lg);
+        color: var(--color-text);
+        padding: var(--space-md);
+        border-left: 3px solid var(--color-accent);
+        background-color: var(--color-bg-alt);
+      }
+
+      .intro__highlight p {
+        margin: 0.5rem 0;
       }
 
       .intro__actions {
@@ -737,6 +755,120 @@
         opacity: 0.55;
       }
 
+      .service-card {
+        cursor: pointer;
+      }
+
+      .service-card.is-active {
+        background-color: #1d1d1d;
+      }
+
+      /* Hover arrow at bottom of card */
+      .service-card__arrow {
+        display: flex;
+        justify-content: center;
+        margin-top: var(--space-md);
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .service-card:hover .service-card__arrow,
+      .service-card.is-active .service-card__arrow {
+        opacity: 0.5;
+        transform: translateY(0);
+      }
+
+      .service-card.is-active .service-card__arrow {
+        opacity: 0.7;
+      }
+
+      .service-card__arrow svg {
+        width: 18px;
+        height: 18px;
+        fill: var(--color-text-light);
+        transition: transform 0.3s ease;
+      }
+
+      .service-card.is-active .service-card__arrow svg {
+        transform: rotate(180deg);
+      }
+
+      /* Expandable detail panel below cards */
+      .services__detail {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    opacity 0.4s ease;
+        opacity: 0;
+        background-color: var(--color-bg-dark);
+      }
+
+      .services__detail.is-open {
+        max-height: 500px;
+        opacity: 1;
+      }
+
+      .services__detail-inner {
+        padding: var(--space-lg) var(--space-md);
+        background-color: #1a1a1a;
+        border-top: 1px solid rgba(246, 244, 240, 0.08);
+      }
+
+      .services__detail-title,
+      .services__detail-text {
+        animation: detailPunchIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      }
+
+      .services__detail-text {
+        animation-delay: 0.06s;
+      }
+
+      @keyframes detailPunchIn {
+        from {
+          opacity: 0;
+          transform: translateX(-16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .services__detail-title {
+        font-family: var(--font-serif);
+        font-size: 1.4rem;
+        margin-bottom: var(--space-sm);
+        color: var(--color-text-light);
+      }
+
+      .services__detail-text {
+        font-size: 0.92rem;
+        font-weight: 300;
+        line-height: 1.8;
+        color: var(--color-text-light);
+        opacity: 0.65;
+        max-width: 700px;
+      }
+
+      .services__detail-text p {
+        margin-bottom: var(--space-sm);
+      }
+
+      .services__detail-text p:last-child {
+        margin-bottom: 0;
+      }
+
+      .services__detail-text ul {
+        list-style: disc;
+        padding-left: 1.4rem;
+        margin-bottom: var(--space-sm);
+      }
+
+      .services__detail-text li {
+        margin-bottom: 0.3rem;
+      }
+
       /* ============================================
        5. ABOUT / STUDIO SECTION
        ============================================ */
@@ -752,7 +884,7 @@
       }
 
       .about__image {
-        aspect-ratio: 5 / 6;
+        aspect-ratio: 3 / 2;
         overflow: hidden;
         background-color: var(--color-bg-alt);
       }
@@ -1428,11 +1560,21 @@
       <div class="container header__inner">
         <!-- REPLACE: Change this to your logo text or an <img> -->
         <a href="#" class="header__logo">
-          <svg class="logo-svg" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            class="logo-svg"
+            viewBox="0 0 80 50"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <!-- Left bracket (horizontal at bottom extends right + vertical up) -->
-            <polyline class="logo-bracket logo-bracket--left" points="50,42 15,42 15,10 18,10" />
+            <polyline
+              class="logo-bracket logo-bracket--left"
+              points="50,42 15,42 15,10 18,10"
+            />
             <!-- Right bracket (horizontal at top extends left + vertical down) -->
-            <polyline class="logo-bracket logo-bracket--right" points="38,10 63,10 63,42 60,42" />
+            <polyline
+              class="logo-bracket logo-bracket--right"
+              points="38,10 63,10 63,42 60,42"
+            />
             <!-- Text -->
             <text class="logo-text" x="38" y="35">
               P
@@ -1496,20 +1638,40 @@
     </section>
 
     <section class="intro" id="contentStart">
-      <div class="container intro__content reveal reveal--manual" id="introContent">
+      <div
+        class="container intro__content reveal reveal--manual"
+        id="introContent"
+      ><br />
         <p class="section-label">Creative Studio</p>
-        <h1 class="intro__heading">Ideas are easy.<br />Making them happen is where we come in.</h1>
+        <h1 class="intro__heading">
+          Ideas are easy.<br />Making them happen is where we come in.
+        </h1>
         <p class="intro__subheading">
-          People with Ideas is a creative studio built around one thing only- solving problems creatively. Whether you
-          need direction, content, or the right people to bring something to life, we help you move from idea to
-          execution.
+          People with Ideas is a creative studio built around one thing only;
+          solving problems creatively. We help turn thoughts into something
+          real.
+          <br />
+          <br />
+          Sometimes that means strategy.
+          <br />
+          Sometimes it's content.
+          <br />
+          Sometimes it's just a better way of thinking about what you already
+          have.
         </p>
+
         <div class="intro__actions">
-          <a href="#work" class="btn btn--primary">What we offer <span class="btn__arrow">→</span></a>
+          <a href="#work" class="btn btn--primary"
+            >Some of our Ideas <span class="btn__arrow">→</span></a
+          >
           <button
             onclick="openContactModal()"
             class="btn btn--outline"
-            style="border: 1px solid var(--color-border); background: transparent; cursor: pointer"
+            style="
+              border: 1px solid var(--color-border);
+              background: transparent;
+              cursor: pointer;
+            "
           >
             Get in Touch
           </button>
@@ -1527,7 +1689,7 @@
             <p class="section-label">Selected Projects</p>
             <h2 class="work__title">Featured Work</h2>
           </div>
-          <a href="#" class="work__browse">Browse all projects →</a>
+          <a href="#" class="work__browse">Browse more projects →</a>
         </div>
 
         <div class="work__grid">
@@ -1536,16 +1698,17 @@
             <div class="work__thumbnail">
               <!-- REPLACE: Swap this image with your project image -->
               <img
-                src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=960&q=80"
-                alt="Project thumbnail — replace with your own"
+                src="assets/Southward_Image.png"
+                alt="Southward"
               />
             </div>
             <div class="work__info">
               <p class="work__category">Brand Campaign</p>
               <h3 class="work__name">Meridian — Voices of the Coast</h3>
               <p class="work__desc">
-                A multi-platform campaign built around authentic stories from New Zealand's coastline communities. Film,
-                photography curation, and a digital-first launch strategy.
+                A multi-platform campaign built around authentic stories from
+                New Zealand's coastline communities. Film, photography curation,
+                and a digital-first launch strategy.
               </p>
               <a href="#" class="work__link">View Project →</a>
             </div>
@@ -1556,16 +1719,17 @@
             <div class="work__thumbnail">
               <!-- REPLACE: Swap this image with your project image -->
               <img
-                src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=960&q=80"
-                alt="Project thumbnail — replace with your own"
+                src="assets/Twentyeight_Image.png"
+                alt="Twentyeight"
               />
             </div>
             <div class="work__info">
               <p class="work__category">Video Production</p>
               <h3 class="work__name">Aether — The Maker Series</h3>
               <p class="work__desc">
-                Real artisans, real stories, real hands-on craft. Filmed across three cities and ready for every
-                screen—from your phone to the big premiere.
+                Real artisans, real stories, real hands-on craft. Filmed across
+                three cities and ready for every screen—from your phone to the
+                big premiere.
               </p>
               <a href="#" class="work__link">View Project →</a>
             </div>
@@ -1579,13 +1743,15 @@
             <div class="work__thumbnail">
               <!-- REPLACE: Swap this image -->
               <img
-                src="https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?auto=format&fit=crop&w=600&q=80"
-                alt="Project thumbnail — replace with your own"
+                src="assets/RealTalk_Man-2.jpg"
+                alt="RealTalk Man"
               />
             </div>
             <p class="work__category">Photography</p>
             <h3 class="work__name">Tōtara — Visual Identity</h3>
-            <p class="work__desc">Campaign photography and creative direction.</p>
+            <p class="work__desc">
+              Campaign photography and creative direction.
+            </p>
           </div>
 
           <!-- Small project 2 -->
@@ -1593,8 +1759,9 @@
             <div class="work__thumbnail">
               <!-- REPLACE: Swap this image -->
               <img
-                src="https://images.unsplash.com/photo-1551817958-d9d86fb29431?auto=format&fit=crop&w=600&q=80"
-                alt="Project thumbnail — replace with your own"
+                src="assets/Adeline_FrenchTech_v2.jpg"
+                alt="Adeline — French Tech"
+                style="object-position: center bottom"
               />
             </div>
             <p class="work__category">Content Campaign</p>
@@ -1607,13 +1774,15 @@
             <div class="work__thumbnail">
               <!-- REPLACE: Swap this image -->
               <img
-                src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80"
-                alt="Project thumbnail — replace with your own"
+                src="assets/Anna.jpeg"
+                alt="Anna"
               />
             </div>
             <p class="work__category">Creative Strategy</p>
             <h3 class="work__name">Kauri — Rebrand</h3>
-            <p class="work__desc">Strategic repositioning and visual overhaul.</p>
+            <p class="work__desc">
+              Strategic repositioning and visual overhaul.
+            </p>
           </div>
         </div>
       </div>
@@ -1625,43 +1794,79 @@
     <section class="services" id="services">
       <div class="container">
         <div class="services__header reveal">
-          <p class="section-label section-label--light">What We Do</p>
+          <p class="section-label section-label--light">
+            What We Do &amp; Why you are here
+          </p>
           <h2 class="services__title">Services</h2>
           <p class="services__intro">
-            We partner with brands who value craft. From concept through to delivery, our work spans film, photography,
-            strategy, and content — always grounded in clear thinking and creative ambition.
+            Why do you use AI? Most likely to get an idea.
+            </p>
+            What if you could just ask a human?
+            Someone who understands your business - and what's actually worth doing.
+            Maybe you've got an idea but don't know how to execute it.
+            Or you're creating content, but it's not landing.
+            We help you figure out what to make, where it should go, and how to make it work.
+            From planning to execution - we make content feel simple.
+            <br/>
+            <br/>
+            All you need is an idea.
+            We'll help you make something out of it.
+            
           </p>
         </div>
 
         <div class="services__list reveal">
           <!-- Service 1 -->
-          <div class="service-card">
+          <div class="service-card" data-service="1">
             <p class="service-card__number">01</p>
             <h3 class="service-card__title">Consulting &amp; Workshops</h3>
             <p class="service-card__text">
-              Strategy sessions, creative workshops, and team training. We work with your people to develop
-              capabilities, refine creative thinking, and build sustainable creative processes.
+              From 2-4 hour sessions to multi-day
+              programmes, we identify what's working and give your team clear
+              direction as well as tools to learn and grow.
             </p>
+            <div class="service-card__arrow">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="6,9 12,15 18,9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
           </div>
 
           <!-- Service 2 -->
-          <div class="service-card">
+          <div class="service-card" data-service="2">
             <p class="service-card__number">02</p>
             <h3 class="service-card__title">Media Production</h3>
             <p class="service-card__text">
-              Campaign films, photography, and branded content. From concept development through to final delivery, we
-              produce work designed to perform across every platform.
+              We don't just film and shoot. We start with why. Video
+              production, photography, live streaming, Motion graphics editing and content libraries
+              - all built around strategy first.
             </p>
+            <div class="service-card__arrow">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="6,9 12,15 18,9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
           </div>
 
           <!-- Service 3 -->
-          <div class="service-card">
+          <div class="service-card" data-service="3">
             <p class="service-card__number">03</p>
-            <h3 class="service-card__title">Creative Hub - <span class="service-card__badge">Coming Soon</span></h3>
+            <h3 class="service-card__title">
+              Creative Hub -
+              <span class="service-card__badge">Coming Soon</span>
+            </h3>
             <p class="service-card__text">
-              Creative broker and project partner. When you need specialist skills we don't provide in-house, we connect
-              you with the right people, manage the relationship, and ensure seamless collaboration.
+              The right people, without the search. A curated network of
+              trusted creatives - ready when you need them. No endless CVs, AI search or asking your mate.
+              We will connect you to the right person for the job.
             </p>
+            <div class="service-card__arrow">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="6,9 12,15 18,9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail panel (outside grid to avoid ghost 4th card) -->
+        <div class="services__detail" id="servicesDetail">
+          <div class="services__detail-inner">
+            <h4 class="services__detail-title" id="servicesDetailTitle"></h4>
+            <div class="services__detail-text" id="servicesDetailText"></div>
           </div>
         </div>
       </div>
@@ -1676,24 +1881,31 @@
           <div class="about__image reveal">
             <!-- REPLACE: Swap this image with a studio or team photo -->
             <img
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
-              alt="Studio photo — replace with your own"
+              src="assets/Lady_Image.jpg"
+              alt="Lady Image"
             />
           </div>
 
           <div class="about__copy reveal">
-            <p class="section-label">About Us</p>
-            <h2 class="about__title">Built around craft and clarity.</h2>
+            <p class="section-label">Our Philosophy</p>
+            <h2 class="about__title">We think out of the Box.</h2>
             <p class="about__text">
-              We're a small, focused creative studio that believes the best work comes from understanding a brand deeply
-              — then finding the most honest, compelling way to tell its story. We work closely with our clients,
-              keeping teams lean and standards high.
+              Ideas worth spreading! Not every idea is a good
+              one. But every good idea starts somewhere. We explore, challenge,
+              and shape ideas into something that works - not just something
+              that looks good. We work closely with our clients, keeping teams
+              lean and standards high.
             </p>
             <p class="about__text">
-              Whether it's a single hero film or a full campaign ecosystem, we bring the same level of care: thoughtful
-              strategy, considered creative, and production craft that speaks for itself.
+              Our experience spans strategy, film, video production, and
+              storytelling in all its forms. We've seen what works, what doesn't
+              - and what's worth backing. Because if it doesn't cut through, it
+              doesn't matter. We're not here to add to the noise. We're here to
+              create ideas - and experiences - worth passing on.
             </p>
-            <a href="#contact" class="btn btn--primary"> Work With Us <span class="btn__arrow">→</span> </a>
+            <a href="#contact" class="btn btn--primary">
+              Work With Us <span class="btn__arrow">→</span>
+            </a>
           </div>
         </div>
       </div>
@@ -1705,11 +1917,10 @@
     <section class="showcase" id="showcase">
       <div class="container">
         <div class="showcase__header reveal">
-          <p class="section-label">Showreel &amp; Films</p>
-          <h2 class="showcase__title">See it in motion.</h2>
+          <p class="section-label">Portfolio</p>
+          <h2 class="showcase__title">Thinking visually?</h2>
           <p class="showcase__subtitle">
-            A selection of recent film work — from brand stories and documentaries to campaign content and event
-            coverage.
+            A selection of some of our recent work. Reach out for more examples.
           </p>
         </div>
 
@@ -1732,8 +1943,8 @@
           </iframe>
         -->
           <img
-            src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1600&q=80"
-            alt="Featured video thumbnail — replace with embed"
+            src="assets/Ainsle_image.png"
+            alt="Ainsle"
             style="width: 100%; height: 100%; object-fit: cover"
           />
           <div class="showcase__play">
@@ -1755,8 +1966,8 @@
             with an <iframe> embed from Vimeo or YouTube.
           -->
             <img
-              src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=600&q=80"
-              alt="Video thumbnail 1 — replace"
+              src="assets/Southward_BTS.jpg"
+              alt="Southward BTS"
             />
             <div class="showcase__thumb-play">
               <div class="showcase__thumb-play-icon">
@@ -1765,7 +1976,9 @@
                 </svg>
               </div>
             </div>
-            <span class="showcase__thumb-label">Behind the Scenes — Meridian</span>
+            <span class="showcase__thumb-label"
+              >Behind the Scenes — Meridian</span
+            >
           </div>
 
           <!-- Video thumb 2 -->
@@ -1811,16 +2024,18 @@
     <section class="testimonials" id="testimonials">
       <div class="container">
         <div class="testimonials__header reveal">
-          <p class="section-label">Client Perspectives</p>
-          <h2 class="testimonials__title">Trusted by brands<br />who value craft.</h2>
+          <p class="section-label">Testimonials</p>
+          <h2 class="testimonials__title">
+            Supported by People<br />for the people.
+          </h2>
         </div>
 
         <div class="testimonials__grid">
           <!-- Testimonial 1 -->
           <div class="testimonial reveal">
             <p class="testimonial__quote">
-              "They understood our audience instinctively. The content they produced was some of the most effective work
-              we've ever launched."
+              "They understood our audience instinctively. The content they
+              produced was some of the most effective work we've ever launched."
             </p>
             <div class="testimonial__divider"></div>
             <p class="testimonial__author">Sarah Thornton</p>
@@ -1830,8 +2045,9 @@
           <!-- Testimonial 2 -->
           <div class="testimonial reveal">
             <p class="testimonial__quote">
-              "The team brought a level of creative thinking we hadn't experienced before. Strategic, considered, and
-              beautifully executed."
+              "The team brought a level of creative thinking we hadn't
+              experienced before. Strategic, considered, and beautifully
+              executed."
             </p>
             <div class="testimonial__divider"></div>
             <p class="testimonial__author">James Hale</p>
@@ -1841,8 +2057,9 @@
           <!-- Testimonial 3 -->
           <div class="testimonial reveal">
             <p class="testimonial__quote">
-              "From the first conversation, it was clear they cared about getting it right — not just getting it done.
-              That difference shows in every frame."
+              "From the first conversation, it was clear they cared about
+              getting it right — not just getting it done. That difference shows
+              in every frame."
             </p>
             <div class="testimonial__divider"></div>
             <p class="testimonial__author">Maia Chen</p>
@@ -1861,11 +2078,16 @@
           <p class="section-label section-label--light">Start a Project</p>
           <h2 class="cta__title">Let's make<br />something together.</h2>
           <p class="cta__text">
-            Whether you have a brief ready or just an idea taking shape, we'd love to hear from you. Every great project
-            starts with a conversation.
+            Whether you have a brief ready or just an idea taking shape, we'd
+            love to hear from you. Every great project starts with a
+            conversation.
           </p>
           <div class="cta__actions">
-            <button onclick="openContactModal()" class="btn btn--light" style="border: none; cursor: pointer">
+            <button
+              onclick="openContactModal()"
+              class="btn btn--light"
+              style="border: none; cursor: pointer"
+            >
               Get in Touch <span class="btn__arrow">→</span>
             </button>
             <a href="#work" class="btn btn--outline-light">View Our Work</a>
@@ -1874,12 +2096,16 @@
             <div class="cta__detail">
               <p class="cta__detail-label">Email</p>
               <!-- REPLACE: Your email -->
-              <a href="mailto:hello@pwi.studio" class="cta__detail-value">hello@pwi.studio</a>
+              <a href="mailto:hello@pwi.studio" class="cta__detail-value"
+                >hello@pwi.studio</a
+              >
             </div>
             <div class="cta__detail">
               <p class="cta__detail-label">Phone</p>
               <!-- REPLACE: Your phone number -->
-              <a href="tel:+64211234567" class="cta__detail-value">+64 21 123 4567</a>
+              <a href="tel:+64211234567" class="cta__detail-value"
+                >+64 21 123 4567</a
+              >
             </div>
             <div class="cta__detail">
               <p class="cta__detail-label">Location</p>
@@ -1910,15 +2136,21 @@
 
           <div class="footer__social">
             <!-- REPLACE: Update these with your actual social links -->
-            <a href="#" class="footer__social-link" aria-label="Instagram">Instagram</a>
+            <a href="#" class="footer__social-link" aria-label="Instagram"
+              >Instagram</a
+            >
             <a href="#" class="footer__social-link" aria-label="Vimeo">Vimeo</a>
-            <a href="#" class="footer__social-link" aria-label="LinkedIn">LinkedIn</a>
+            <a href="#" class="footer__social-link" aria-label="LinkedIn"
+              >LinkedIn</a
+            >
           </div>
         </div>
 
         <div class="footer__bottom">
           <!-- REPLACE: Update the year and studio name -->
-          <p class="footer__copy">&copy; 2026 PWI Creative Studio. All rights reserved.</p>
+          <p class="footer__copy">
+            &copy; 2026 PWI Creative Studio. All rights reserved.
+          </p>
           <p class="footer__copy">Crafted with intention.</p>
         </div>
       </div>
@@ -1932,7 +2164,9 @@
       <div class="contact-modal__content">
         <div class="contact-modal__header">
           <h2 class="contact-modal__title">Get in Touch</h2>
-          <p class="contact-modal__subtitle">Tell us about your project. We'll get back to you shortly.</p>
+          <p class="contact-modal__subtitle">
+            Tell us about your project. We'll get back to you shortly.
+          </p>
         </div>
 
         <form class="contact-form" id="contactForm">
@@ -1961,12 +2195,22 @@
           </div>
 
           <div class="contact-form__group">
-            <label for="contactPhone" class="contact-form__label">Phone (optional)</label>
-            <input type="tel" id="contactPhone" name="phone" class="contact-form__input" placeholder="+64 21..." />
+            <label for="contactPhone" class="contact-form__label"
+              >Phone (optional)</label
+            >
+            <input
+              type="tel"
+              id="contactPhone"
+              name="phone"
+              class="contact-form__input"
+              placeholder="+64 21..."
+            />
           </div>
 
           <div class="contact-form__group">
-            <label for="contactMessage" class="contact-form__label">Message</label>
+            <label for="contactMessage" class="contact-form__label"
+              >Message</label
+            >
             <textarea
               id="contactMessage"
               name="message"
@@ -1977,8 +2221,16 @@
           </div>
 
           <div class="contact-modal__actions">
-            <button type="button" class="contact-modal__close" onclick="closeContactModal()">Cancel</button>
-            <button type="submit" class="contact-modal__submit">Send Message</button>
+            <button
+              type="button"
+              class="contact-modal__close"
+              onclick="closeContactModal()"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="contact-modal__submit">
+              Send Message
+            </button>
           </div>
         </form>
       </div>
@@ -1997,7 +2249,9 @@
 
         function onScroll() {
           const triggerPoint = window.innerHeight * 0.3;
-          const contentTop = contentStartSection ? contentStartSection.getBoundingClientRect().top : window.innerHeight;
+          const contentTop = contentStartSection
+            ? contentStartSection.getBoundingClientRect().top
+            : window.innerHeight;
 
           if (contentTop <= triggerPoint) {
             header.classList.add("header--scrolled");
@@ -2086,6 +2340,123 @@
       })();
     </script>
     <script>
+      /* Service card expand/collapse */
+      (function () {
+        var serviceData = {
+          1: {
+            title: "Make your content work harder",
+            text:
+              "<p>If your content isn't landing - or you're not sure what to do next - we can help.</p>" +
+              "<p><strong>What we do</strong></p>" +
+              "<ul>" +
+                "<li>Identify what's working (and what's not)</li>" +
+                "<li>Review your current content</li>" +
+                "<li>Train and upskill your team where needed</li>" +
+                "<li>Guide your team on how to improve</li>" +
+                "<li>Introduce tools where useful, including AI</li>" +
+              "</ul>" +
+              "<p><strong>Formats</strong></p>" +
+              "<p>2-4 hour sessions. Full-day workshops. Multi-day programmes or semi-permanent for intense training.</p>" +
+              "<p><strong>Outcome</strong></p>" +
+              "<p>Clear direction. Practical steps. Confidence to move forward.</p>"
+          },
+          2: {
+            title: "Content with a purpose",
+            text:
+              "<p>We don't just film and shoot. We start with why.</p>" +
+              "<p><strong>What we offer</strong></p>" +
+              "<ul>" +
+                "<li>Content strategy and roll-out plan</li>" +
+                "<li>Video production</li>" +
+                "<li>Photography</li>" +
+                "<li>Live streaming</li>" +
+                "<li>Content libraries — create from scratch, add, or refresh</li>" +
+                "<li>Editing — one-off or semi-regular</li>" +
+              "</ul>" +
+              "<p><strong>Approach</strong></p>" +
+              "<p>Plan first. Then create. Less guesswork. Better results.</p>"
+          },
+          3: {
+            title: "The right people, without the search",
+            text:
+              "<p>A curated network of trusted creatives — ready when you need them.</p>" +
+              "<p><strong>What it means</strong></p>" +
+              "<ul>" +
+                "<li>No endless CVs</li>" +
+                "<li>No guesswork</li>" +
+                "<li>Just the right person for the job</li>" +
+                "<li>We manage quality control, admin, and communication</li>" +
+              "</ul>"
+          }
+        };
+
+        var detail = document.getElementById("servicesDetail");
+        var detailTitle = document.getElementById("servicesDetailTitle");
+        var detailText = document.getElementById("servicesDetailText");
+        var servicesList = document.querySelector(".services__list");
+        var activeCard = null;
+
+        function isMobile() {
+          return window.innerWidth <= 768;
+        }
+
+        function restartAnimation(el) {
+          el.style.animation = "none";
+          void el.offsetHeight;
+          el.style.animation = "";
+        }
+
+        document.querySelectorAll(".service-card[data-service]").forEach(function (card) {
+          card.addEventListener("click", function () {
+            var id = this.getAttribute("data-service");
+            var panelAlreadyOpen = detail.classList.contains("is-open");
+
+            if (activeCard === this) {
+              /* Close */
+              this.classList.remove("is-active");
+              detail.classList.remove("is-open");
+              activeCard = null;
+              return;
+            }
+
+            /* Deactivate previous */
+            if (activeCard) {
+              activeCard.classList.remove("is-active");
+            }
+
+            /* Update content */
+            detailTitle.textContent = serviceData[id].title;
+            detailText.innerHTML = serviceData[id].text;
+            this.classList.add("is-active");
+
+            if (panelAlreadyOpen) {
+              /* Panel stays open — punch in the new content */
+              restartAnimation(detailTitle);
+              restartAnimation(detailText);
+            } else {
+              /* First open — position panel and expand */
+              if (isMobile()) {
+                this.after(detail);
+              } else {
+                servicesList.parentNode.insertBefore(detail, servicesList.nextSibling);
+              }
+              void detail.offsetHeight;
+              detail.classList.add("is-open");
+            }
+
+            activeCard = this;
+
+            /* Scroll panel into view on mobile */
+            if (isMobile() && !panelAlreadyOpen) {
+              setTimeout(function () {
+                detail.scrollIntoView({ behavior: "smooth", block: "nearest" });
+              }, 100);
+            }
+          });
+        });
+      })();
+    </script>
+    <script>
       /* Contact modal functions */
       function openContactModal() {
         document.getElementById("contactModal").classList.add("is-open");
@@ -2098,20 +2469,24 @@
       }
 
       /* Close modal when clicking outside */
-      document.getElementById("contactModal").addEventListener("click", function (e) {
-        if (e.target === this) {
-          closeContactModal();
-        }
-      });
+      document
+        .getElementById("contactModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeContactModal();
+          }
+        });
 
       /* Handle form submission */
-      document.getElementById("contactForm").addEventListener("submit", function (e) {
-        e.preventDefault();
-        // For now, just show success message and reset form
-        alert("Thanks for your message! We'll be in touch soon.");
-        this.reset();
-        closeContactModal();
-      });
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          // For now, just show success message and reset form
+          alert("Thanks for your message! We'll be in touch soon.");
+          this.reset();
+          closeContactModal();
+        });
     </script>
   </body>
 </html>
