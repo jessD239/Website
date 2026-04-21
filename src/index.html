@@ -777,7 +777,9 @@
         margin-top: var(--space-md);
         opacity: 0;
         transform: translateY(-6px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
       }
 
       .service-card:hover .service-card__arrow,
@@ -805,8 +807,9 @@
       .services__detail {
         height: 0;
         overflow: hidden;
-        transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                    opacity 0.4s ease;
+        transition:
+          height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          opacity 0.4s ease;
         opacity: 0;
         background-color: var(--color-bg-dark);
       }
@@ -890,7 +893,7 @@
       }
 
       .about__image {
-        aspect-ratio: 3 / 2;
+        aspect-ratio: 5 / 6;
         overflow: hidden;
         background-color: var(--color-bg-alt);
       }
@@ -923,8 +926,44 @@
        6. VIDEO SHOWCASE SECTION
        ============================================ */
       .showcase {
+        position: relative;
         padding: var(--space-2xl) 0;
         background-color: var(--color-bg-alt);
+        overflow: hidden;
+      }
+
+      /* Subtle background image with overlay */
+      .showcase::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23f6f4f0" stroke-width="0.5" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="%23141414"/><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        background-size: 100px 100px;
+        background-position: center;
+        background-attachment: fixed;
+        opacity: 1;
+        z-index: 0;
+      }
+
+      /* Optional: Add a semi-transparent overlay on top of background */
+      .showcase::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(20, 20, 20, 0.02) 0%,
+          rgba(20, 20, 20, 0.04) 50%,
+          rgba(20, 20, 20, 0.02) 100%
+        );
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* Ensure all showcase content sits above background */
+      .showcase .container {
+        position: relative;
+        z-index: 1;
       }
 
       .showcase__header {
@@ -932,16 +971,21 @@
         max-width: 600px;
       }
 
+      .showcase__header .section-label {
+        color: rgba(246, 244, 240, 0.6);
+      }
+
       .showcase__title {
         font-size: clamp(2rem, 4vw, 3.2rem);
         letter-spacing: -0.02em;
         margin-bottom: var(--space-sm);
+        color: var(--color-text-light);
       }
 
       .showcase__subtitle {
         font-size: 1rem;
         font-weight: 300;
-        color: var(--color-text-muted);
+        color: rgba(246, 244, 240, 0.7);
         line-height: 1.7;
       }
 
@@ -1004,19 +1048,52 @@
         fill: var(--color-bg-dark);
       }
 
-      /* Supporting video thumbnails */
+      /* ======================================
+         VIDEO SHOWCASE - PREMIUM EDITORIAL GRID
+         ====================================== */
+      
       .showcase__thumbs {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: var(--space-md);
+        grid-auto-rows: auto;
+        gap: 2rem; /* 32px premium spacing */
       }
 
+      /* Base video container */
       .showcase__thumb {
         position: relative;
         aspect-ratio: 16 / 9;
         background-color: var(--color-bg-dark);
         overflow: hidden;
         cursor: pointer;
+        border-radius: 0.375rem; /* 6px subtle corners */
+        transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .showcase__thumb:hover {
+        transform: scale(1.02);
+        opacity: 0.98;
+      }
+
+      /* Featured landscape video - hero piece (spans 2 cols x 2 rows, left side) */
+      .showcase__thumb--featured {
+        grid-column: span 2;
+        grid-row: span 2;
+        aspect-ratio: 16 / 9;
+      }
+
+      .showcase__thumb--featured:hover {
+        transform: scale(1.015);
+      }
+
+      /* Portrait video - vertical accent (right side, spans 2 rows) */
+      .showcase__thumb--portrait {
+        grid-row: span 2;
+        aspect-ratio: 9 / 16;
+      }
+
+      .showcase__thumb--portrait:hover {
+        transform: scale(1.01);
       }
 
       .showcase__thumb img {
@@ -1514,6 +1591,33 @@
 
         .showcase__thumbs {
           grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .showcase__thumb--featured {
+          grid-column: span 1;
+          grid-row: span 1;
+        }
+
+        .showcase__thumb--portrait {
+          grid-row: span 1;
+        }
+      }
+
+      /* Tablet: 2-column layout */
+      @media (min-width: 768px) and (max-width: 1024px) {
+        .showcase__thumbs {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+        }
+
+        .showcase__thumb--featured {
+          grid-column: span 1;
+          grid-row: span 1;
+        }
+
+        .showcase__thumb--portrait {
+          grid-row: span 1;
         }
 
         .testimonials__grid {
@@ -1689,18 +1793,29 @@
          </video>
     -->
       <div class="hero__media">
-        <video
-          class="hero__media-placeholder"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1920&q=80"
-          aria-label="Creative studio hero background video"
-        >
-          <source src="assets/videos/test.mp4" type="video/mp4" />
-        </video>
+        <div style="padding: 56.25% 0 0 0; position: relative">
+          <iframe
+            src="https://player.vimeo.com/video/1185033344?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1"
+            frameborder="0"
+            allow="
+              autoplay;
+              fullscreen;
+              picture-in-picture;
+              clipboard-write;
+              encrypted-media;
+              web-share;
+            "
+            referrerpolicy="strict-origin-when-cross-origin"
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+            title="People With Ideas Showreel 2026"
+          ></iframe>
+        </div>
         <div class="hero__overlay"></div>
       </div>
     </section>
@@ -1709,7 +1824,8 @@
       <div
         class="container intro__content reveal reveal--manual"
         id="introContent"
-      ><br />
+      >
+        <br />
         <p class="section-label">Creative Studio</p>
         <h1 class="intro__heading">
           Ideas are easy.<br />Making them happen is where we come in.
@@ -1757,7 +1873,7 @@
             <p class="section-label">Selected Projects</p>
             <h2 class="work__title">Featured Work</h2>
           </div>
-          <a href="#" class="work__browse">Browse more projects →</a>
+          <a href="#showcase" class="work__browse">Browse more projects →</a>
         </div>
 
         <div class="work__grid">
@@ -1765,41 +1881,37 @@
           <div class="work__item--feature reveal">
             <div class="work__thumbnail">
               <!-- REPLACE: Swap this image with your project image -->
-              <img
-                src="assets/Southward_Image.png"
-                alt="Southward"
-              />
+              <img src="assets/Southward_BTS.jpg" alt="Southward" />
             </div>
             <div class="work__info">
-              <p class="work__category">Brand Campaign</p>
-              <h3 class="work__name">Meridian — Voices of the Coast</h3>
+              <p class="work__category">A day On-set</p>
+              <h3 class="work__name">
+                Southward Distilling Co - Gin, Vibes & More
+              </h3>
               <p class="work__desc">
-                A multi-platform campaign built around authentic stories from
-                New Zealand's coastline communities. Film, photography curation,
-                and a digital-first launch strategy.
+                Staged but fun! From Moodboard to Masterpiece: Behind the Scenes
+                shot of Southward Distilling Co's Hero Video.
               </p>
-              <a href="#" class="work__link">View Project →</a>
+              <a href="#showcase" class="work__link">View Project →</a>
             </div>
           </div>
 
           <!-- Featured project 2 (large) -->
           <div class="work__item--feature reveal">
-            <div class="work__thumbnail">
+            <div class="work__thumbnail" style="aspect-ratio: 16/9">
               <!-- REPLACE: Swap this image with your project image -->
-              <img
-                src="assets/Twentyeight_Image.png"
-                alt="Twentyeight"
-              />
+              <img src="assets/RealTalk.png" alt="RealTalk" />
             </div>
             <div class="work__info">
-              <p class="work__category">Video Production</p>
-              <h3 class="work__name">Aether — The Maker Series</h3>
+              <p class="work__category">Content for all Channels</p>
+              <h3 class="work__name">RealTalk - An impactful message</h3>
               <p class="work__desc">
-                Real artisans, real stories, real hands-on craft. Filmed across
-                three cities and ready for every screen—from your phone to the
-                big premiere.
+                Content can be more than just another Video, Reel or Post. For
+                RealTalk, we created a distinct look and feel to capture the
+                attention of their audience and make sure the message created an
+                impact.
               </p>
-              <a href="#" class="work__link">View Project →</a>
+              <a href="#showcase" class="work__link">View Project →</a>
             </div>
           </div>
         </div>
@@ -1810,15 +1922,14 @@
           <div class="work__item--small reveal">
             <div class="work__thumbnail">
               <!-- REPLACE: Swap this image -->
-              <img
-                src="assets/RealTalk_Man-2.jpg"
-                alt="RealTalk Man"
-              />
+              <img src="assets/Alex_Image.jpg" alt="Alex" />
             </div>
             <p class="work__category">Photography</p>
-            <h3 class="work__name">Tōtara — Visual Identity</h3>
+            <h3 class="work__name">Elevate your Content library.</h3>
             <p class="work__desc">
-              Campaign photography and creative direction.
+              A picture says more than a thousand words. Great photography can
+              elevate your content and make it feel more premium, more engaging
+              and more on brand.
             </p>
           </div>
 
@@ -1832,24 +1943,26 @@
                 style="object-position: center bottom"
               />
             </div>
-            <p class="work__category">Content Campaign</p>
-            <h3 class="work__name">Hinaki — Launch Film</h3>
-            <p class="work__desc">Hero video and social content suite.</p>
+            <p class="work__category">Social Media, Podcast or TV</p>
+            <h3 class="work__name">Knowing your Audience is key.</h3>
+            <p class="work__desc">
+              Who are you trying to reach? and where? Let's find out together
+              and create solutions accordingly.
+            </p>
           </div>
 
           <!-- Small project 3 -->
           <div class="work__item--small reveal">
             <div class="work__thumbnail">
               <!-- REPLACE: Swap this image -->
-              <img
-                src="assets/Anna.jpeg"
-                alt="Anna"
-              />
+              <img src="assets/Anna.jpeg" alt="Anna" />
             </div>
             <p class="work__category">Creative Strategy</p>
-            <h3 class="work__name">Kauri — Rebrand</h3>
+            <h3 class="work__name">Think ahead.</h3>
             <p class="work__desc">
-              Strategic repositioning and visual overhaul.
+              A marketing strategy might be your most valuable asset. Sometimes
+              you don't need more content, you might need a better strategy and
+              execution plan.
             </p>
           </div>
         </div>
@@ -1886,12 +1999,21 @@
             <p class="service-card__number">01</p>
             <h3 class="service-card__title">Consulting &amp; Workshops</h3>
             <p class="service-card__text">
-              From 2-4 hour sessions to multi-day
-              programmes, we identify what's working and give your team clear
-              direction as well as tools to learn and grow.
+              From 2-4 hour sessions to multi-day programmes, we identify what's
+              working and give your team clear direction as well as tools to
+              learn and grow.
             </p>
             <div class="service-card__arrow">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="6,9 12,15 18,9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <polyline
+                  points="6,9 12,15 18,9"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
           </div>
 
@@ -1900,12 +2022,21 @@
             <p class="service-card__number">02</p>
             <h3 class="service-card__title">Media Production</h3>
             <p class="service-card__text">
-              We don't just film and shoot. We start with why. Video
-              production, photography, live streaming, Motion graphics editing and content libraries
-              - all built around strategy first.
+              We don't just film and shoot. We start with why. Video production,
+              Podcasts, Photography, Live streaming, Motion graphics Editing and
+              content libraries - all built around strategy first.
             </p>
             <div class="service-card__arrow">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="6,9 12,15 18,9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <polyline
+                  points="6,9 12,15 18,9"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
           </div>
 
@@ -1917,12 +2048,22 @@
               <span class="service-card__badge">Coming Soon</span>
             </h3>
             <p class="service-card__text">
-              The right people, without the search. A curated network of
-              trusted creatives - ready when you need them. No endless CVs, AI search or asking your mate.
-              We will connect you to the right person for the job.
+              The right people, without the search. A curated network of trusted
+              creatives - ready when you need them. No endless CVs, AI search or
+              asking your mate. We will connect you to the right person for the
+              job.
             </p>
             <div class="service-card__arrow">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="6,9 12,15 18,9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <polyline
+                  points="6,9 12,15 18,9"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
           </div>
         </div>
@@ -1945,28 +2086,25 @@
         <div class="about__inner">
           <div class="about__image reveal">
             <!-- REPLACE: Swap this image with a studio or team photo -->
-            <img
-              src="assets/Lady_Image.jpg"
-              alt="Lady Image"
-            />
+            <img src="assets/IFwebsite_PWI.jpg" alt="PWI" />
           </div>
 
           <div class="about__copy reveal">
             <p class="section-label">Our Philosophy</p>
             <h2 class="about__title">We think out of the Box.</h2>
             <p class="about__text">
-              Ideas worth spreading! Not every idea is a good
-              one. But every good idea starts somewhere. We explore, challenge,
-              and shape ideas into something that works - not just something
-              that looks good. We work closely with our clients, keeping teams
-              lean and standards high.
+              Ideas worth spreading! Not every idea is a good one. But every
+              good idea starts somewhere. We explore, challenge, and shape ideas
+              into something that works - not just something that looks good. We
+              work closely with our clients, keeping teams lean and standards
+              high.
             </p>
             <p class="about__text">
-              Our experience spans strategy, film, video production, and
-              storytelling in all its forms. We've seen what works, what doesn't
-              - and what's worth backing. Because if it doesn't cut through, it
-              doesn't matter. We're not here to add to the noise. We're here to
-              create ideas - and experiences - worth passing on.
+              We have extensive experiences in building strategies, creating
+              films & video content for all channels. As well as educating and
+              teaching fellow creatives. We've seen what works, what doesn't and
+              what's worth pursuing. We're not here to add to the noise. We are
+              here to create ideas, experiences and stories worth passing on.
             </p>
             <a href="#contact" class="btn btn--primary">
               Work With Us <span class="btn__arrow">→</span>
@@ -1985,100 +2123,98 @@
           <p class="section-label">Portfolio</p>
           <h2 class="showcase__title">Thinking visually?</h2>
           <p class="showcase__subtitle">
-            A selection of some of our recent work. Reach out for more examples.
+            A small selection of some of our recent work.
+          Looking for something specific, like educational videos, 2D animation or other? Get in touch.</p>
           </p>
         </div>
-
-        <!-- Main featured video area -->
-        <div class="showcase__featured reveal">
-          <!--
-          REPLACE: Paste your Vimeo or YouTube embed code here.
-          Example (Vimeo):
-          <iframe src="https://player.vimeo.com/video/YOUR_VIDEO_ID"
-                  width="100%" height="100%" frameborder="0"
-                  allow="autoplay; fullscreen" allowfullscreen
-                  style="position:absolute;inset:0;width:100%;height:100%;">
-          </iframe>
-
-          Example (YouTube):
-          <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                  width="100%" height="100%" frameborder="0"
-                  allow="autoplay; encrypted-media" allowfullscreen
-                  style="position:absolute;inset:0;width:100%;height:100%;">
-          </iframe>
-        -->
-          <img
-            src="assets/Ainsle_image.png"
-            alt="Ainsle"
-            style="width: 100%; height: 100%; object-fit: cover"
-          />
-          <div class="showcase__play">
-            <div class="showcase__play-btn">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="6,3 21,12 6,21" />
-              </svg>
-            </div>
+        <!-- Video Portfolio Grid - Premium Editorial Layout -->
+        <div class="showcase__thumbs">
+          
+          <!-- VIDEO 1: Featured Landscape (Hero) - Spans 2x2 on Left -->
+          <div class="showcase__thumb showcase__thumb--featured reveal">
+            <iframe
+              src="https://player.vimeo.com/video/1185038230?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              width="100%"
+              height="100%"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share;"
+              referrerpolicy="strict-origin-when-cross-origin"
+              title="Southward Distilling Co - Hero Video"
+              style="position: absolute; inset: 0"
+            ></iframe>
+            <span class="showcase__thumb-label">Southward Distilling Co — Hero Video</span>
           </div>
+
+          <!-- VIDEO 2: Portrait (Vertical Accent) - Spans 2 rows on Right -->
+          <div class="showcase__thumb showcase__thumb--portrait reveal">
+            <div style="padding:177.78% 0 0 0;position:relative;">
+              <iframe 
+                src="https://player.vimeo.com/video/1185139123?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                frameborder="0" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                title="French Tech MiniStories - Adeline">
+              </iframe>
+            </div>
+            <span class="showcase__thumb-label">French Tech — Adeline</span>
+          </div>
+
+          <!-- VIDEO 3: Supporting - Bottom Left -->
+          <div class="showcase__thumb reveal">
+            <iframe
+              src="https://player.vimeo.com/video/1185035368?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              width="100%"
+              height="100%"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share;"
+              referrerpolicy="strict-origin-when-cross-origin"
+              title="Real Talk - Inspirational Video"
+              style="position: absolute; inset: 0"
+            ></iframe>
+            <span class="showcase__thumb-label">Real Talk — Inspirational Video</span>
+          </div>
+
+          <!-- VIDEO 4: Supporting - Bottom Center -->
+          <div class="showcase__thumb reveal">
+            <div style="padding:52.73% 0 0 0;position:relative;">
+              <iframe 
+                src="https://player.vimeo.com/video/1185124279?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                frameborder="0" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                title="Mama Says (Breaking Rules) Music Video">
+              </iframe>
+            </div>
+            <span class="showcase__thumb-label">Mama Says — Ainslie Allen</span>
+          </div>
+
+          <!-- VIDEO 5: Supporting - Bottom Right -->
+          <div class="showcase__thumb reveal">
+            <div style="padding:56.25% 0 0 0;position:relative;">
+              <iframe 
+                src="https://player.vimeo.com/video/1185142851?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+                frameborder="0" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                title="TeamCloud - Showcase">
+              </iframe>
+            </div>
+            <span class="showcase__thumb-label">TeamCloud — Showcase</span>
+          </div>
+          
         </div>
 
-        <!-- Supporting video thumbnails -->
-        <div class="showcase__thumbs">
-          <!-- Video thumb 1 -->
-          <div class="showcase__thumb reveal">
-            <!--
-            REPLACE: Swap this image with a video thumbnail.
-            To make it a playable embed, replace the <img> and overlay
-            with an <iframe> embed from Vimeo or YouTube.
-          -->
-            <img
-              src="assets/Southward_BTS.jpg"
-              alt="Southward BTS"
-            />
-            <div class="showcase__thumb-play">
-              <div class="showcase__thumb-play-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="6,3 21,12 6,21" />
-                </svg>
-              </div>
-            </div>
-            <span class="showcase__thumb-label"
-              >Behind the Scenes — Meridian</span
-            >
-          </div>
-
-          <!-- Video thumb 2 -->
-          <div class="showcase__thumb reveal">
-            <!-- REPLACE: Same as above — swap with your own thumbnail or embed -->
-            <img
-              src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=80"
-              alt="Video thumbnail 2 — replace"
-            />
-            <div class="showcase__thumb-play">
-              <div class="showcase__thumb-play-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="6,3 21,12 6,21" />
-                </svg>
-              </div>
-            </div>
-            <span class="showcase__thumb-label">Aether — Director's Cut</span>
-          </div>
-
-          <!-- Video thumb 3 -->
-          <div class="showcase__thumb reveal">
-            <!-- REPLACE: Same as above — swap with your own thumbnail or embed -->
-            <img
-              src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80"
-              alt="Video thumbnail 3 — replace"
-            />
-            <div class="showcase__thumb-play">
-              <div class="showcase__thumb-play-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <polygon points="6,3 21,12 6,21" />
-                </svg>
-              </div>
-            </div>
-            <span class="showcase__thumb-label">Tōtara — Campaign Reel</span>
-          </div>
+        <!-- Vimeo CTA -->
+        <div style="margin-top: var(--space-xl); text-align: center;">
+          <p style="font-size: 1rem; color: rgba(246, 244, 240, 0.7); margin-bottom: var(--space-md);">
+            View more on our <a href="https://vimeo.com/user257644529" target="_blank" style="color: var(--color-text-light); text-decoration: underline;">Vimeo channel</a>
+          </p>
+          <a href="https://vimeo.com/user257644529" target="_blank" class="btn btn--primary" style="text-decoration: none;">
+            Vimeo <span class="btn__arrow">→</span>
+          </a>
         </div>
       </div>
     </section>
@@ -2099,12 +2235,12 @@
           <!-- Testimonial 1 -->
           <div class="testimonial reveal">
             <p class="testimonial__quote">
-              "They understood our audience instinctively. The content they
-              produced was some of the most effective work we've ever launched."
+              "So easy to work with! Loved the guys and their passion for anything creative.
+              I highly recommend them."
             </p>
             <div class="testimonial__divider"></div>
-            <p class="testimonial__author">Sarah Thornton</p>
-            <p class="testimonial__role">Marketing Director — Meridian</p>
+            <p class="testimonial__author">Frankie McPhail</p>
+            <p class="testimonial__role">Owner - Southward Distilling Co</p>
           </div>
 
           <!-- Testimonial 2 -->
@@ -2115,20 +2251,20 @@
               executed."
             </p>
             <div class="testimonial__divider"></div>
-            <p class="testimonial__author">James Hale</p>
-            <p class="testimonial__role">Brand Lead — Aether</p>
+            <p class="testimonial__author">Michelle Henry</p>
+            <p class="testimonial__role">Marketing & Communications</p>
           </div>
 
           <!-- Testimonial 3 -->
           <div class="testimonial reveal">
             <p class="testimonial__quote">
               "From the first conversation, it was clear they cared about
-              getting it right — not just getting it done. That difference shows
+              getting it right - not just getting it done. That difference shows
               in every frame."
             </p>
             <div class="testimonial__divider"></div>
-            <p class="testimonial__author">Maia Chen</p>
-            <p class="testimonial__role">Founder — Hinaki</p>
+            <p class="testimonial__author">Prashanth Gunasekaran</p>
+            <p class="testimonial__role">Film Director</p>
           </div>
         </div>
       </div>
@@ -2141,7 +2277,7 @@
       <div class="container">
         <div class="cta__inner reveal">
           <p class="section-label section-label--light">Start a Project</p>
-          <h2 class="cta__title">Let's make<br />something together.</h2>
+          <h2 class="cta__title">Not sure where to start?<br />share with us your thoughts.</h2>
           <p class="cta__text">
             Whether you have a brief ready or just an idea taking shape, we'd
             love to hear from you. Every great project starts with a
@@ -2155,27 +2291,26 @@
             >
               Get in Touch <span class="btn__arrow">→</span>
             </button>
-            <a href="#work" class="btn btn--outline-light">View Our Work</a>
           </div>
           <div class="cta__details">
             <div class="cta__detail">
               <p class="cta__detail-label">Email</p>
               <!-- REPLACE: Your email -->
-              <a href="mailto:hello@pwi.studio" class="cta__detail-value"
-                >hello@pwi.studio</a
+              <a href="mailto:hello@peoplewithideas.co.nz" class="cta__detail-value"
+                >hello@peoplewithideas.co.nz</a
               >
             </div>
             <div class="cta__detail">
               <p class="cta__detail-label">Phone</p>
               <!-- REPLACE: Your phone number -->
-              <a href="tel:+64211234567" class="cta__detail-value"
-                >+64 21 123 4567</a
+              <a href="tel:+64272660314" class="cta__detail-value"
+                >+64 272 66 03 14</a
               >
             </div>
             <div class="cta__detail">
               <p class="cta__detail-label">Location</p>
               <!-- REPLACE: Your location -->
-              <p class="cta__detail-value">Auckland, New Zealand</p>
+              <p class="cta__detail-value"></p>New Zealand</p>
             </div>
           </div>
         </div>
@@ -2188,8 +2323,10 @@
     <footer class="footer">
       <div class="container">
         <div class="footer__inner">
-          <!-- REPLACE: Change this to your logo text or an <img> -->
-          <a href="#" class="footer__logo">PWI</a>
+          <!-- Footer logo image -->
+          <a href="#" class="footer__logo">
+            <img src="assets/PWI Logo SHORT_Black.png" alt="PWI Logo" style="height: 40px; width: auto;" />
+          </a>
 
           <nav class="footer__nav" aria-label="Footer navigation">
             <a href="#" class="footer__link">Home</a>
@@ -2214,9 +2351,9 @@
         <div class="footer__bottom">
           <!-- REPLACE: Update the year and studio name -->
           <p class="footer__copy">
-            &copy; 2026 PWI Creative Studio. All rights reserved.
+            &copy; 2026 People with Ideas. All rights reserved.
           </p>
-          <p class="footer__copy">Crafted with intention.</p>
+          <p class="footer__copy">A Creative Studio.</p>
         </div>
       </div>
     </footer>
@@ -2414,16 +2551,16 @@
               "<p>If your content isn't landing - or you're not sure what to do next - we can help.</p>" +
               "<p><strong>What we do</strong></p>" +
               "<ul>" +
-                "<li>Identify what's working (and what's not)</li>" +
-                "<li>Review your current content</li>" +
-                "<li>Train and upskill your team where needed</li>" +
-                "<li>Guide your team on how to improve</li>" +
-                "<li>Introduce tools where useful, including AI</li>" +
+              "<li>Identify what's working (and what's not)</li>" +
+              "<li>Review your current content</li>" +
+              "<li>Train and upskill your team where needed</li>" +
+              "<li>Guide your team on how to improve</li>" +
+              "<li>Introduce tools where useful, including AI</li>" +
               "</ul>" +
               "<p><strong>Formats</strong></p>" +
               "<p>2-4 hour sessions. Full-day workshops. Multi-day programmes or semi-permanent for intense training.</p>" +
               "<p><strong>Outcome</strong></p>" +
-              "<p>Clear direction. Practical steps. Confidence to move forward.</p>"
+              "<p>Clear direction. Practical steps. Confidence to move forward.</p>",
           },
           2: {
             title: "Content with a purpose",
@@ -2431,15 +2568,16 @@
               "<p>We don't just film and shoot. We start with why.</p>" +
               "<p><strong>What we offer</strong></p>" +
               "<ul>" +
-                "<li>Content strategy and roll-out plan</li>" +
-                "<li>Video production</li>" +
-                "<li>Photography</li>" +
-                "<li>Live streaming</li>" +
-                "<li>Content libraries — create from scratch, add, or refresh</li>" +
-                "<li>Editing — one-off or semi-regular</li>" +
+              "<li>Content strategy and roll-out plan</li>" +
+              "<li>Video production</li>" +
+              "<li>Podcasts</li>" +
+              "<li>Photography</li>" +
+              "<li>Live streaming</li>" +
+              "<li>Content libraries — create from scratch, add, or refresh</li>" +
+              "<li>Editing — one-off or semi-regular</li>" +
               "</ul>" +
               "<p><strong>Approach</strong></p>" +
-              "<p>Plan first. Then create. Less guesswork. Better results.</p>"
+              "<p>Plan first. Then create. Less guesswork. Better results.</p>",
           },
           3: {
             title: "The right people, without the search",
@@ -2447,12 +2585,12 @@
               "<p>A curated network of trusted creatives — ready when you need them.</p>" +
               "<p><strong>What it means</strong></p>" +
               "<ul>" +
-                "<li>No endless CVs</li>" +
-                "<li>No guesswork</li>" +
-                "<li>Just the right person for the job</li>" +
-                "<li>We manage quality control, admin, and communication</li>" +
-              "</ul>"
-          }
+              "<li>No endless CVs</li>" +
+              "<li>No guesswork</li>" +
+              "<li>Just the right person for the job</li>" +
+              "<li>We manage quality control, admin, and communication</li>" +
+              "</ul>",
+          },
         };
 
         var detail = document.getElementById("servicesDetail");
@@ -2505,7 +2643,9 @@
           cards.forEach(function (card) {
             var id = card.getAttribute("data-service");
             var data = serviceData[id];
-            var mobileDetail = card.querySelector(".service-card__mobile-detail");
+            var mobileDetail = card.querySelector(
+              ".service-card__mobile-detail",
+            );
 
             if (!mobileDetail) {
               mobileDetail = document.createElement("div");
@@ -2589,7 +2729,10 @@
               if (isMobile()) {
                 this.after(detail);
               } else {
-                servicesList.parentNode.insertBefore(detail, servicesList.nextSibling);
+                servicesList.parentNode.insertBefore(
+                  detail,
+                  servicesList.nextSibling,
+                );
               }
 
               openDetailPanel();
@@ -2639,5 +2782,6 @@
           closeContactModal();
         });
     </script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
   </body>
 </html>
