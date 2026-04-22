@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PWI — Creative Studio</title>
+    <title>PWI - Creative Studio</title>
 
     <!-- Google Fonts: Serif for headlines, Sans for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -404,21 +404,17 @@
        ============================================ */
       .hero {
         position: relative;
-        min-height: 100vh;
-        display: flex;
-        align-items: flex-end;
-        padding-top: var(--header-h);
-        padding-bottom: var(--space-xl);
+        aspect-ratio: 16 / 9;
         overflow: hidden;
         z-index: 1;
       }
 
       .hero__media {
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         z-index: 0;
         pointer-events: none;
       }
@@ -430,17 +426,6 @@
         object-fit: cover;
       }
 
-      .hero__overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(20, 20, 20, 0.15) 0%,
-          rgba(20, 20, 20, 0.6) 70%,
-          rgba(20, 20, 20, 0.85) 100%
-        );
-        z-index: 1;
-      }
 
       .hero__content {
         position: relative;
@@ -729,9 +714,11 @@
 
       .service-card {
         background-color: var(--services-card-bg);
-        padding: var(--space-lg) var(--space-md);
+        padding: var(--space-lg) var(--space-md) 1rem;
         transition: background-color 0.4s ease;
         position: relative;
+        display: flex;
+        flex-direction: column;
       }
 
       .service-card:hover {
@@ -770,26 +757,27 @@
         background-color: var(--services-panel-bg);
       }
 
-      /* Hover arrow at bottom of card */
+      /* Arrow pinned to bottom of card */
       .service-card__arrow {
         display: flex;
         justify-content: center;
-        margin-top: var(--space-md);
-        opacity: 0;
-        transform: translateY(-6px);
+        margin-top: auto;
+        padding-top: var(--space-md);
+        opacity: 0.35;
+        transform: translateY(0);
         transition:
           opacity 0.3s ease,
           transform 0.3s ease;
       }
 
-      .service-card:hover .service-card__arrow,
-      .service-card.is-active .service-card__arrow {
-        opacity: 0.5;
-        transform: translateY(0);
+      .service-card:hover .service-card__arrow {
+        opacity: 0.7;
+        transform: translateY(-4px);
       }
 
       .service-card.is-active .service-card__arrow {
-        opacity: 0.7;
+        opacity: 0.9;
+        transform: translateY(-4px);
       }
 
       .service-card__arrow svg {
@@ -1212,6 +1200,10 @@
         margin-top: 0.15rem;
       }
 
+      .testimonial__toggle {
+        display: none;
+      }
+
       /* ============================================
        8. CONTACT / CTA SECTION
        ============================================ */
@@ -1506,6 +1498,19 @@
           display: flex;
         }
 
+        .hero {
+          margin-top: var(--header-h);
+        }
+
+        .hero__overlay {
+          background: linear-gradient(
+            to bottom,
+            rgba(20, 20, 20, 0.05) 0%,
+            rgba(20, 20, 20, 0.3) 70%,
+            rgba(20, 20, 20, 0.55) 100%
+          );
+        }
+
         .hero__heading {
           font-size: clamp(2.2rem, 8vw, 3.2rem);
         }
@@ -1516,7 +1521,7 @@
         }
 
         .about__image {
-          aspect-ratio: 16 / 10;
+          aspect-ratio: 4 / 5;
         }
 
         .services__list {
@@ -1601,6 +1606,61 @@
 
         .showcase__thumb--portrait {
           grid-row: span 1;
+        }
+
+        .testimonials__grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .testimonial {
+          padding: 1.1rem 1.2rem;
+        }
+
+        .testimonial__quote {
+          font-size: 0.95rem;
+          line-height: 1.55;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          margin-bottom: 0.5rem;
+        }
+
+        .testimonial.is-expanded .testimonial__quote {
+          display: block;
+          overflow: visible;
+        }
+
+        .testimonial__toggle {
+          display: inline-block;
+          background: none;
+          border: none;
+          padding: 0;
+          margin-bottom: 0.75rem;
+          font-size: 0.78rem;
+          font-weight: 600;
+          color: var(--color-text);
+          cursor: pointer;
+          letter-spacing: 0.03em;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+          font-family: var(--font-sans);
+        }
+
+        .testimonial__divider {
+          margin-bottom: 0.6rem;
+        }
+
+        .contact-modal__content {
+          aspect-ratio: 2 / 3;
+          overflow-y: auto;
+        }
+
+        /* Show intro content immediately on mobile - no scroll reveal */
+        #introContent.reveal--manual {
+          opacity: 1;
+          transform: none;
         }
       }
 
@@ -1793,28 +1853,15 @@
          </video>
     -->
       <div class="hero__media">
-        <div style="padding: 56.25% 0 0 0; position: relative">
-          <iframe
-            src="https://player.vimeo.com/video/1185033344?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1"
-            frameborder="0"
-            allow="
-              autoplay;
-              fullscreen;
-              picture-in-picture;
-              clipboard-write;
-              encrypted-media;
-              web-share;
-            "
-            referrerpolicy="strict-origin-when-cross-origin"
-            style="
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-            "
-            title="People With Ideas Showreel 2026"
-          ></iframe>
+        <div style="padding:56.25% 0 0 0;position:relative;">
+          <iframe 
+            src="https://player.vimeo.com/video/1185033344?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+            title="People WIth Ideas Showreel 2026">
+          </iframe>
         </div>
         <div class="hero__overlay"></div>
       </div>
@@ -1881,16 +1928,15 @@
           <div class="work__item--feature reveal">
             <div class="work__thumbnail">
               <!-- REPLACE: Swap this image with your project image -->
-              <img src="assets/Southward_BTS.jpg" alt="Southward" />
+              <img src="assets/TwentyEight_imageV2.png" alt="Twenty Eight" />
             </div>
             <div class="work__info">
-              <p class="work__category">A day On-set</p>
+              <p class="work__category">Post Covid back on-set</p>
               <h3 class="work__name">
-                Southward Distilling Co - Gin, Vibes & More
+                Twenty Eight - Coffee, Vibes & More
               </h3>
               <p class="work__desc">
-                Staged but fun! From Moodboard to Masterpiece: Behind the Scenes
-                shot of Southward Distilling Co's Hero Video.
+               It's just more than an cafe. A bit of a hidden gem. Such a good shoot and loved the "retro" video style we went for. It did make it stand out from other hospitality content we have created. 
               </p>
               <a href="#showcase" class="work__link">View Project →</a>
             </div>
@@ -1938,8 +1984,8 @@
             <div class="work__thumbnail">
               <!-- REPLACE: Swap this image -->
               <img
-                src="assets/Adeline_FrenchTech_v2.jpg"
-                alt="Adeline — French Tech"
+                src="assets/Adeline_FrenchTech_Final.jpeg"
+                alt="Adeline - French Tech"
                 style="object-position: center bottom"
               />
             </div>
@@ -2132,17 +2178,17 @@
           
           <!-- VIDEO 1: Featured Landscape (Hero) - Spans 2x2 on Left -->
           <div class="showcase__thumb showcase__thumb--featured reveal">
-            <iframe
-              src="https://player.vimeo.com/video/1185038230?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-              width="100%"
-              height="100%"
-              frameborder="0"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share;"
-              referrerpolicy="strict-origin-when-cross-origin"
-              title="Southward Distilling Co - Hero Video"
-              style="position: absolute; inset: 0"
-            ></iframe>
-            <span class="showcase__thumb-label">Southward Distilling Co — Hero Video</span>
+            <div style="padding:56.25% 0 0 0;position:relative;">
+              <iframe
+                src="https://player.vimeo.com/video/1185082291?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                title="Twenty Eight">
+              </iframe>
+            </div>
+            <span class="showcase__thumb-label">Twenty Eight - Hero Video</span>
           </div>
 
           <!-- VIDEO 2: Portrait (Vertical Accent) - Spans 2 rows on Right -->
@@ -2157,7 +2203,7 @@
                 title="French Tech MiniStories - Adeline">
               </iframe>
             </div>
-            <span class="showcase__thumb-label">French Tech — Adeline</span>
+            <span class="showcase__thumb-label">French Tech - Adeline</span>
           </div>
 
           <!-- VIDEO 3: Supporting - Bottom Left -->
@@ -2172,7 +2218,7 @@
               title="Real Talk - Inspirational Video"
               style="position: absolute; inset: 0"
             ></iframe>
-            <span class="showcase__thumb-label">Real Talk — Inspirational Video</span>
+            <span class="showcase__thumb-label">Real Talk - Inspirational Video</span>
           </div>
 
           <!-- VIDEO 4: Supporting - Bottom Center -->
@@ -2187,7 +2233,7 @@
                 title="Mama Says (Breaking Rules) Music Video">
               </iframe>
             </div>
-            <span class="showcase__thumb-label">Mama Says — Ainslie Allen</span>
+            <span class="showcase__thumb-label">Mama Says - Ainslie Allen</span>
           </div>
 
           <!-- VIDEO 5: Supporting - Bottom Right -->
@@ -2202,7 +2248,7 @@
                 title="TeamCloud - Showcase">
               </iframe>
             </div>
-            <span class="showcase__thumb-label">TeamCloud — Showcase</span>
+            <span class="showcase__thumb-label">TeamCloud - Showcase</span>
           </div>
           
         </div>
@@ -2210,7 +2256,7 @@
         <!-- Vimeo CTA -->
         <div style="margin-top: var(--space-xl); text-align: center;">
           <p style="font-size: 1rem; color: rgba(246, 244, 240, 0.7); margin-bottom: var(--space-md);">
-            View more on our <a href="https://vimeo.com/user257644529" target="_blank" style="color: var(--color-text-light); text-decoration: underline;">Vimeo channel</a>
+            View more on our channel
           </p>
           <a href="https://vimeo.com/user257644529" target="_blank" class="btn btn--primary" style="text-decoration: none;">
             Vimeo <span class="btn__arrow">→</span>
@@ -2238,9 +2284,10 @@
               "So easy to work with! Loved the guys and their passion for anything creative.
               I highly recommend them."
             </p>
+            <button class="testimonial__toggle" aria-expanded="false">Read more</button>
             <div class="testimonial__divider"></div>
-            <p class="testimonial__author">Frankie McPhail</p>
-            <p class="testimonial__role">Owner - Southward Distilling Co</p>
+            <p class="testimonial__author">Joshua Ross</p>
+            <p class="testimonial__role">Owner - Twenty Eight</p>
           </div>
 
           <!-- Testimonial 2 -->
@@ -2250,6 +2297,7 @@
               experienced before. Strategic, considered, and beautifully
               executed."
             </p>
+            <button class="testimonial__toggle" aria-expanded="false">Read more</button>
             <div class="testimonial__divider"></div>
             <p class="testimonial__author">Michelle Henry</p>
             <p class="testimonial__role">Marketing & Communications</p>
@@ -2262,6 +2310,7 @@
               getting it right - not just getting it done. That difference shows
               in every frame."
             </p>
+            <button class="testimonial__toggle" aria-expanded="false">Read more</button>
             <div class="testimonial__divider"></div>
             <p class="testimonial__author">Prashanth Gunasekaran</p>
             <p class="testimonial__role">Film Director</p>
@@ -2338,11 +2387,11 @@
 
           <div class="footer__social">
             <!-- REPLACE: Update these with your actual social links -->
-            <a href="#" class="footer__social-link" aria-label="Instagram"
+            <a href="https://www.instagram.com/peoplewithideas_" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Instagram"
               >Instagram</a
             >
-            <a href="#" class="footer__social-link" aria-label="Vimeo">Vimeo</a>
-            <a href="#" class="footer__social-link" aria-label="LinkedIn"
+            <a href="https://vimeo.com/user257644529" target="_blank" rel="noopener noreferrer" class="footer__social-link" aria-label="Vimeo">Vimeo</a>
+            <a href="https://www.linkedin.com/company/people-with-ideasnz" target="_blank" class="footer__social-link" aria-label="LinkedIn"
               >LinkedIn</a
             >
           </div>
@@ -2573,8 +2622,8 @@
               "<li>Podcasts</li>" +
               "<li>Photography</li>" +
               "<li>Live streaming</li>" +
-              "<li>Content libraries — create from scratch, add, or refresh</li>" +
-              "<li>Editing — one-off or semi-regular</li>" +
+              "<li>Content libraries - create from scratch, add, or refresh</li>" +
+              "<li>Editing - one-off or semi-regular</li>" +
               "</ul>" +
               "<p><strong>Approach</strong></p>" +
               "<p>Plan first. Then create. Less guesswork. Better results.</p>",
@@ -2582,7 +2631,7 @@
           3: {
             title: "The right people, without the search",
             text:
-              "<p>A curated network of trusted creatives — ready when you need them.</p>" +
+              "<p>A curated network of trusted creatives - ready when you need them.</p>" +
               "<p><strong>What it means</strong></p>" +
               "<ul>" +
               "<li>No endless CVs</li>" +
@@ -2719,13 +2768,13 @@
               setDetailContent(id);
               animateDetailToContentHeight();
 
-              /* Panel stays open — punch in the new content */
+              /* Panel stays open - punch in the new content */
               restartAnimation(detailTitle);
               restartAnimation(detailText);
             } else {
               setDetailContent(id);
 
-              /* First open — position panel and expand */
+              /* First open - position panel and expand */
               if (isMobile()) {
                 this.after(detail);
               } else {
@@ -2774,13 +2823,74 @@
       /* Handle form submission */
       document
         .getElementById("contactForm")
-        .addEventListener("submit", function (e) {
+        .addEventListener("submit", async function (e) {
           e.preventDefault();
-          // For now, just show success message and reset form
-          alert("Thanks for your message! We'll be in touch soon.");
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+
+        const res = await fetch("https://script.google.com/macros/s/AKfycbxWmddAxQg7HeLIB4CoPIHRY0gy967znU06xzmbSX6tNCclYwB8BvVUi5_hcqMf9-jm/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain",
+          },
+          body: JSON.stringify(data),
+        });
+
+        alert("Thanks for your message! We'll be in touch soon.");
           this.reset();
           closeContactModal();
         });
+    </script>
+    <script>
+      /* Testimonial read more/less toggle (mobile only) */
+      (function () {
+        var toggles = document.querySelectorAll('.testimonial__toggle');
+
+        function checkOverflow(btn) {
+          var quote = btn.previousElementSibling;
+          if (quote && quote.scrollHeight > quote.clientHeight + 2) {
+            btn.style.display = 'inline-block';
+          } else {
+            btn.style.display = 'none';
+          }
+        }
+
+        function initToggles() {
+          toggles.forEach(function (btn) {
+            var testimonial = btn.closest('.testimonial');
+            if (window.innerWidth <= 768) {
+              testimonial.classList.remove('is-expanded');
+              btn.textContent = 'Read more';
+              btn.setAttribute('aria-expanded', 'false');
+              checkOverflow(btn);
+            } else {
+              btn.style.display = 'none';
+            }
+          });
+        }
+
+        toggles.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var testimonial = this.closest('.testimonial');
+            var expanded = testimonial.classList.toggle('is-expanded');
+            this.textContent = expanded ? 'Read less' : 'Read more';
+            this.setAttribute('aria-expanded', String(expanded));
+          });
+        });
+
+        /* Wait one frame so layout is painted before measuring */
+        requestAnimationFrame(function () {
+          requestAnimationFrame(initToggles);
+        });
+
+        var resizeTimer;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(initToggles, 100);
+        });
+      })();
     </script>
     <script src="https://player.vimeo.com/api/player.js"></script>
   </body>
