@@ -1,7 +1,5 @@
 import "./Footer.css";
 import logoBlack from "../../assets/PWI Logo SHORT_Black.png";
-import { LiaLinkedin } from "react-icons/lia";
-import { FaInstagram, FaVimeo } from "react-icons/fa6";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faLinkedin, faVimeo } from "@fortawesome/free-brands-svg-icons";
 
