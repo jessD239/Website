@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "./Services.css";
 
 interface Service {
@@ -112,21 +112,34 @@ const ChevronIcon = () => (
 
 const Services = () => {
   const [activeId, setActiveId] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
 
-  const activeService = services.find((s) => s.id === activeId) ?? null;
+  const interactiveActiveId = isMobile ? null : activeId;
+  const activeService = services.find((s) => s.id === interactiveActiveId) ?? null;
+
+  useEffect(() => {
+    const mobileMedia = window.matchMedia("(max-width: 768px)");
+
+    const updateMobile = () => setIsMobile(mobileMedia.matches);
+    updateMobile();
+
+    mobileMedia.addEventListener("change", updateMobile);
+    return () => mobileMedia.removeEventListener("change", updateMobile);
+  }, []);
 
   useLayoutEffect(() => {
     if (!detailRef.current || !innerRef.current) return;
-    if (activeId !== null) {
+    if (interactiveActiveId !== null) {
       detailRef.current.style.height = innerRef.current.scrollHeight + "px";
     } else {
       detailRef.current.style.height = "0px";
     }
-  }, [activeId]);
+  }, [interactiveActiveId]);
 
   const handleCardClick = (id: number) => {
+    if (isMobile) return;
     setActiveId((prev) => (prev === id ? null : id));
   };
 
@@ -151,17 +164,17 @@ const Services = () => {
           {services.map((service) => (
             <div
               key={service.id}
-              className={`service-card${activeId === service.id ? " is-active" : ""}`}
-              onClick={() => handleCardClick(service.id)}
-              role="button"
-              aria-expanded={activeId === service.id}
+              className={`service-card${interactiveActiveId === service.id ? " is-active" : ""}`}
+              onClick={isMobile ? undefined : () => handleCardClick(service.id)}
+              role={isMobile ? undefined : "button"}
+              aria-expanded={isMobile ? undefined : interactiveActiveId === service.id}
             >
               <p className="service-card__number">{service.number}</p>
               <h3 className="service-card__title">{service.title}</h3>
               <p className="service-card__text">{service.text}</p>
 
               {/* Mobile inline detail */}
-              <div className="service-card__mobile-detail">
+              <div className="service-card__mobile-detail reveal">
                 <h4 className="services__detail-title">{service.detailTitle}</h4>
                 <div className="services__detail-text">{service.detailContent}</div>
               </div>
@@ -174,7 +187,7 @@ const Services = () => {
         </div>
 
         {/* Desktop expand panel — sits outside the grid */}
-        <div ref={detailRef} className={`services__detail${activeId !== null ? " is-open" : ""}`}>
+        <div ref={detailRef} className={`services__detail${interactiveActiveId !== null ? " is-open" : ""}`}>
           <div ref={innerRef} className="services__detail-inner">
             {activeService && (
               <>
