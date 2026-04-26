@@ -1,0 +1,194 @@
+/* ============================================
+   CONTACT MODAL
+   ============================================ */
+
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(20, 20, 20, 0.7);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.contact-modal--open {
+  opacity: 1;
+}
+
+.contact-modal__content {
+  background-color: var(--color-bg);
+  border-radius: 2px;
+  padding: var(--space-lg);
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: 0.3s ease;
+}
+
+.contact-modal__content--open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Header ---- */
+
+.contact-modal__header {
+  margin-bottom: var(--space-md);
+}
+
+.contact-modal__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-modal__subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ---- Actions ---- */
+
+.contact-modal__actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.contact-modal__close {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  padding: 0.95rem 2.2rem;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text);
+  transition: border-color var(--transition-base);
+}
+
+.contact-modal__close:hover:not(:disabled) {
+  border-color: var(--color-text);
+}
+
+.contact-modal__submit {
+  flex: 1;
+  background-color: var(--color-text);
+  color: var(--color-text-light);
+  border: none;
+  padding: 0.95rem 2.2rem;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background-color var(--transition-base);
+}
+
+.contact-modal__submit:hover:not(:disabled) {
+  background-color: var(--color-text-alt);
+}
+
+.contact-modal__close:disabled,
+.contact-modal__submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ---- Error message ---- */
+
+.contact-modal__error {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-sm);
+}
+
+/* ---- Success state ---- */
+
+.contact-modal__success {
+  text-align: center;
+  padding: var(--space-md) 0;
+}
+
+.contact-modal__success-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text-muted);
+}
+
+.contact-modal__success .contact-modal__title {
+  margin-bottom: 0.5rem;
+}
+
+.contact-modal__success .contact-modal__actions {
+  justify-content: center;
+}
+
+.contact-modal__success .contact-modal__submit {
+  flex: 0 1 auto;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 768px) {
+  .contact-modal {
+    padding: var(--space-sm);
+    align-items: flex-end;
+  }
+
+  .contact-modal__content {
+    max-width: 100%;
+    padding: var(--space-md);
+    border-radius: 2px 2px 0 0;
+  }
+
+  .contact-modal__actions {
+    margin-top: var(--space-md);
+    flex-direction: column;
+  }
+
+  .contact-modal__close,
+  .contact-modal__submit {
+    width: 100%;
+    text-align: center;
+  }
+
+  .contact-modal__submit {
+    flex: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-modal__content {
+    padding: var(--space-sm);
+  }
+}
+
+.contact-modal__success-tick {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin: 0 auto var(--space-sm);
+  color: var(--color-text-muted); /* Matches your previous icon color */
+}
+
+.tick-path {
+  /* The total length of the path - 50 is a safe estimate for this shape */
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: draw-tick 0.6s ease-out forwards;
+  animation-delay: 0.2s; /* Starts slightly after the success message appears */
+}
+
+@keyframes draw-tick {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
