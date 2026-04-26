@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d dist -c peoplewithideas.co.nz",
     "start": "vite --port 3000 --open"
   },
   "dependencies": {
