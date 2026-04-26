@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "start": "react-scripts start"
+    "start": "vite --port 3000 --open"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
