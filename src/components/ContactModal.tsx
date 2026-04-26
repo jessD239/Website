@@ -58,6 +58,15 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     return () => clearTimeout(timer);
   }, [isOpen, ANIMATION_DURATION]);
 
+  useEffect(() => {
+    if (mounted) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+  }, [mounted]);
+
   if (!mounted) return null;
 
   const handleBackdropPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {

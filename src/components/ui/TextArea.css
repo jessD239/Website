@@ -29,6 +29,7 @@
   resize: vertical;
 }
 
+/* WebKit browsers only — Firefox ignores this but supports vertical resize above */
 .text-area-input--resizable::-webkit-resizer {
   background:
     linear-gradient(135deg, var(--color-surface) 50%, transparent 50%),

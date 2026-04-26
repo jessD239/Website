@@ -188,21 +188,21 @@ input {
   font-size: var(--fs-sm);
   color: var(--color-text);
   box-sizing: border-box;
+}
 
-  &:focus,
-  :focus-visible {
-    outline: none;
-  }
+input:focus,
+input:focus-visible {
+  outline: none;
+}
 
-  &::placeholder {
-    color: transparent;
-    transition: color var(--duration-fast);
-  }
+input::placeholder {
+  color: transparent;
+  transition: color var(--duration-fast);
+}
 
-  &::-webkit-textfield-decoration-container,
-  &::-webkit-input-decoration,
-  &::-ms-reveal,
-  &::-ms-clear {
-    display: none;
-  }
+input::-webkit-textfield-decoration-container,
+input::-webkit-input-decoration,
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
 }

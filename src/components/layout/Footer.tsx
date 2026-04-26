@@ -1,5 +1,6 @@
 import "./Footer.css";
-import logoBlack from "../../assets/PWI Logo SHORT_Black.png";
+// import logoBlack from "../../assets/PWI Logo SHORT_Black.png";
+import logoLongBlack from "../../assets/pwi_logo_long_black.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faLinkedin, faVimeo } from "@fortawesome/free-brands-svg-icons";
 
@@ -8,9 +9,11 @@ export const Footer = () => {
     <footer className="footer">
       <div className="container">
         <div className="footer__inner">
+          <div className="footer__logo-container">
           <a href="#" className="footer__logo">
-            <img src={logoBlack} alt="PWI Logo" className="footer__logo-img" />
+            <img src={logoLongBlack} alt="PWI Logo" className="footer__logo-img" />
           </a>
+          </div>
 
           <nav className="footer__nav" aria-label="Footer navigation">
             <a href="#" className="footer__link">

@@ -78,11 +78,13 @@
   .testimonial__quote {
     font-size: 0.95rem;
     line-height: 1.55;
+    /* Webkit browsers (Chrome, Safari): 3-line clamp */
     display: -webkit-box;
     -webkit-line-clamp: 3;
-    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    /* Fallback for Firefox: max-height (shows ~3 lines worth) */
+    max-height: 4.65em;
     margin-bottom: 0.5rem;
   }
 
