@@ -55,9 +55,9 @@ ul {
   padding: var(--section-padding);
 }
 
-section[id] {
-  scroll-margin-top: 80px;
-}
+/* section[id] {
+  scroll-margin-top: 20px;
+} */
 
 @media (max-width: 768px) {
   :root {
@@ -83,6 +83,6 @@ section[id] {
 
 /* Selection */
 ::selection {
-  background: var(--color-accent-glow);
-  color: var(--color-accent-light);
+  background: var(--color-accent);
+  color: var(--color-text);
 }

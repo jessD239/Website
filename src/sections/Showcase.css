@@ -3,7 +3,7 @@
    ============================================ */
 .showcase {
   position: relative;
-  padding: var(--space-2xl) 0;
+  padding: var(--space-xl) 0;
   background-color: var(--color-bg-alt);
   overflow: hidden;
 }

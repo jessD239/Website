@@ -72,6 +72,10 @@
    RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
+  .cta {
+    padding: var(--space-xl) 0;
+  }
+
   .cta__details {
     /* flex-direction: column; */
     gap: var(--space-lg);

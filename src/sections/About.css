@@ -2,7 +2,7 @@
    5. ABOUT / STUDIO SECTION
    ============================================ */
 .about {
-  padding: var(--space-2xl) 0;
+  padding: var(--space-xl) 0;
 }
 
 .about__inner {
@@ -46,6 +46,10 @@
    RESPONSIVE
    ============================================ */
 @media (max-width: 768px) {
+  .about {
+    padding: var(--space-lg) 0;
+  }
+
   .about__inner {
     grid-template-columns: 1fr;
     gap: var(--space-lg);

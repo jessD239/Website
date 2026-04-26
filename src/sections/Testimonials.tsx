@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Testimonials.css";
 
 interface Testimonial {
@@ -32,9 +32,42 @@ const testimonials: Testimonial[] = [
 ];
 
 const Testimonials = () => {
-  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
+  // const [expanded, setExpanded] = useState<Record<number, boolean>>({});
+  const [visible, setVisible] = useState<Record<number, boolean>>({});
+  const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
-  const toggle = (id: number) => setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
+  // const toggle = (id: number) => setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
+
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) {
+      const all: Record<number, boolean> = {};
+      testimonials.forEach((t) => {
+        all[t.id] = true;
+      });
+      setVisible(all);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = Number((entry.target as HTMLElement).dataset.revealId);
+            setVisible((prev) => ({ ...prev, [id]: true }));
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+
+    testimonials.forEach((t) => {
+      const el = cardRefs.current[t.id];
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="testimonials" id="testimonials">
@@ -50,15 +83,22 @@ const Testimonials = () => {
 
         <div className="testimonials__grid">
           {testimonials.map((t) => (
-            <div key={t.id} className={`testimonial reveal${expanded[t.id] ? " is-expanded" : ""}`}>
+            <div
+              key={t.id}
+              ref={(el) => {
+                cardRefs.current[t.id] = el;
+              }}
+              data-reveal-id={t.id}
+              className={`testimonial reveal reveal--manual${visible[t.id] ? " is-visible" : ""}${/* expanded[t.id] ? " is-expanded" : "" */""}`}
+            >
               <p className="testimonial__quote">"{t.quote}"</p>
-              <button
+              {/* <button
                 className="testimonial__toggle"
                 aria-expanded={expanded[t.id] ?? false}
                 onClick={() => toggle(t.id)}
               >
                 {expanded[t.id] ? "Read less" : "Read more"}
-              </button>
+              </button> */}
               <div className="testimonial__divider" />
               <p className="testimonial__author">{t.author}</p>
               <p className="testimonial__role">{t.role}</p>

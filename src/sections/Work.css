@@ -2,7 +2,7 @@
        3. FEATURED WORK SECTION
        ============================================ */
 .work {
-  padding: var(--space-2xl) 0;
+  padding: var(--space-xl) 0;
 }
 
 .work__header {

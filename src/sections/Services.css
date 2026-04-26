@@ -206,6 +206,10 @@
 }
 
 @media (max-width: 768px) {
+  .services {
+    padding: var(--space-xl) 0;
+  }
+
   .services__list {
     grid-template-columns: 1fr;
   }
