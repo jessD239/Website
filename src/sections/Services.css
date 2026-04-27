@@ -12,7 +12,7 @@
 
 .services__header {
   max-width: 640px;
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
 }
 
 .services__title {
@@ -263,7 +263,7 @@
 
 .services__header {
   max-width: 640px;
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-sm);
 }
 
 .services__title {
