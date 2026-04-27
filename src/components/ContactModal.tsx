@@ -98,6 +98,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email.trim() && !emailRegex.test(email)) errors.push({ field: "email", message: "Email is invalid" });
     if (!message.trim()) errors.push({ field: "message", message: "Message is required" });
+    if (!phone.trim()) errors.push({ field: "phone", message: "Phone number is required" });
     setErrors(errors);
     return errors;
   };
@@ -195,12 +196,14 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               />
               <TextField
                 name="phone"
-                label="Phone (optional)"
+                label="Phone"
+                required
                 type="phone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 fullWidth
                 disabled={status === "submitting"}
+                error={getError("phone")}
               />
               <TextArea
                 name="message"
