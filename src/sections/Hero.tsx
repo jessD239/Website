@@ -60,7 +60,9 @@ const Hero = ({ onOpenContact }: HeroProps) => {
           <h1 className="intro__heading">
             Ideas are easy.
             <br />
-            Making them happen is where we come in.
+            Making them happen is
+            <br />
+            where we come in.
           </h1>
           <p className="intro__subheading">
             People with Ideas is a creative studio built around one thing only; solving problems creatively. We help
