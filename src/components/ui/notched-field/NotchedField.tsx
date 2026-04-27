@@ -7,7 +7,7 @@ export interface NotchedFieldProps {
   label: string;
   /** Whether the wrapped control currently holds a value. */
   hasValue?: boolean;
-  /** Error message — triggers error styling when truthy. */
+  /** Error message - triggers error styling when truthy. */
   error?: string | null;
   /** Helper text shown below the field (hidden when error is present). */
   subtext?: string;

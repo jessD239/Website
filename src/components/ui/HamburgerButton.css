@@ -62,7 +62,7 @@
   }
 }
 
-/* Open state — middle bar hidden, top/bottom cross */
+/* Open state - middle bar hidden, top/bottom cross */
 .hamburger--open .hamburger__icon {
   background-color: transparent;
 }

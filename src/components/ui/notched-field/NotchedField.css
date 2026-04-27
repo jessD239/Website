@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NotchedField — Reusable MUI-style floating label with fieldset/legend notch
+   NotchedField - Reusable MUI-style floating label with fieldset/legend notch
    Wrap any form control (input, textarea, select, button) to get the
    outlined notch effect.
    ========================================================================== */
@@ -35,7 +35,7 @@
   transition: border-color var(--duration-base);
 }
 
-/* Legend — collapsed by default, expands to create the notch */
+/* Legend - collapsed by default, expands to create the notch */
 .notched-field legend {
   padding: 0;
   height: 0;
@@ -125,7 +125,7 @@
   max-width: 100%;
 }
 
-/* ---- Focused + Filled — focus color wins ---- */
+/* ---- Focused + Filled - focus color wins ---- */
 
 .notched-field.has-value:focus-within .notched-field-label {
   color: var(--color-accent-light);

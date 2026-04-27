@@ -112,7 +112,7 @@
 }
 
 @media (max-width: 768px) {
-  /* On mobile the hero is short — header is always in scrolled state, no transition */
+  /* On mobile the hero is short - header is always in scrolled state, no transition */
   .header {
     transition: none;
     background-color: rgba(246, 244, 240, 0.92);
