@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./Hero.css";
+import showreelVideo from "../assets/video/People WIth Ideas Showreel 2026_10MB Compressed.mp4";
 
 interface HeroProps {
   onOpenContact?: () => void;
@@ -39,12 +40,22 @@ const Hero = ({ onOpenContact }: HeroProps) => {
       <section className="hero">
         <div className="hero__media">
           <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
+            {/*
             <iframe
               src="https://player.vimeo.com/video/1185033344?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1"
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
               title="People With Ideas Showreel 2026"
+            />
+            */}
+            <video
+              src={showreelVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>
           <div className="hero__overlay" />
