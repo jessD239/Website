@@ -16,11 +16,32 @@ const services: Service[] = [
     number: "01",
     title: "Consulting & Workshops",
     text: "From 2-4 hour sessions to multi-day programmes, we identify what's working and give your team clear direction as well as tools to learn and grow.",
-    detailTitle: "Consulting & Workshops",
+    detailTitle: "Make your content work harder",
     detailContent: (
       <>
+        <p>If your content isn't landing - or you're not sure what to do next - we can help.</p>
         <p>
-          We work with teams of all sizes — from founders figuring out their message to established businesses that need
+          <strong>What we do</strong>
+        </p>
+        <ul>
+          <li>Identify what's working (and what's not)</li>
+          <li>Review your current content</li>
+          <li>Train and upskill your team where needed</li>
+          <li>Guide your team on how to improve</li>
+          <li>Introduce tools where useful, including AI</li>
+        </ul>
+        <p>
+          <strong>Formats</strong>
+        </p>
+        <p>2-4 hour sessions. Full-day workshops. Multi-day programmes or semi-permanent for intense training.</p>
+        <p>
+          <strong>Outcome</strong>
+        </p>
+        <p>Clear direction. Practical steps. Confidence to move forward.</p>
+
+        {/* 
+        <p>
+          We work with teams of all sizes - from founders figuring out their message to established businesses that need
           a creative reset. Our sessions are practical, focused, and built around your specific situation.
         </p>
         <ul>
@@ -29,7 +50,7 @@ const services: Service[] = [
           <li>Team training and creative development</li>
           <li>One-on-one advisory retainers</li>
         </ul>
-        <p>Every engagement starts with a conversation. No templates, no fluff.</p>
+        <p>Every engagement starts with a conversation. No templates, no fluff.</p> */}
       </>
     ),
   },
@@ -40,25 +61,25 @@ const services: Service[] = [
     text: (
       <>
         We don't just film and shoot. We start with the <i>why</i>. Video production, podcasts, photography, live
-        streaming, motion graphics editing and content libraries — all built around strategy first.
+        streaming, motion graphics editing and content libraries - all built around strategy first.
       </>
     ),
-    detailTitle: "Media Production",
+    detailTitle: "We offer content with a purpose",
     detailContent: (
       <>
-        <p>
-          Great content starts before the camera turns on. We plan, shoot, and deliver work that is built to perform —
-          not just to look good on a hard drive.
-        </p>
         <ul>
-          <li>Video production &amp; direction</li>
-          <li>Photography (commercial, portrait, event)</li>
-          <li>Podcast production &amp; setup</li>
+          <li>Content strategy and roll-out plan</li>
+          <li>Video production</li>
+          <li>Podcasts</li>
+          <li>Photography</li>
           <li>Live streaming</li>
-          <li>Motion graphics &amp; editing</li>
-          <li>Content library creation</li>
+          <li>Content libraries - create from scratch, add, or refresh</li>
+          <li>Editing - one-off or semi-regular</li>
         </ul>
-        <p>We handle everything from concept through to final delivery.</p>
+        <p>
+          <strong>Approach</strong>
+        </p>
+        <p>Plan first. Then create. Less guesswork. Better results.</p>
       </>
     ),
   },
@@ -74,24 +95,23 @@ const services: Service[] = [
     text: (
       <>
         The right people, without the search.
-        <br />A curated network of our most trusted creatives — ready when you need them. No endless CVs, AI search or
+        <br />A curated network of our most trusted creatives - ready when you need them. No endless CVs, AI search or
         asking your mate. We will connect you to the right person for the job.
       </>
     ),
-    detailTitle: "Creative Hub",
+    detailTitle: "Our people are your people",
     detailContent: (
       <>
+        <p>A curated network of trusted creatives - ready when you need them.</p>
         <p>
-          Finding the right creative for a project is hard. We've spent years building a trusted network of specialists
-          — so you don't have to start from scratch every time.
+          <strong>What it means</strong>
         </p>
         <ul>
-          <li>Vetted photographers, videographers &amp; editors</li>
-          <li>Designers, copywriters &amp; strategists</li>
-          <li>Fast matching based on your brief</li>
-          <li>Managed introductions — no cold outreach</li>
+          <li>No endless CVs</li>
+          <li>No guesswork</li>
+          <li>Just the right person for the job</li>
+          <li>We manage quality control, admin, and communication</li>
         </ul>
-        <p>Launching soon. Get in touch to be first on the list.</p>
       </>
     ),
   },
@@ -186,7 +206,7 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Desktop expand panel — sits outside the grid */}
+        {/* Desktop expand panel - sits outside the grid */}
         <div ref={detailRef} className={`services__detail${interactiveActiveId !== null ? " is-open" : ""}`}>
           <div ref={innerRef} className="services__detail-inner">
             {activeService && (
