@@ -92,6 +92,13 @@
     margin-top: var(--header-h);
   }
 
+  .intro__heading {
+    font-size: clamp(1.35rem, 6.6vw, 2.4rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
   .hero__overlay {
     background: linear-gradient(to bottom, rgba(20, 20, 20, 0.2) 0%, rgba(20, 20, 20, 0.6) 100%);
   }
