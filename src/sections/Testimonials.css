@@ -2,7 +2,7 @@
    7. TESTIMONIALS / CREDIBILITY SECTION
    ============================================ */
 .testimonials {
-  padding: var(--space-2xl) 0;
+  padding: var(--space-lg) 0;
 }
 
 .testimonials__header {

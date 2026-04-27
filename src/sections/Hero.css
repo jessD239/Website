@@ -36,7 +36,7 @@
    ============================================ */
 .intro {
   background-color: var(--color-bg);
-  padding: var(--space-2xl) 0;
+  padding: var(--space-lg) 0;
   position: relative;
   z-index: 3;
 }
@@ -100,7 +100,7 @@
     padding: var(--space-md) 0;
   }
 
-  /* Intro is always visible on mobile — no scroll trigger needed */
+  /* Intro is always visible on mobile - no scroll trigger needed */
   .intro__content.reveal--manual {
     opacity: 1;
     transform: translateY(0);

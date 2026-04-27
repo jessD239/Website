@@ -4,7 +4,7 @@
 .services {
   background-color: var(--color-bg-dark);
   color: var(--color-text-light);
-  padding: var(--space-2xl) 0;
+  padding: var(--space-lg) 0;
   --services-card-bg: var(--color-bg-dark);
   --services-card-hover-bg: #202020;
   --services-panel-bg: #1a1a1a;
@@ -249,7 +249,7 @@
     display: visible;
   } */
 
-  /* Desktop panel hidden on mobile — details are shown inline */
+  /* Desktop panel hidden on mobile - details are shown inline */
   .services__detail {
     display: none;
   }
