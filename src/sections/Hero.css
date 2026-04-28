@@ -46,7 +46,7 @@
 }
 
 .intro__heading {
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: clamp(2rem, 4vw, 3.2rem);
   line-height: 1.08;
   margin-bottom: var(--space-md);
   letter-spacing: -0.02em;

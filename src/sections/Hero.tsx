@@ -69,22 +69,15 @@ const Hero = ({ onOpenContact }: HeroProps) => {
         >
           <p className="section-label">Creative Studio</p>
           <h1 className="intro__heading">
-            Ideas are easy.
+            Good ideas deserve to go further
             <br />
-            Making them happen is
-            <br />
-            where we come in.
+            We help make that happen.
+            {/* Good ideas are the beginning, what we do with them is what matters. */}
           </h1>
           <p className="intro__subheading">
-            People with Ideas is a creative studio built around one thing only; solving problems creatively. We help
-            turn thoughts into something real.
-            <br />
-            <br />
-            Sometimes that means strategy.
-            <br />
-            Sometimes it's content.
-            <br />
-            Sometimes it's just a better way of thinking about what you already have.
+            <strong>People with Ideas</strong> helps turn thoughts into clear direction, content, and action. We work
+            with you to shape ideas, build strategy, and create the content - or help your team learn how to do it
+            themselves.
           </p>
 
           <div className="intro__actions">
