@@ -8,24 +8,43 @@
   font-family: var(--font-serif);
   font-size: 28px;
   font-weight: 400;
-  fill: var(--color-text);
+  fill: rgba(246, 244, 240, 0.9);
   text-anchor: middle;
   dominant-baseline: bottom;
   letter-spacing: -2px;
+  transition: fill 0.4s ease;
 }
 
 .logo-text__accent {
-  fill: var(--color-text-alt);
+  fill: rgba(246, 244, 240, 0.65);
   font-size: 20px;
   letter-spacing: 1px;
   font-style: italic;
+  transition: fill 0.4s ease;
 }
 
 .logo-bracket {
-  stroke: var(--color-text);
+  stroke: rgba(246, 244, 240, 0.9);
   stroke-width: 2;
   fill: none;
   stroke-linecap: round;
+  transition: stroke 0.4s ease;
+}
+
+/* Scrolled — switch to dark colours */
+.logo-svg--scrolled .logo-text,
+.logo-svg--unscrolled .logo-text {
+  fill: var(--color-text);
+}
+
+.logo-svg--scrolled .logo-text__accent,
+.logo-svg--unscrolled .logo-text__accent {
+  fill: var(--color-text-alt);
+}
+
+.logo-svg--scrolled .logo-bracket,
+.logo-svg--unscrolled .logo-bracket {
+  stroke: var(--color-text);
 }
 
 .logo-bracket--left {
@@ -66,12 +85,14 @@
 }
 
 .logo-svg--unscrolled .logo-bracket--left {
-  animation: eraseLeftBracket 0.45s cubic-bezier(0.55, 0.06, 0.68, 0.19) backwards;
+  animation: eraseLeftBracket 0.45s cubic-bezier(0.55, 0.06, 0.68, 0.19)
+    backwards;
   animation-delay: 0.1s;
 }
 
 .logo-svg--unscrolled .logo-bracket--right {
-  animation: eraseRightBracket 0.45s cubic-bezier(0.55, 0.06, 0.68, 0.19) backwards;
+  animation: eraseRightBracket 0.45s cubic-bezier(0.55, 0.06, 0.68, 0.19)
+    backwards;
 }
 
 @keyframes eraseLeftBracket {
