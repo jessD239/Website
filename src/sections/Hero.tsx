@@ -69,7 +69,7 @@ const Hero = ({ onOpenContact }: HeroProps) => {
         >
           <p className="section-label">Creative Studio</p>
           <h1 className="intro__heading">
-            Good ideas deserve to go further
+            Good ideas deserve to go further.
             <br />
             We help make that happen.
             {/* Good ideas are the beginning, what we do with them is what matters. */}
