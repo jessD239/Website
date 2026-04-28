@@ -32,19 +32,29 @@
 }
 
 /* Scrolled — switch to dark colours */
-.logo-svg--scrolled .logo-text,
-.logo-svg--unscrolled .logo-text {
+.logo-svg--scrolled .logo-text {
   fill: var(--color-text);
 }
 
-.logo-svg--scrolled .logo-text__accent,
-.logo-svg--unscrolled .logo-text__accent {
+.logo-svg--scrolled .logo-text__accent {
   fill: var(--color-text-alt);
 }
 
-.logo-svg--scrolled .logo-bracket,
-.logo-svg--unscrolled .logo-bracket {
+.logo-svg--scrolled .logo-bracket {
   stroke: var(--color-text);
+}
+
+/* Unscrolled — back to white */
+.logo-svg--unscrolled .logo-text {
+  fill: rgba(246, 244, 240, 0.9);
+}
+
+.logo-svg--unscrolled .logo-text__accent {
+  fill: rgba(246, 244, 240, 0.65);
+}
+
+.logo-svg--unscrolled .logo-bracket {
+  stroke: rgba(246, 244, 240, 0.9);
 }
 
 .logo-bracket--left {
