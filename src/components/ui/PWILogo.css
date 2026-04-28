@@ -1,0 +1,93 @@
+.logo-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.logo-text {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 400;
+  fill: var(--color-text);
+  text-anchor: middle;
+  dominant-baseline: bottom;
+  letter-spacing: -2px;
+}
+
+.logo-text__accent {
+  fill: var(--color-text-alt);
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-style: italic;
+}
+
+.logo-bracket {
+  stroke: var(--color-text);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.logo-bracket--left {
+  stroke-dasharray: 72;
+  stroke-dashoffset: 72;
+}
+
+.logo-bracket--right {
+  stroke-dasharray: 62;
+  stroke-dashoffset: 62;
+}
+
+.logo-svg--scrolled .logo-bracket--left {
+  animation: drawLeftBracket 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.logo-svg--scrolled .logo-bracket--right {
+  animation: drawRightBracket 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.15s;
+}
+
+@keyframes drawLeftBracket {
+  0% {
+    stroke-dashoffset: 72;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawRightBracket {
+  0% {
+    stroke-dashoffset: 62;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.logo-svg--unscrolled .logo-bracket--left {
+  animation: eraseLeftBracket 0.45s cubic-bezier(0.55, 0.06, 0.68, 0.19) backwards;
+  animation-delay: 0.1s;
+}
+
+.logo-svg--unscrolled .logo-bracket--right {
+  animation: eraseRightBracket 0.45s cubic-bezier(0.55, 0.06, 0.68, 0.19) backwards;
+}
+
+@keyframes eraseLeftBracket {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 72;
+  }
+}
+
+@keyframes eraseRightBracket {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 62;
+  }
+}
