@@ -55,7 +55,14 @@ const Hero = ({ onOpenContact }: HeroProps) => {
               loop
               muted
               playsInline
-              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
             />
           </div>
           <div className="hero__overlay" />
@@ -67,17 +74,23 @@ const Hero = ({ onOpenContact }: HeroProps) => {
           ref={introRef}
           className={`container intro__content reveal reveal--manual${introVisible ? " is-visible" : ""}`}
         >
-          <p className="section-label">Creative Studio</p>
+          <p className="section-label">People with Ideas: a creative studio</p>
           <h1 className="intro__heading">
-            Good ideas deserve to go further
-            <br />
-            We help make that happen
-            {/* Good ideas are the beginning, what we do with them is what matters. */}
+            Strategy. Storytelling. Content that works.
           </h1>
+          {/* Good ideas are the beginning, what we do with them is what matters. */}
+
           <p className="intro__subheading">
-            <strong>People with Ideas</strong> helps turn thoughts into clear direction, content, and action. We work
-            with you to shape ideas, build strategy, and create the content - or help your team learn how to do it
-            themselves.
+            <strong>Strategy first. Content second. Results that last.</strong>
+          </p>
+          <p className="intro__text">
+            We help businesses clarify their message, develop practical
+            marketing strategies, create engaging content, and deliver campaigns
+            that connect with the right audience.
+            <br />
+            Whether you need a workshop, video production, photography,
+            advertising, or ongoing creative support, we become an extension of
+            your team.
           </p>
 
           <div className="intro__actions">
