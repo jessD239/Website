@@ -17,8 +17,8 @@ const Contact = ({ onOpenContact }: ContactProps) => {
             We do.
           </h2>
           <p className="cta__text">
-            Whether you have a brief ready or a concept taking shape, we'd love to hear from you. Every great project
-            starts with a conversation.
+            Whether you have a brief ready or a concept taking shape, we'd love
+            to hear from you. Every great project starts with a conversation.
           </p>
           <div className="cta__actions">
             <button onClick={onOpenContact} className="btn btn--light">
@@ -28,7 +28,10 @@ const Contact = ({ onOpenContact }: ContactProps) => {
           <div className="cta__details">
             <div className="cta__detail">
               <p className="cta__detail-label">Email</p>
-              <a href="mailto:hello@peoplewithideas.co.nz" className="cta__detail-value">
+              <a
+                href="mailto:hello@peoplewithideas.co.nz"
+                className="cta__detail-value"
+              >
                 hello@peoplewithideas.co.nz
               </a>
             </div>
@@ -46,7 +49,7 @@ const Contact = ({ onOpenContact }: ContactProps) => {
                 rel="noopener noreferrer"
                 className="cta__detail-value"
               >
-                New Zealand
+                Wellington, New Zealand
               </a>
             </div>
           </div>
