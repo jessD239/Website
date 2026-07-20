@@ -19,24 +19,25 @@ const About = () => {
             {/* <h2 className="about__title">We think out of the Box.</h2> */}
             <p className="about__text">
               <span>
-                <b>People First</b> - We start with the audience, because every
-                great idea begins with understanding people.
+                <b className="about__highlight">People First</b> - We start with
+                the audience, because every great idea begins with understanding
+                people.
               </span>
               <span>
-                <b>Lead with Curiosity</b> - We ask questions before offering
-                answers.
+                <b className="about__highlight">Lead with Curiosity</b> - We ask
+                questions before offering answers.
               </span>
               <span>
-                <b>Create with Purpose</b> - Every photo, video and strategy
-                should have a reason to exist.
+                <b className="about__highlight">Create with Purpose</b> - Every
+                photo, video and strategy should have a reason to exist.
               </span>
               <span>
-                <b>Keep it Genuine</b> - Authentic stories always outlast
-                trends.
+                <b className="about__highlight">Keep it Genuine</b> - Authentic
+                stories always outlast trends.
               </span>
               <span>
-                <b>Grow Together</b> - The best ideas come through collaboration
-                and shared perspectives.
+                <b className="about__highlight">Grow Together</b> - The best
+                ideas come through collaboration and shared perspectives.
               </span>
             </p>
             {/* <p className="about__text">

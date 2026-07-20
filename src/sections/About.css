@@ -38,7 +38,11 @@
   margin-bottom: var(--space-md);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
+}
+
+.about__highlight {
+  font-family: var(--font-serif);
 }
 
 .about__text:last-of-type {
