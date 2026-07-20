@@ -36,6 +36,9 @@
   line-height: 1.85;
   color: var(--color-text-muted);
   margin-bottom: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .about__text:last-of-type {
