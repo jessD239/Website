@@ -8,8 +8,8 @@ const Showcase = () => {
           <p className="section-label">Portfolio</p>
           <h2 className="showcase__title">Thinking visually?</h2>
           <p className="showcase__subtitle">
-            A small selection of some of our recent work. Looking for something specific, like educational videos, 2D
-            animation or just need a new perspective? Get in touch.
+            A small selection of some of our recent video, storytelling and Ad creation work. Looking for other types of marketing material? Maybe commercial photography 
+            or perhaps explainer videos or 2D animation? Get in touch.
           </p>
         </div>
 

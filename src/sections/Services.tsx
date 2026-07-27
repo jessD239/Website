@@ -19,7 +19,10 @@ const services: Service[] = [
     detailTitle: "Make your content work harder",
     detailContent: (
       <>
-        <p>If your content isn't landing - or you're not sure what to do next - we can help.</p>
+        <p>
+          If your content isn't landing - or you're not sure what to do next -
+          we can help.
+        </p>
         <p>
           <strong>What we do</strong>
         </p>
@@ -33,7 +36,10 @@ const services: Service[] = [
         <p>
           <strong>Formats</strong>
         </p>
-        <p>2-4 hour sessions. Full-day workshops. Multi-day programmes or semi-permanent for intense training.</p>
+        <p>
+          2-4 hour sessions. Full-day workshops. Multi-day programmes or
+          semi-permanent for intense training.
+        </p>
         <p>
           <strong>Outcome</strong>
         </p>
@@ -60,8 +66,9 @@ const services: Service[] = [
     title: "Media Production",
     text: (
       <>
-        We don't just film and shoot. We start with the <i>why</i>. Video production, podcasts, photography, live
-        streaming, motion graphics editing and content libraries - all built around strategy first.
+        We don't just film and shoot. We start with the <i>why</i>. Video
+        production, podcasts, photography, live streaming, motion graphics
+        editing and content libraries - all built around strategy first.
       </>
     ),
     detailTitle: "We offer content with a purpose",
@@ -95,14 +102,17 @@ const services: Service[] = [
     text: (
       <>
         The right people, without the search.
-        <br />A curated network of our most trusted creatives - ready when you need them. No endless CVs, AI search or
-        asking your mate. We will connect you to the right person for the job.
+        <br />A curated network of our most trusted creatives - ready when you
+        need them. No endless CVs, AI search or asking your mate. We will
+        connect you to the right person for the job.
       </>
     ),
     detailTitle: "Our people are your people",
     detailContent: (
       <>
-        <p>A curated network of trusted creatives - ready when you need them.</p>
+        <p>
+          A curated network of trusted creatives - ready when you need them.
+        </p>
         <p>
           <strong>What it means</strong>
         </p>
@@ -137,7 +147,8 @@ const Services = () => {
   const innerRef = useRef<HTMLDivElement>(null);
 
   const interactiveActiveId = isMobile ? null : activeId;
-  const activeService = services.find((s) => s.id === interactiveActiveId) ?? null;
+  const activeService =
+    services.find((s) => s.id === interactiveActiveId) ?? null;
 
   useEffect(() => {
     const mobileMedia = window.matchMedia("(max-width: 768px)");
@@ -167,16 +178,23 @@ const Services = () => {
     <section className="services" id="services">
       <div className="container">
         <div className="services__header reveal">
-          <p className="section-label section-label--light">What We Do &amp; Why you are here</p>
+          <p className="section-label section-label--light">
+            What We Do &amp; Why you are here
+          </p>
           <h2 className="services__title">Services</h2>
           <p className="services__intro">
-            Why do you use AI? Most likely to get an idea. What if you could just ask a human? Someone who understands
-            your business and what is actually worth doing. Maybe you have an idea but do not know how to execute it. Or
-            you are creating content, but it's just not landing. We help you figure out what to make, where it should
-            go, and how to make it work. From planning to execution, we make content feel simple.
+            Why do you use AI? Most likely to get an idea. What if you could
+            just ask People with Ideas? Someone who understands your business
+            and what is actually worth doing. Maybe you have an idea but don't
+            know how to execute it. Or you are creating content, but it's just
+            not landing. At PWI (People with Ideas), we help you figure out what
+            to make, where it should go, and how to make it work. From strategy
+            and planning to content creation and execution, we make the process
+            feel simple.
             <br />
             <br />
-            Got an idea? We'll make something out of it. If not, you're in the right place.
+            People with Ideas helps turn thoughts into clear direction, content
+            and action.
           </p>
         </div>
 
@@ -187,7 +205,9 @@ const Services = () => {
               className={`service-card${interactiveActiveId === service.id ? " is-active" : ""}`}
               onClick={isMobile ? undefined : () => handleCardClick(service.id)}
               role={isMobile ? undefined : "button"}
-              aria-expanded={isMobile ? undefined : interactiveActiveId === service.id}
+              aria-expanded={
+                isMobile ? undefined : interactiveActiveId === service.id
+              }
             >
               <p className="service-card__number">{service.number}</p>
               <h3 className="service-card__title">{service.title}</h3>
@@ -195,8 +215,12 @@ const Services = () => {
 
               {/* Mobile inline detail */}
               <div className="service-card__mobile-detail reveal">
-                <h4 className="services__detail-title">{service.detailTitle}</h4>
-                <div className="services__detail-text">{service.detailContent}</div>
+                <h4 className="services__detail-title">
+                  {service.detailTitle}
+                </h4>
+                <div className="services__detail-text">
+                  {service.detailContent}
+                </div>
               </div>
 
               <div className="service-card__arrow">
@@ -207,12 +231,19 @@ const Services = () => {
         </div>
 
         {/* Desktop expand panel - sits outside the grid */}
-        <div ref={detailRef} className={`services__detail${interactiveActiveId !== null ? " is-open" : ""}`}>
+        <div
+          ref={detailRef}
+          className={`services__detail${interactiveActiveId !== null ? " is-open" : ""}`}
+        >
           <div ref={innerRef} className="services__detail-inner">
             {activeService && (
               <>
-                <h4 className="services__detail-title">{activeService.detailTitle}</h4>
-                <div className="services__detail-text">{activeService.detailContent}</div>
+                <h4 className="services__detail-title">
+                  {activeService.detailTitle}
+                </h4>
+                <div className="services__detail-text">
+                  {activeService.detailContent}
+                </div>
               </>
             )}
           </div>

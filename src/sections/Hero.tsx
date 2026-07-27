@@ -84,9 +84,9 @@ const Hero = ({ onOpenContact }: HeroProps) => {
             <strong>Strategy first. Content second. Results that last.</strong>
           </p>
           <p className="intro__text">
-            We help businesses clarify their message, develop practical
-            marketing strategies, create engaging content, and deliver campaigns
-            that connect with the right audience.
+            People with Ideas help businesses clarify their message, develop
+            practical marketing strategies, create engaging content, and deliver
+            campaigns that connect with the right audience.
             <br />
             Whether you need a workshop, video production, photography,
             advertising, or ongoing creative support, we become an extension of

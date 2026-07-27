@@ -1,8 +1,12 @@
 import "./Footer.css";
 // import logoBlack from "../../assets/PWI Logo SHORT_Black.png";
-import logoLongBlack from "../../assets/pwi_logo_long_black.png"
+import logoLongBlack from "../../assets/pwi_logo_long_black.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faLinkedin, faVimeo } from "@fortawesome/free-brands-svg-icons";
+import {
+  // faInstagram,
+  faLinkedin,
+  faVimeo,
+} from "@fortawesome/free-brands-svg-icons";
 
 export const Footer = () => {
   return (
@@ -10,9 +14,13 @@ export const Footer = () => {
       <div className="container">
         <div className="footer__inner">
           <div className="footer__logo-container">
-          <a href="#" className="footer__logo">
-            <img src={logoLongBlack} alt="PWI Logo" className="footer__logo-img" />
-          </a>
+            <a href="#" className="footer__logo">
+              <img
+                src={logoLongBlack}
+                alt="PWI Logo"
+                className="footer__logo-img"
+              />
+            </a>
           </div>
 
           <nav className="footer__nav" aria-label="Footer navigation">
@@ -34,7 +42,7 @@ export const Footer = () => {
           </nav>
 
           <div className="footer__social">
-            <a
+            {/* <a
               href="https://www.instagram.com/peoplewithideas_"
               target="_blank"
               rel="noopener noreferrer"
@@ -43,7 +51,7 @@ export const Footer = () => {
             >
               <FontAwesomeIcon icon={faInstagram} />
               Instagram
-            </a>
+            </a> */}
             <a
               href="https://vimeo.com/user257644529"
               target="_blank"
@@ -68,7 +76,9 @@ export const Footer = () => {
         </div>
 
         <div className="footer__bottom">
-          <p className="footer__copy">&copy; 2026 People with Ideas. All rights reserved.</p>
+          <p className="footer__copy">
+            &copy; 2026 People with Ideas. All rights reserved.
+          </p>
           <p className="footer__copy">A Creative Studio.</p>
         </div>
       </div>
