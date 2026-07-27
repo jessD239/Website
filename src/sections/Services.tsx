@@ -187,7 +187,7 @@ const Services = () => {
             just ask People with Ideas? Someone who understands your business
             and what is actually worth doing. Maybe you have an idea but don't
             know how to execute it. Or you are creating content, but it's just
-            not landing. At PWI (People with Ideas), we help you figure out what
+            not landing. At PwI (People with Ideas), we help you figure out what
             to make, where it should go, and how to make it work. From strategy
             and planning to content creation and execution, we make the process
             feel simple.
