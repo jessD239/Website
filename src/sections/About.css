@@ -13,15 +13,19 @@
 }
 
 .about__image {
-  aspect-ratio: 5 / 6;
+  aspect-ratio: 2 / 3;
   overflow: hidden;
   background-color: var(--color-bg-alt);
 }
 
-.about__image img {
+.about__image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+
+  max-width: 467px; /* 700 × 2 / 3 */
+
+  aspect-ratio: 2 / 3;
+
+  overflow: hidden;
 }
 
 .about__title {
@@ -63,6 +67,32 @@
   }
 
   .about__image {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 2 / 3;
   }
+}
+
+/* ============================================
+       Image Rotate
+       ============================================ */
+
+.about__image {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+.about__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about__slideshow-image {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.about__slideshow-image.is-visible {
+  opacity: 1;
 }

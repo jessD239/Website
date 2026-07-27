@@ -1,16 +1,79 @@
-import imgAbout from "../assets/IFwebsite_PWI.jpg";
+// import imgAbout from "../assets/IFwebsite_PWI.jpg";
+import advertisingLuxury from "../assets/Advertisingluxury.jpeg";
+import brandHeadshotPWI from "../assets/BrandHeadshotPWI.jpeg";
+import businessHeadshotPWI from "../assets/BusinessheadshotPWI.jpeg";
+import contentCreatorPWI from "../assets/ContenCreatorPWI.jpg";
+import creativePhotographyPWI from "../assets/CreativePhotographyPWI.jpg";
+import drMorseTattooArtistPWI from "../assets/Dr.Morse-TattooArtist_PWI.jpg";
+import gymLadyTrainingSessionPWI from "../assets/GymLadytrainingsessionPWI.jpeg";
+import headshotsPWI from "../assets/HeadshotsPWI.jpeg";
+import marketingManagerPWI from "../assets/MarketingManagerPWI.jpeg";
+import productionLadyPhotographPWI from "../assets/Production_Lady_Photography_PWI.jpg";
+import socialMediaManagerPhotographPWI from "../assets/Socialmedia-Manager-Photography-PWI.jpg";
+import tattooArtistWellingtonPWI from "../assets/TattooartistWellington-PWI.jpg";
+import wellingtonOrchestraPWI from "../assets/WellingtonOrchestraPWI.jpeg";
 import "./About.css";
+import { useEffect, useState } from "react";
+
+const FADE_TIME = 500; // milliseconds
+const DISPLAY_TIME = 3000; // milliseconds
 
 const About = () => {
+  const images = [
+    advertisingLuxury,
+    brandHeadshotPWI,
+    businessHeadshotPWI,
+    contentCreatorPWI,
+    creativePhotographyPWI,
+    drMorseTattooArtistPWI,
+    gymLadyTrainingSessionPWI,
+    headshotsPWI,
+    marketingManagerPWI,
+    productionLadyPhotographPWI,
+    socialMediaManagerPhotographPWI,
+    tattooArtistWellingtonPWI,
+    wellingtonOrchestraPWI,
+  ];
+
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      // Fade the current image out
+
+      setIsVisible(false);
+
+      window.setTimeout(() => {
+        // Change the image once it has faded out
+
+        setCurrentImage((previousImage) =>
+          previousImage === images.length - 1 ? 0 : previousImage + 1,
+        );
+
+        window.setTimeout(() => {
+          setIsVisible(true);
+        }, 50);
+      }, FADE_TIME);
+    }, DISPLAY_TIME);
+
+    return () => window.clearInterval(interval);
+  }, [images.length]);
+
   return (
     <section className="about" id="about">
       <div className="container">
         <div className="about__inner">
           <div className="about__image reveal">
             <img
-              src={imgAbout}
-              alt="PWI"
-              aria-description="thinking out the box"
+              src={images[currentImage]}
+              alt="People with Ideas"
+              className={
+                isVisible
+                  ? "about__slideshow-image is-visible"
+                  : "about__slideshow-image"
+              }
             />
           </div>
 
