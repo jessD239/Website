@@ -40,21 +40,29 @@ const About = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const interval = window.setInterval(() => {
-      // Fade the current image out
+    let fadeTimeout: number | undefined;
+    let changeTimeout: number | undefined;
 
-      setIsVisible(false);
+    const cycle = () => {
+      fadeTimeout = window.setTimeout(() => {
+        setIsVisible(false);
 
-      window.setTimeout(() => {
-        // Change the image once it has faded out
+        changeTimeout = window.setTimeout(() => {
+          setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
-        setCurrentImage((previousImage) => (previousImage === images.length - 1 ? 0 : previousImage + 1));
+          setIsVisible(true);
 
-        setIsVisible(true);
-      }, FADE_TIME);
-    }, DISPLAY_TIME);
+          cycle();
+        }, FADE_TIME);
+      }, DISPLAY_TIME);
+    };
 
-    return () => window.clearInterval(interval);
+    cycle();
+
+    return () => {
+      clearTimeout(fadeTimeout);
+      clearTimeout(changeTimeout);
+    };
   }, [images.length]);
 
   return (
