@@ -140,13 +140,15 @@
 @media (max-width: 768px) {
   .contact-modal {
     padding: var(--space-sm);
-    align-items: flex-end;
+    align-items: center;
   }
 
   .contact-modal__content {
     max-width: 100%;
     padding: var(--space-md);
-    border-radius: 2px 2px 0 0;
+    border-radius: 2px;
+    max-height: 90dvh;
+    overflow-y: auto;
   }
 
   .contact-modal__actions {
