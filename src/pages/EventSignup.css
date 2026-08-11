@@ -1,0 +1,634 @@
+/* ============================================
+   EVENT SIGNUP PAGE
+   ============================================ */
+
+/* ---- Shared page shell ---- */
+
+.event-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  .notched-field {
+    min-width: unset;
+  }
+}
+
+/* ---- Logo (top-left on all variants) ---- */
+
+.event-logo {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  width: 68px;
+  height: 42px;
+  opacity: 0.9;
+  transition: opacity var(--transition-base);
+}
+
+.event-logo:hover {
+  opacity: 1;
+}
+
+/* ============================================
+   KIOSK MODE  (dark)
+   ============================================ */
+
+.event-page--kiosk {
+  background-color: var(--color-bg-dark);
+}
+
+/* Subtle ambient spotlight */
+.event-page--kiosk::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 55% at 50% 52%, rgba(200, 168, 124, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ---- Kiosk welcome ---- */
+
+.kiosk-welcome {
+  text-align: center;
+  padding: 2rem;
+  max-width: 640px;
+  animation: fadeUp 0.7s var(--ease-default) both;
+}
+
+.kiosk-welcome__eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1.5rem;
+}
+
+.kiosk-welcome__title {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-text-light);
+  margin-bottom: 1.5rem;
+}
+
+.kiosk-welcome__sub {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 300;
+  color: rgba(246, 244, 240, 0.55);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto 3rem;
+}
+
+/* ---- Kiosk modal ---- */
+
+.kiosk-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background-color: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.kiosk-modal--open {
+  opacity: 1;
+}
+
+.kiosk-modal__card {
+  background-color: #1c1c1c;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 2px;
+  padding: 3rem 3rem 2.5rem;
+  max-width: 560px;
+  width: 100%;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  transition:
+    opacity 320ms ease,
+    transform 320ms var(--ease-default);
+}
+
+.kiosk-modal__card--open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.kiosk-modal__header {
+  margin-bottom: 2rem;
+}
+
+.kiosk-modal__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  letter-spacing: -0.02em;
+  color: var(--color-text-light);
+  margin-bottom: 0.5rem;
+}
+
+.kiosk-modal__subtitle {
+  font-size: 0.9rem;
+  color: rgba(246, 244, 240, 0.45);
+  line-height: 1.6;
+}
+
+/* ---- Kiosk success screen ---- */
+
+.kiosk-success {
+  text-align: center;
+  padding: 2rem;
+  animation: fadeUp 0.5s var(--ease-default) both;
+}
+
+.kiosk-success__tick {
+  width: 72px;
+  height: 72px;
+  color: var(--color-accent);
+  margin: 0 auto 2rem;
+  display: block;
+}
+
+.kiosk-success__title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  letter-spacing: -0.03em;
+  color: var(--color-text-light);
+  margin-bottom: 1rem;
+}
+
+.kiosk-success__sub {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  font-weight: 300;
+  color: rgba(246, 244, 240, 0.5);
+  margin-bottom: 3rem;
+}
+
+.kiosk-success__reset-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+}
+
+.kiosk-success__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.kiosk-success__ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 3;
+}
+
+.kiosk-success__ring-progress {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.kiosk-success__count {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: rgba(246, 244, 240, 0.35);
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   QR / MOBILE MODE  (light)
+   ============================================ */
+
+.event-page--qr {
+  background-color: var(--color-bg);
+  padding: 6rem 1.5rem 4rem;
+  justify-content: flex-start;
+}
+
+/* ---- QR form header ---- */
+
+.qr-wrap {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  animation: fadeUp 0.6s var(--ease-default) both;
+}
+
+.qr-header {
+  margin-bottom: 2.5rem;
+}
+
+.qr-header__eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.qr-header__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 8vw, 3rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+}
+
+.qr-header__sub {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+/* ---- QR success ---- */
+
+.qr-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  min-height: calc(100dvh - 10rem);
+  animation: fadeUp 0.55s var(--ease-default) both;
+}
+
+.qr-success__tick {
+  width: 56px;
+  height: 56px;
+  color: var(--color-accent);
+  margin: 0 auto 1.75rem;
+  display: block;
+}
+
+.qr-success__title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 14vw, 4.5rem);
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: 1.25rem;
+}
+
+.qr-success__line {
+  width: 48px;
+  height: 2px;
+  background-color: var(--color-accent);
+  margin: 0 auto 1.5rem;
+  animation: expandLine 0.5s var(--ease-default) 0.4s both;
+  transform-origin: center;
+}
+
+.qr-success__sub {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   SHARED FORM STYLES
+   ============================================ */
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.event-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.event-form__submit-error {
+  font-size: var(--fs-sm);
+  color: var(--color-danger);
+  margin-top: -0.25rem;
+}
+
+.event-form__optin {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.36);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+.event-form__optin:hover {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.event-form__optin-input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.15rem 0 0;
+  flex: 0 0 auto;
+  accent-color: var(--color-accent);
+}
+
+.event-form__optin-text {
+  display: block;
+}
+
+.event-form--dark .event-form__optin {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(246, 244, 240, 0.62);
+}
+
+.event-form--dark .event-form__optin:hover {
+  border-color: rgba(200, 168, 124, 0.55);
+  color: rgba(246, 244, 240, 0.82);
+}
+
+.event-form--dark .event-form__optin-input {
+  accent-color: var(--color-accent);
+}
+
+/* Dark variant — override notched-field colours for the kiosk modal */
+.event-form--dark .notched-field fieldset {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.event-form--dark .notched-field:focus-within fieldset {
+  border-color: rgba(200, 168, 124, 0.75);
+}
+
+.event-form--dark .notched-field-label {
+  color: rgba(246, 244, 240, 0.38);
+}
+
+.event-form--dark .notched-field:focus-within .notched-field-label,
+.event-form--dark .notched-field.has-value .notched-field-label {
+  color: rgba(200, 168, 124, 0.8);
+}
+
+.event-form--dark .notched-field.has-value:focus-within .notched-field-label {
+  color: rgba(200, 168, 124, 0.8);
+}
+
+.event-form--dark input {
+  color: rgba(246, 244, 240, 0.9);
+}
+
+.event-form--dark .notched-field-error {
+  color: #e07070;
+}
+
+.event-form__actions {
+  display: flex;
+  gap: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.qr-success .footer__social {
+  margin-top: clamp(5rem, 14vh, 9rem);
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: fadeUp 0.55s var(--ease-default) 0.9s both;
+}
+
+.qr-success .footer__social-link {
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp 0.55s var(--ease-default) both;
+}
+
+.qr-success .footer__social-link:nth-of-type(1) {
+  animation-delay: 1.05s;
+}
+
+.qr-success .footer__social-link:nth-of-type(2) {
+  animation-delay: 1.2s;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.event-btn {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: none;
+  padding: 0.95rem 2.2rem;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    border-color var(--transition-base),
+    opacity var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.event-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Primary — dark fill */
+.event-btn--primary {
+  flex: 1;
+  background-color: var(--color-text);
+  color: var(--color-text-light);
+}
+
+.event-btn--primary:hover:not(:disabled) {
+  background-color: var(--color-text-alt);
+}
+
+/* Ghost — outline */
+.event-btn--ghost {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  padding: 0.95rem 1.75rem;
+}
+
+.event-btn--ghost:hover:not(:disabled) {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+/* For dark modal: ghost should use light tones */
+.event-form--dark .event-btn--ghost {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: rgba(246, 244, 240, 0.4);
+}
+
+.event-form--dark .event-btn--ghost:hover:not(:disabled) {
+  border-color: rgba(246, 244, 240, 0.45);
+  color: rgba(246, 244, 240, 0.7);
+}
+
+.event-form--dark .event-btn--primary {
+  background-color: var(--color-accent);
+  color: #1a1a1a;
+}
+
+.event-form--dark .event-btn--primary:hover:not(:disabled) {
+  background-color: #d4b88a;
+}
+
+/* Hero — large kiosk CTA */
+.event-btn--hero {
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1.15rem 3.5rem;
+  background: transparent;
+  color: var(--color-text-light);
+  border: 1px solid rgba(200, 168, 124, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.event-btn--hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(200, 168, 124, 0.08);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.event-btn--hero:hover::after {
+  opacity: 1;
+}
+
+.event-btn--hero:hover {
+  border-color: rgba(200, 168, 124, 0.85);
+}
+
+/* Spinner inside button */
+.event-btn__spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandLine {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 540px) {
+  .qr-success {
+    min-height: calc(100dvh - 8.5rem);
+  }
+
+  .qr-success .footer__social {
+    margin-top: clamp(3rem, 10vh, 5rem);
+  }
+
+  .event-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .kiosk-modal__card {
+    padding: 2rem 1.5rem 2rem;
+  }
+
+  .event-form__actions {
+    flex-direction: column;
+  }
+
+  .event-btn--ghost {
+    order: 2;
+  }
+
+  .event-btn--primary {
+    order: 1;
+  }
+}
+
+@media (max-width: 380px) {
+  .qr-header__title {
+    font-size: 2rem;
+  }
+}

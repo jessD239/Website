@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 
+export const EVENT_WEBHOOK_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbyesi0Vxa4FQZJfuJhTbQNXFQXInyPnsVevQFUnsu01eWWAcnn4Y0zyJompaV8EWquxnA/exec";
+
 /**
  * Observes all `.reveal:not(.reveal--manual)` elements in the document
  * and adds `is-visible` when they scroll into view.

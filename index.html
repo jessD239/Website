@@ -10,6 +10,20 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png" />
     <link rel="manifest" href="assets/images/site.webmanifest" />
 
+    <!-- GitHub Pages SPA routing: restore path from 404.html redirect -->
+    <script>
+      (function () {
+        var r = sessionStorage.getItem("spa_redirect");
+        if (r) {
+          sessionStorage.removeItem("spa_redirect");
+          var parts = r.split("~and~");
+          var path = "/" + parts[0];
+          var search = parts[1] ? "?" + parts[1] : "";
+          history.replaceState(null, null, path + search);
+        }
+      })();
+    </script>
+
     <!-- Google Fonts: Serif for headlines, Sans for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
