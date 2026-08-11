@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Footer from "./components/layout/Footer";
 import Navbar from "./components/layout/Navbar";
 import ContactModal from "./components/ContactModal";
 import Home from "./pages/Home";
+import EventSignup from "./pages/EventSignup";
+import EventDraw from "./pages/EventDraw";
 import { useReveal } from "./functions/Utility";
 import "./App.css";
 
-function App() {
+function HomePage() {
   useReveal();
   const [contactOpen, setContactOpen] = useState(false);
 
@@ -17,6 +20,16 @@ function App() {
       <Footer />
       <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
     </>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/event" element={<EventSignup />} />
+      <Route path="/event-draw" element={<EventDraw />} />
+    </Routes>
   );
 }
 
