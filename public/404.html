@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>People With Ideas</title>
+    <script>
+      // GitHub Pages SPA redirect — stores the full path/search/hash in
+      // sessionStorage, then navigates to the root so index.html can take over.
+      (function () {
+        var l = window.location;
+        sessionStorage.setItem(
+          "spa_redirect",
+          l.pathname.slice(1) + (l.search ? "~and~" + l.search.slice(1) : "") + l.hash
+        );
+        l.replace(l.protocol + "//" + l.host + "/");
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
