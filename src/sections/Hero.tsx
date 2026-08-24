@@ -75,27 +75,23 @@ const Hero = ({ onOpenContact }: HeroProps) => {
           className={`container intro__content reveal reveal--manual${introVisible ? " is-visible" : ""}`}
         >
           <p className="section-label">People with Ideas: a creative studio</p>
-          <h1 className="intro__heading">
-            Strategy. Storytelling. Content that works.
-          </h1>
+          <h1 className="intro__heading">Strategy. Storytelling. Content that works.</h1>
           {/* Good ideas are the beginning, what we do with them is what matters. */}
 
           <p className="intro__subheading">
             <strong>Strategy first. Content second. Results that last.</strong>
           </p>
           <p className="intro__text">
-            People with Ideas help businesses clarify their message, develop
-            practical marketing strategies, create engaging content, and deliver
-            campaigns that connect with the right audience.
+            People with Ideas help businesses clarify their message, develop practical marketing strategies, create
+            engaging content, and deliver campaigns that connect with the right audience.
             <br />
-            Whether you need a workshop, video production, photography,
-            advertising, or ongoing creative support, we become an extension of
-            your team.
+            Whether you need a workshop, video production, photography, advertising, or ongoing creative support, we
+            become an extension of your team.
           </p>
 
           <div className="intro__actions">
-            <a href="#work" className="btn btn--primary">
-              Some of our Ideas <span className="btn__arrow">→</span>
+            <a href="/collective" className="btn btn--primary">
+              Our Collective <span className="btn__arrow">→</span>
             </a>
             <button onClick={onOpenContact} className="btn btn--outline">
               Get in Touch

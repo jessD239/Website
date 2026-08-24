@@ -39,30 +39,60 @@ const About = () => {
 
   const [isVisible, setIsVisible] = useState(true);
 
+  // Warm the browser cache so images are already decoded before they're swapped in,
+  // preventing the old image from briefly flashing back in while the next one loads.
+  useEffect(() => {
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [images]);
+
   useEffect(() => {
     let fadeTimeout: number | undefined;
     let changeTimeout: number | undefined;
+    let cancelled = false;
 
-    const cycle = () => {
+    const cycle = (index: number) => {
       fadeTimeout = window.setTimeout(() => {
         setIsVisible(false);
 
         changeTimeout = window.setTimeout(() => {
-          setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+          const nextIndex = index === images.length - 1 ? 0 : index + 1;
 
-          setIsVisible(true);
+          const showNext = () => {
+            if (cancelled) return;
 
-          cycle();
+            setCurrentImage(nextIndex);
+            setIsVisible(true);
+
+            cycle(nextIndex);
+          };
+
+          // Ensure the next image is fully loaded before swapping the src and
+          // starting the fade-in, otherwise the previous image can reappear
+          // momentarily while the new one finishes decoding.
+          const img = new Image();
+          img.src = images[nextIndex];
+
+          if (img.complete) {
+            showNext();
+          } else {
+            img.onload = showNext;
+            img.onerror = showNext;
+          }
         }, FADE_TIME);
       }, DISPLAY_TIME);
     };
 
-    cycle();
+    cycle(currentImage);
 
     return () => {
+      cancelled = true;
       clearTimeout(fadeTimeout);
       clearTimeout(changeTimeout);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images.length]);
 
   return (

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Footer from "./components/layout/Footer";
 import Navbar from "./components/layout/Navbar";
 import ContactModal from "./components/ContactModal";
@@ -14,6 +14,15 @@ import "./App.css";
 function HomePage() {
   useReveal();
   const [contactOpen, setContactOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) return;
+    const target = document.getElementById(location.hash.slice(1));
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [location]);
 
   return (
     <>
@@ -25,11 +34,23 @@ function HomePage() {
   );
 }
 
+function CollectivePage() {
+  const [contactOpen, setContactOpen] = useState(false);
+
+  return (
+    <>
+      <Navbar onOpenContact={() => setContactOpen(true)} forceDark />
+      <Collective />
+      <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
+    </>
+  );
+}
+
 function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/collective" element={<Collective />} />
+      <Route path="/collective" element={<CollectivePage />} />
 
       <Route path="/subscribe" element={<Subscribe />} />
       <Route path="/unsubscribe" element={<Unsubscribe />} />

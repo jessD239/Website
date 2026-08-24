@@ -134,6 +134,102 @@
   margin-bottom: 0.4rem;
 }
 
+/* Stories in progress */
+.work__stories {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-accent);
+}
+
+.work__stories-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.work__stories-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+}
+
+.work__stories-intro {
+  max-width: 280px;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.work__stories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.work__story {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-alt);
+}
+
+.work__story-image {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.work__story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.work__story:hover .work__story-image img {
+  transform: scale(1.04);
+}
+
+.work__story-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1;
+  padding: var(--space-md);
+}
+
+.work__story-info .work__link {
+  margin-top: auto;
+}
+
+.work__story-tagline {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.work__story-status {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.work__link--muted {
+  color: var(--color-text-muted);
+  cursor: default;
+}
+
+.work__link--muted:hover {
+  gap: 0.4rem;
+}
+
+.work__divider {
+  margin-top: var(--space-xl);
+  border-top: 1px solid var(--color-accent);
+}
+
 /* ============================================
    RESPONSIVE
    ============================================ */
@@ -153,10 +249,23 @@
   .work__row {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .work__stories-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
   .work__row {
     grid-template-columns: 1fr;
+  }
+
+  .work__stories-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .work__story-info .work__link {
+    margin-top: 1.2rem;
   }
 }

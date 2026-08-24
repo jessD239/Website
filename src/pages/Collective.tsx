@@ -1,24 +1,23 @@
 import { useState, type ReactNode } from "react";
-import PWILogo from "../components/ui/PWILogo";
 import { useReveal } from "../functions/Utility";
-import imgTwentyEightA from "../assets/TwentyEight_imageV2.png";
-import imgTwentyEightB from "../assets/Twentyeight_Image.png";
-import imgBrandHeadshot from "../assets/BrandHeadshotPWI.jpeg";
-import imgMarketingManager from "../assets/MarketingManagerPWI.jpeg";
-import imgBusinessHeadshot from "../assets/BusinessheadshotPWI.jpeg";
-import imgSocialMediaManager from "../assets/Socialmedia-Manager-Photography-PWI.jpg";
-import imgRealTalkA from "../assets/RealTalk.png";
-import imgRealTalkB from "../assets/RealTalk_Man-2.jpg";
-import imgHeadshots from "../assets/HeadshotsPWI.jpeg";
-import imgAlex from "../assets/Alex_Image.jpg";
-import imgContentCreator from "../assets/ContenCreatorPWI.jpg";
-import imgProductionPhotography from "../assets/Production_Lady_Photography_PWI.jpg";
-import imgAdelineA from "../assets/Adeline_FrenchTech_Final.jpeg";
-import imgAdelineB from "../assets/Adeline_FrenchTech_v2.jpg";
-import imgAinslie from "../assets/Ainsle_image.png";
-import imgAnna from "../assets/Anna.jpeg";
-import imgCreativePhotography from "../assets/CreativePhotographyPWI.jpg";
-import imgLady from "../assets/Lady_Image.jpg";
+
+// import placeholder from "../assets/images/collective/placeholder.jpg";
+
+import jess1 from "../assets/images/collective/jess_main_1.jpg";
+import jess2 from "../assets/images/collective/jess_work_2.jpg";
+import jess3 from "../assets/images/collective/jess_work_3.jpg";
+import matt1 from "../assets/images/collective/matt_main_1.jpg";
+import matt2 from "../assets/images/collective/matt_work_2.jpg";
+import matt3 from "../assets/images/collective/matt_work_3.jpg";
+import caleb1 from "../assets/images/collective/caleb_main_1.jpg";
+import caleb2 from "../assets/images/collective/caleb_work_2.jpg";
+import caleb3 from "../assets/images/collective/caleb_work_3.jpg";
+import chris1 from "../assets/images/collective/chris_main_1.jpg";
+import chris2 from "../assets/images/collective/chris_work_2.jpg";
+import chris3 from "../assets/images/collective/chris_work_3.jpg";
+import fran1 from "../assets/images/collective/fran_main_1.jpg";
+import fran2 from "../assets/images/collective/fran_work_2.jpg";
+import fran3 from "../assets/images/collective/fran_work_3.jpg";
 import "./Collective.css";
 
 interface ProfileImage {
@@ -30,10 +29,10 @@ interface Profile {
   id: number;
   name: string;
   role: string;
-  /** Always visible. Should read naturally on its own, and flow into `bioMore` when expanded. */
-  bioPreview: ReactNode;
-  /** Only rendered once the profile is expanded. */
-  bioMore: ReactNode;
+  /** Always visible. Complete sentence/paragraph. */
+  bio: ReactNode;
+  /** Optional extra bio shown at the top of the expanded dropdown. */
+  extendedBio?: ReactNode;
   images: [string, string];
   innerImage?: ProfileImage;
   /** Extra paragraph shown alongside `innerImage` inside the expanded dropdown. */
@@ -45,24 +44,23 @@ interface Profile {
 const profiles: Profile[] = [
   {
     id: 1,
-    name: "Jess Denise",
+    name: "Jess",
     role: "Creative Director | Co-founder",
-    bioPreview: (
+    bio: (
       <>
         I believe every great idea starts with listening. As Creative Director and co-founder of People with Ideas, I
-        combine
+        help organisations uncover
       </>
     ),
-    bioMore: (
+    extendedBio: (
       <>
-        {" "}
-        strategy, storytelling and creativity to help organisations connect with people in authentic and meaningful
-        ways. Whether I'm developing a brand, producing ads, films, documentaries or leading a creative workshop, my
+        authentic stories and transform them into brands, films, campaigns and experiences that genuinely connect with
+        people. Whether I'm developing a brand, producing ads, films, documentaries or leading a creative workshop, my
         focus is always on uncovering the stories that matter most.
       </>
     ),
-    images: [imgTwentyEightA, imgTwentyEightB],
-    innerImage: { src: imgBrandHeadshot, orientation: "portrait" },
+    images: [jess1, jess2],
+    innerImage: { src: jess3, orientation: "portrait" },
     dropdownText: (
       <>
         Over the years I've worked alongside businesses, charities and communities across New Zealand and the Pacific,
@@ -70,65 +68,108 @@ const profiles: Profile[] = [
         exploring new places and turning meaningful conversations into ideas that inspire action.
       </>
     ),
-    linkedin: "#",
-    website: "#",
+    linkedin: "https://www.linkedin.com/in/jessdlucht/",
+    website: "https://jessdenise.com/",
   },
   {
     id: 2,
-    name: "Michelle Henry",
-    role: "Marketing & Communications",
-    bioPreview: <>We worked together to build content that speaks directly to the right audience, at the right time.</>,
-    bioMore: (
+    name: "Matt",
+    role: "Cinematographer | Co-founder",
+    bio: (
       <>
-        {" "}
-        Michelle's eye for detail and clarity of message shaped a campaign that felt considered from start to finish.
+        For more than 25 years I’ve been telling stories through film. As co-founder of People with Ideas, I bring a
+        documentary approach to cinematography, combining
       </>
     ),
-    images: [imgMarketingManager, imgBusinessHeadshot],
-    innerImage: { src: imgSocialMediaManager, orientation: "portrait" },
-    linkedin: "#",
+    extendedBio: (
+      <>
+        creative vision with a passion for authentic storytelling. Whether I’m behind the camera, in the edit suite or
+        shaping the creative direction of a project, my goal is always to create work that feels honest, cinematic and
+        deeply human.
+      </>
+    ),
+    images: [matt1, matt2],
+    innerImage: { src: matt3, orientation: "portrait" },
+    dropdownText: (
+      <>
+        I love collaborating with great people and finding those unscripted moments that often become the most powerful
+        part of a story. From documentaries to commercial campaigns, I believe the best films are the ones that help
+        people connect with each other.
+      </>
+    ),
+    linkedin: "https://www.linkedin.com/in/matt-sharp-367a5537/",
+    website: "https://ma6429.wixsite.com/matt-sharp",
   },
   {
     id: 3,
-    name: "Prashanth Gunasekaran",
-    role: "Film Director — RealTalk",
-    bioPreview: <>Together we crafted a distinct look and feel for RealTalk that made sure the message landed.</>,
-    bioMore: <> It's a reminder that content doesn't need to shout to be heard — it just needs to be honest.</>,
-    images: [imgRealTalkA, imgRealTalkB],
-    innerImage: { src: imgHeadshots, orientation: "portrait" },
-    linkedin: "#",
-    website: "#",
+    name: "Caleb",
+    role: "Photographer | Videographer | Documentary Storyteller",
+    bio: <>I am a photographer and documentary filmmaker who believes the best stories are built on trust. My work</>,
+    extendedBio: (
+      <>
+        has taken me across New Zealand and the Pacific, where I have spent extended time living and working alongside
+        communities to capture authentic stories with honesty and respect.
+      </>
+    ),
+    images: [caleb1, caleb2],
+    innerImage: { src: caleb3, orientation: "portrait" },
+    dropdownText: (
+      <>
+        Calm, curious and people-focused, I think I might have a natural ability to make people feel comfortable in
+        front of the camera, creating imagery that feels genuine, cinematic and deeply human.
+      </>
+    ),
+    website: "https://www.calebansleymedia.com",
   },
   {
     id: 4,
-    name: "Alex",
-    role: "Content Creator",
-    bioPreview: <>We helped build a library Alex could lean on across every platform —</>,
-    bioMore: <> polished enough to feel premium, versatile enough to keep up with a fast-moving content calendar.</>,
-    images: [imgAlex, imgContentCreator],
-    innerImage: { src: imgProductionPhotography, orientation: "landscape" },
-    website: "#",
+    name: "Chris",
+    role: "Commercial Photographer | Visual Storyteller",
+    bio: (
+      <>
+        I am an award-winning commercial photographer who creates thoughtful, high-quality imagery for businesses,
+        hospitality brands and organisations throughout New Zealand.
+      </>
+    ),
+    extendedBio: (
+      <>
+        With a collaborative approach and an eye for detail, I produce photography that feels authentic, purposeful and
+        beautifully crafted.
+      </>
+    ),
+    images: [chris1, chris2],
+    innerImage: { src: chris3, orientation: "portrait" },
+    dropdownText: (
+      <>
+        Together with People with Ideas, I help bring brands and stories to life through imagery that captures not only
+        what people do, but who they are. My work is grounded in trust, creativity and a genuine passion for creating
+        visuals that connect with audiences.
+      </>
+    ),
+    website: "https://www.chrisholloman.com/",
   },
   {
     id: 5,
-    name: "Adeline",
-    role: "French Tech",
-    bioPreview: <>We partnered with Adeline to find the right voice for French Tech across social, podcast and TV.</>,
-    bioMore: <> The result: content that felt native to every platform it landed on.</>,
-    images: [imgAdelineA, imgAdelineB],
-    innerImage: { src: imgAinslie, orientation: "portrait" },
-    linkedin: "#",
-  },
-  {
-    id: 6,
-    name: "Anna",
-    role: "Creative Strategy",
-    bioPreview: <>We worked with Anna to think ahead and execute with intent,</>,
-    bioMore: <> building a strategy first so every piece of content that followed had a clear purpose.</>,
-    images: [imgAnna, imgCreativePhotography],
-    innerImage: { src: imgLady, orientation: "portrait" },
-    linkedin: "#",
-    website: "#",
+    name: "Fran",
+    role: "Digital Marketing | Strategy | Performance",
+    bio: (
+      <>
+        I believe great marketing starts with understanding people. Through Virtual Marketers, I help businesses develop
+      </>
+    ),
+    extendedBio: (
+      <>digital strategies and campaigns that connect with the right audience and turn ideas into measurable results.</>
+    ),
+    images: [fran1, fran2],
+    innerImage: { src: fran3, orientation: "portrait" },
+    dropdownText: (
+      <>
+        I love collaborating with creative teams to combine authentic storytelling with data-driven marketing. Together,
+        we create campaigns that not only perform but help businesses build genuine, lasting connections with the people
+        they want to reach.
+      </>
+    ),
+    website: "https://www.virtualmarketers.co.nz/",
   },
 ];
 
@@ -140,19 +181,17 @@ const Collective = () => {
 
   return (
     <div className="collective-page">
-      <a href="/" className="collective-page__back" aria-label="Back to People With Ideas">
-        <PWILogo scrolled />
-      </a>
-
       <section className="collective-hero">
         <div className="container">
-          <p className="section-label">The Collective</p>
-          <h1 className="collective-hero__title">People we're proud to feature.</h1>
+          <p className="section-label">Our Collective</p>
+          <h1 className="collective-hero__title">Your creative menu.</h1>
           <p className="collective-hero__text">
-            Great ideas rarely come from one person. Over the years, we’ve built a collective of talented specialists:
-            photographers, designers, developers, filmmakers, strategists, Meta and SEO experts, who join us when their
-            expertise is exactly what’s needed. We don’t believe in building a big agency. We believe in building the
-            right team for every project.
+            Great ideas rarely come from one person. We’ve built a collective of trusted creatives, strategists and
+            technical specialists who join us when their expertise is exactly what’s needed.
+          </p>
+          <p className="collective-hero__text">
+            We don’t believe the best ideas come from having the biggest team. We believe they come from bringing
+            together the right people.
           </p>
         </div>
       </section>
@@ -162,6 +201,12 @@ const Collective = () => {
           <div className="collective-grid">
             {profiles.map((profile, index) => {
               const isOpen = expanded[profile.id] ?? false;
+              const hasExpandable = !!(
+                profile.extendedBio ||
+                profile.innerImage ||
+                profile.linkedin ||
+                profile.website
+              );
 
               return (
                 <article
@@ -178,64 +223,86 @@ const Collective = () => {
                   </div>
 
                   <div className="collective-profile__info">
-                    <p className="collective-profile__role">{profile.role}</p>
+                    <p className="collective-profile__role">
+                      {profile.role.split(" | ").map((rolePart, roleIndex) => (
+                        <span key={rolePart}>
+                          {roleIndex > 0 && (
+                            <>
+                              <wbr />
+                              <span className="collective-profile__role-separator">&nbsp;|&nbsp;</span>
+                            </>
+                          )}
+                          <span className="collective-profile__role-part">{rolePart}</span>
+                        </span>
+                      ))}
+                    </p>
                     <h2 className="collective-profile__name">{profile.name}</h2>
-
-                    <p className="collective-profile__bio">
-                      {profile.bioPreview}
-                      {isOpen ? profile.bioMore : "…"}
+                    <p
+                      className={`collective-profile__bio${
+                        hasExpandable && !isOpen ? " collective-profile__bio--truncated" : ""
+                      }`}
+                    >
+                      {profile.bio}
+                      {profile.extendedBio && isOpen && <> {profile.extendedBio}</>}
                     </p>
 
-                    <div className={`collective-profile__dropdown${isOpen ? " is-open" : ""}`}>
-                      <div className="collective-profile__dropdown-inner">
-                        {profile.innerImage && (
-                          <div className="collective-profile__dropdown-row">
-                            <div
-                              className={`collective-profile__image collective-profile__image--tertiary collective-profile__image--${profile.innerImage.orientation ?? "portrait"}`}
-                            >
-                              <img src={profile.innerImage.src} alt={`${profile.name} — ${profile.role}`} />
-                            </div>
-                            {profile.dropdownText && (
-                              <p className="collective-profile__dropdown-text">{profile.dropdownText}</p>
+                    {hasExpandable && (
+                      <>
+                        <div className={`collective-profile__dropdown${isOpen ? " is-open" : ""}`}>
+                          <div className="collective-profile__dropdown-inner">
+                            {profile.innerImage && (
+                              <div className="collective-profile__dropdown-row">
+                                <div
+                                  className={`collective-profile__image collective-profile__image--tertiary collective-profile__image--${profile.innerImage.orientation ?? "portrait"}`}
+                                >
+                                  <img src={profile.innerImage.src} alt={`${profile.name} — ${profile.role}`} />
+                                </div>
+                                {profile.dropdownText && (
+                                  <p className="collective-profile__dropdown-text">{profile.dropdownText}</p>
+                                )}
+                              </div>
+                            )}
+                            {(profile.linkedin || profile.website) && (
+                              <div className="collective-profile__links">
+                                <p className="collective-profile__links-label">More about {profile.name} on:</p>
+                                {profile.linkedin && (
+                                  <a
+                                    href={profile.linkedin}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="collective-profile__link"
+                                  >
+                                    LinkedIn →
+                                  </a>
+                                )}
+                                {profile.website && (
+                                  <a
+                                    href={profile.website}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="collective-profile__link"
+                                  >
+                                    Website →
+                                  </a>
+                                )}
+                              </div>
                             )}
                           </div>
-                        )}
-                        {(profile.linkedin || profile.website) && (
-                          <div className="collective-profile__links">
-                            <p className="collective-profile__links-label">More about {profile.name} on:</p>
-                            {profile.linkedin && (
-                              <a
-                                href={profile.linkedin}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="collective-profile__link"
-                              >
-                                LinkedIn →
-                              </a>
-                            )}
-                            {profile.website && (
-                              <a
-                                href={profile.website}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="collective-profile__link"
-                              >
-                                Website →
-                              </a>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                        </div>
 
-                    <button
-                      type="button"
-                      className="collective-profile__toggle"
-                      aria-expanded={isOpen}
-                      onClick={() => toggle(profile.id)}
-                    >
-                      {isOpen ? "Read less" : "Read more"}
-                    </button>
+                        <button
+                          type="button"
+                          className="collective-profile__toggle"
+                          aria-expanded={isOpen}
+                          onClick={() => toggle(profile.id)}
+                        >
+                          <span className="collective-profile__toggle-icon" aria-hidden="true">
+                            {isOpen ? "−" : "+"}
+                          </span>
+                          {isOpen ? "Read less" : "Read more"}
+                        </button>
+                      </>
+                    )}
                   </div>
                 </article>
               );

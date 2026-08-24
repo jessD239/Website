@@ -8,11 +8,7 @@
   width: 100%;
   height: var(--header-h);
   z-index: 1000;
-  background: linear-gradient(
-    to bottom,
-    rgba(20, 20, 20, 0.55) 0%,
-    rgba(20, 20, 20, 0) 100%
-  );
+  background: linear-gradient(to bottom, rgba(20, 20, 20, 0.55) 0%, rgba(20, 20, 20, 0) 100%);
   transition:
     background 0.4s ease,
     box-shadow 0.4s ease;
@@ -91,6 +87,16 @@
 
 .header--scrolled .header__link:hover {
   color: var(--color-text);
+}
+
+.header__divider {
+  width: 1px;
+  height: 14px;
+  background-color: rgba(246, 244, 240, 0.35);
+}
+
+.header--scrolled .header__divider {
+  background-color: var(--color-border);
 }
 
 .hamburger {
