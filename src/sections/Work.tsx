@@ -1,4 +1,4 @@
-import imgTwentyEight from "../assets/TwentyEight_imageV2.png";
+import imgTwentyEight from "../assets/TwentyEight_imageV2.jpg";
 import imgRealTalk from "../assets/RealTalk.png";
 import imgAlex from "../assets/Alex_Image.jpg";
 import imgAdeline from "../assets/Adeline_FrenchTech_Final.jpeg";
