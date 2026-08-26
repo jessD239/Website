@@ -8,7 +8,7 @@ import jess2 from "../assets/images/collective/jess_work_2.jpg";
 import jess3 from "../assets/images/collective/jess_work_3.jpg";
 import matt1 from "../assets/images/collective/matt_main_1.jpg";
 import matt2 from "../assets/images/collective/matt_work_2.jpg";
-import matt3 from "../assets/images/collective/matt_work_3.jpg";
+import matt3 from "../assets/images/collective/matt_work_3.png";
 import caleb1 from "../assets/images/collective/caleb_main_1.jpg";
 import caleb2 from "../assets/images/collective/caleb_work_2.jpg";
 import caleb3 from "../assets/images/collective/caleb_work_3.jpg";
@@ -23,6 +23,12 @@ import "./Collective.css";
 interface ProfileImage {
   src: string;
   orientation?: "portrait" | "landscape";
+  /** Overrides the orientation's default aspect-ratio, e.g. "16 / 9". */
+  aspectRatio?: string;
+  /** Overrides the default floated width (e.g. "220px") for ratios that need more room. */
+  width?: string;
+  /** Which side the image floats to, with text wrapping the opposite side. Defaults to "left". */
+  side?: "left" | "right";
 }
 
 interface Profile {
@@ -74,27 +80,27 @@ const profiles: Profile[] = [
   {
     id: 2,
     name: "Matt",
-    role: "Cinematographer | Co-founder",
+    role: "Director of Photography | Co-founder",
     bio: (
       <>
-        For more than 25 years I’ve been telling stories through film. As co-founder of People with Ideas, I bring a
-        documentary approach to cinematography, combining
+        For more than 25 years, I’ve been crafting stories through film. My career began in the world of feature films,
+        working on productions including
       </>
     ),
     extendedBio: (
       <>
-        creative vision with a passion for authentic storytelling. Whether I’m behind the camera, in the edit suite or
-        shaping the creative direction of a project, my goal is always to create work that feels honest, cinematic and
-        deeply human.
+        Avatar, King Kong and a wide range of independent films, where I developed a passion for cinematic storytelling,
+        visual composition and creating imagery that serves the story.
       </>
     ),
     images: [matt1, matt2],
     innerImage: { src: matt3, orientation: "portrait" },
     dropdownText: (
       <>
-        I love collaborating with great people and finding those unscripted moments that often become the most powerful
-        part of a story. From documentaries to commercial campaigns, I believe the best films are the ones that help
-        people connect with each other.
+        Today, I bring that experience to People with Ideas, helping businesses and organisations create beautifully
+        crafted films, commercials and branded content with the same level of care and attention to detail. Whether I’m
+        behind the camera, shaping a creative concept or refining the final edit, I believe great cinematography should
+        elevate a story, not distract from it.
       </>
     ),
     linkedin: "https://www.linkedin.com/in/matt-sharp-367a5537/",
@@ -161,7 +167,7 @@ const profiles: Profile[] = [
       <>digital strategies and campaigns that connect with the right audience and turn ideas into measurable results.</>
     ),
     images: [fran1, fran2],
-    innerImage: { src: fran3, orientation: "portrait" },
+    innerImage: { src: fran3, orientation: "landscape", aspectRatio: "16 / 9", width: "100%" },
     dropdownText: (
       <>
         I love collaborating with creative teams to combine authentic storytelling with data-driven marketing. Together,
@@ -253,7 +259,11 @@ const Collective = () => {
                             {profile.innerImage && (
                               <div className="collective-profile__dropdown-row">
                                 <div
-                                  className={`collective-profile__image collective-profile__image--tertiary collective-profile__image--${profile.innerImage.orientation ?? "portrait"}`}
+                                  className={`collective-profile__image collective-profile__image--tertiary collective-profile__image--${profile.innerImage.orientation ?? "portrait"} collective-profile__image--${profile.innerImage.side ?? "left"}`}
+                                  style={{
+                                    aspectRatio: profile.innerImage.aspectRatio,
+                                    width: profile.innerImage.width,
+                                  }}
                                 >
                                   <img src={profile.innerImage.src} alt={`${profile.name} — ${profile.role}`} />
                                 </div>

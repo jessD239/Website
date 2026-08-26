@@ -79,6 +79,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: block;
 }
 
 /* .collective-profile:hover .collective-profile__image img {
@@ -150,7 +151,7 @@
   overflow: hidden;
 }
 
-/* Third image floats left; text fills remaining width then wraps below */
+/* Mobile: simple float wrap. Overridden with flexbox at desktop widths. */
 .collective-profile__dropdown-row {
   margin-top: var(--space-sm);
 }
@@ -164,7 +165,12 @@
 .collective-profile__image--tertiary {
   float: left;
   width: var(--tertiary-image-width);
-  margin: 10px var(--space-sm) var(--space-xs) 0;
+  margin: 8px var(--space-sm) 0 0;
+}
+
+.collective-profile__image--tertiary.collective-profile__image--right {
+  float: right;
+  margin: 0 0 var(--space-sm) var(--space-md);
 }
 
 .collective-profile__image--tertiary.collective-profile__image--portrait {
@@ -173,14 +179,13 @@
 
 .collective-profile__image--tertiary.collective-profile__image--landscape {
   aspect-ratio: 4 / 3;
+  margin-bottom: var(--space-sm);
 }
 
 .collective-profile__dropdown-text {
   font-size: 0.9rem;
   color: var(--color-text-muted);
   line-height: 1.75;
-  /* Counteract the line-height's half-leading so the first line's text aligns with the floated image's top edge */
-  margin-top: -0.375em;
 }
 
 /* ---- Links ---- */
@@ -289,6 +294,31 @@
   /* Reset mobile max-width so gallery fills its column */
   .collective-profile__gallery {
     max-width: none;
+  }
+
+  /* Image sits in its own column; text fills the rest and never wraps around it. */
+  .collective-profile__dropdown-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-sm) var(--space-md);
+  }
+
+  .collective-profile__image--tertiary {
+    float: none;
+    flex: 0 1 auto;
+    margin: 0;
+  }
+
+  .collective-profile__image--tertiary.collective-profile__image--right {
+    float: none;
+    margin: 0;
+    order: 2;
+  }
+
+  .collective-profile__dropdown-text {
+    flex: 1 1 220px;
+    min-width: 0;
   }
 
   /* Larger offset on wider screens */
