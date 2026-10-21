@@ -83,6 +83,9 @@ const Navbar = ({ onOpenContact, forceDark = false }: NavbarProps) => {
             <Link to="/collective" className="header__link">
               Collective
             </Link>
+            <Link to="/awards" className="header__link">
+              Awards
+            </Link>
           </nav>
 
           <HamburgerButton isOpen={navOpen} onClick={() => setNavOpen((prev) => !prev)} />
