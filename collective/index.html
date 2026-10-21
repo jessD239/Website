@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PwI - Creative Studio</title>
+    <link rel="canonical" href="https://peoplewithideas.co.nz/collective/" />
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+    <link rel="manifest" href="/assets/images/site.webmanifest" />
+
+    <!-- Google Analytics 4 (page views are sent on route change from src/components/Analytics.tsx) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZFDB09F1B"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KZFDB09F1B", { send_page_view: false });
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "People with Ideas",
+        "alternateName": "PwI",
+        "url": "https://peoplewithideas.co.nz/",
+        "logo": "https://peoplewithideas.co.nz/assets/images/android-chrome-512x512.png",
+        "email": "hello@peoplewithideas.co.nz",
+        "telephone": "+64272660314",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wellington",
+          "addressCountry": "NZ"
+        },
+        "sameAs": [
+          "https://www.instagram.com/peoplewithideas_",
+          "https://vimeo.com/user257644529",
+          "https://www.linkedin.com/company/people-with-ideasnz"
+        ]
+      }
+    </script>
+
+    <!-- GitHub Pages SPA routing: restore path from 404.html redirect -->
+    <script>
+      (function () {
+        var r = sessionStorage.getItem("spa_redirect");
+        if (r) {
+          sessionStorage.removeItem("spa_redirect");
+          var parts = r.split("~and~");
+          var path = "/" + parts[0];
+          var search = parts[1] ? "?" + parts[1] : "";
+          history.replaceState(null, null, path + search);
+        }
+      })();
+    </script>
+
+    <!-- Google Fonts: Serif for headlines, Sans for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/assets/index-DCPI3Rhh.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-D459PKng.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
