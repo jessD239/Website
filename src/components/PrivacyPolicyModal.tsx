@@ -40,7 +40,7 @@ const PrivacyPolicyModal = ({ isOpen, onClose }: PrivacyPolicyModalProps) => {
         document.body.style.position = "";
         document.body.style.top = "";
         document.body.style.width = "";
-        window.scrollTo(0, scrollY);
+        window.scrollTo({ top: scrollY, left: 0, behavior: "instant" });
       };
     }
   }, [mounted]);
