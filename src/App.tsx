@@ -3,7 +3,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Footer from "./components/layout/Footer";
 import Navbar from "./components/layout/Navbar";
 import ContactModal from "./components/ContactModal";
-import Analytics from "./components/Analytics";
 import Home from "./pages/Home";
 import Collective from "./pages/Collective";
 // import EventSignup from "./pages/EventSignup";
@@ -50,19 +49,16 @@ function CollectivePage() {
 
 function App() {
   return (
-    <>
-      <Analytics />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/collective" element={<CollectivePage />} />
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/collective" element={<CollectivePage />} />
 
-        <Route path="/subscribe" element={<Subscribe />} />
-        <Route path="/unsubscribe" element={<Unsubscribe />} />
+      <Route path="/subscribe" element={<Subscribe />} />
+      <Route path="/unsubscribe" element={<Unsubscribe />} />
 
-        {/* <Route path="/event" element={<EventSignup />} /> */}
-        {/* <Route path="/event-draw" element={<EventDraw />} /> */}
-      </Routes>
-    </>
+      {/* <Route path="/event" element={<EventSignup />} /> */}
+      {/* <Route path="/event-draw" element={<EventDraw />} /> */}
+    </Routes>
   );
 }
 
