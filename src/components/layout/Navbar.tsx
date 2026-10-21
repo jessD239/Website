@@ -76,6 +76,9 @@ const Navbar = ({ onOpenContact, forceDark = false }: NavbarProps) => {
             <a href={sectionHref("#about")} className="header__link">
               About
             </a>
+            <a href={sectionHref("#faqs")} className="header__link">
+              FAQs
+            </a>
             <a href={sectionHref("#contact")} className="header__link" onClick={handleContactClick}>
               Contact
             </a>
@@ -105,6 +108,9 @@ const Navbar = ({ onOpenContact, forceDark = false }: NavbarProps) => {
         <a href={sectionHref("#about")} className="mobile-nav__link" onClick={closeNav}>
           About
         </a>
+        <a href={sectionHref("#faqs")} className="mobile-nav__link" onClick={closeNav}>
+          FAQs
+        </a>
         <a
           href={sectionHref("#contact")}
           className="mobile-nav__link"
@@ -117,6 +123,9 @@ const Navbar = ({ onOpenContact, forceDark = false }: NavbarProps) => {
         </a>
         <Link to="/collective" className="mobile-nav__link" onClick={closeNav}>
           Collective
+        </Link>
+        <Link to="/awards" className="mobile-nav__link" onClick={closeNav}>
+          Awards
         </Link>
       </div>
     </>

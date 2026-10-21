@@ -3,30 +3,41 @@ import { useReveal } from "../functions/Utility";
 
 // import placeholder from "../assets/images/collective/placeholder.jpg";
 
-import jess1 from "../assets/images/collective/jess_main_1.jpg";
-import jess2 from "../assets/images/collective/jess_work_2.jpg";
-import jess3 from "../assets/images/collective/jess_work_3.jpg";
-import matt1 from "../assets/images/collective/matt_main_1.jpg";
-import matt2 from "../assets/images/collective/matt_work_2.jpg";
-import matt3 from "../assets/images/collective/matt_work_3.png";
-import caleb1 from "../assets/images/collective/caleb_main_1.jpg";
-import caleb2 from "../assets/images/collective/caleb_work_2.jpg";
-import caleb3 from "../assets/images/collective/caleb_work_3.jpg";
-import chris1 from "../assets/images/collective/chris_main_1.jpg";
-import chris2 from "../assets/images/collective/chris_work_2.jpg";
-import chris3 from "../assets/images/collective/chris_work_3.jpg";
-import fran1 from "../assets/images/collective/fran_main_1.jpg";
-import fran2 from "../assets/images/collective/fran_work_2.jpg";
-import fran3 from "../assets/images/collective/fran_work_3.jpg";
+import ResponsiveImage from "../components/ResponsiveImage";
+import jess1 from "../assets/images/collective/jess_main_1.jpg?preset=portrait";
+import jess2 from "../assets/images/collective/jess_work_2.jpg?preset=portrait";
+import jess3 from "../assets/images/collective/jess_work_3.jpg?preset=thumb";
+import matt1 from "../assets/images/collective/matt_main_1.jpg?preset=portrait";
+import matt2 from "../assets/images/collective/matt_work_2.jpg?preset=portrait";
+import matt3 from "../assets/images/collective/matt_work_3.png?preset=thumb";
+import caleb1 from "../assets/images/collective/caleb_main_1.jpg?preset=portrait";
+import caleb2 from "../assets/images/collective/caleb_work_2.jpg?preset=portrait";
+import caleb3 from "../assets/images/collective/caleb_work_3.jpg?preset=thumb";
+import chris1 from "../assets/images/collective/chris_main_1.jpg?preset=portrait";
+import chris2 from "../assets/images/collective/chris_work_2.jpg?preset=portrait";
+import chris3 from "../assets/images/collective/chris_work_3.jpg?preset=thumb";
+import fran1 from "../assets/images/collective/fran_main_1.jpg?preset=portrait";
+import fran2 from "../assets/images/collective/fran_work_2.jpg?preset=portrait";
+import fran3 from "../assets/images/collective/fran_work_3.jpg?preset=wide";
 import "./Collective.css";
 
+// Container is max 1320px with 32px side padding; gallery images are half a gallery column minus the 8px gap.
+// <480: full width; 480-767: gallery max 360; 768-1023: max 420; 1024-1439: two columns (64px gap); 1440+: gallery max 480.
+const GALLERY_SIZES =
+  "(max-width: 479px) calc((100vw - 72px) / 2), (max-width: 767px) 176px, (max-width: 1023px) 206px, (max-width: 1439px) calc((min(100vw, 1320px) - 144px) / 4), 236px";
+// Floated/inline portrait thumbnail: 150px on mobile, 180px from 768px.
+const INNER_PORTRAIT_SIZES = "(max-width: 767px) 150px, 180px";
+// Landscape inner image fills the info column.
+const INNER_LANDSCAPE_SIZES =
+  "(max-width: 1023px) calc(100vw - 64px), (max-width: 1439px) calc((min(100vw, 1320px) - 128px) / 2), 596px";
+
 interface ProfileImage {
-  src: string;
+  image: ResponsiveImageData;
   orientation?: "portrait" | "landscape";
   /** Overrides the orientation's default aspect-ratio, e.g. "16 / 9". */
   aspectRatio?: string;
   /** Overrides the default floated width (e.g. "220px") for ratios that need more room. */
-  width?: string;
+  containerWidth?: string;
   /** Which side the image floats to, with text wrapping the opposite side. Defaults to "left". */
   side?: "left" | "right";
 }
@@ -39,7 +50,7 @@ interface Profile {
   bio: ReactNode;
   /** Optional extra bio shown at the top of the expanded dropdown. */
   extendedBio?: ReactNode;
-  images: [string, string];
+  images: [ResponsiveImageData, ResponsiveImageData];
   innerImage?: ProfileImage;
   /** Extra paragraph shown alongside `innerImage` inside the expanded dropdown. */
   dropdownText?: ReactNode;
@@ -66,7 +77,7 @@ const profiles: Profile[] = [
       </>
     ),
     images: [jess1, jess2],
-    innerImage: { src: jess3, orientation: "portrait" },
+    innerImage: { image: jess3, orientation: "portrait" },
     dropdownText: (
       <>
         Over the years I've worked alongside businesses, charities and communities across New Zealand and the Pacific,
@@ -94,7 +105,7 @@ const profiles: Profile[] = [
       </>
     ),
     images: [matt1, matt2],
-    innerImage: { src: matt3, orientation: "portrait" },
+    innerImage: { image: matt3, orientation: "portrait" },
     dropdownText: (
       <>
         Today, I bring that experience to People with Ideas, helping businesses and organisations create beautifully
@@ -118,7 +129,7 @@ const profiles: Profile[] = [
       </>
     ),
     images: [caleb1, caleb2],
-    innerImage: { src: caleb3, orientation: "portrait" },
+    innerImage: { image: caleb3, orientation: "portrait" },
     dropdownText: (
       <>
         Calm, curious and people-focused, I think I might have a natural ability to make people feel comfortable in
@@ -144,7 +155,7 @@ const profiles: Profile[] = [
       </>
     ),
     images: [chris1, chris2],
-    innerImage: { src: chris3, orientation: "portrait" },
+    innerImage: { image: chris3, orientation: "portrait" },
     dropdownText: (
       <>
         Together with People with Ideas, I help bring brands and stories to life through imagery that captures not only
@@ -167,7 +178,12 @@ const profiles: Profile[] = [
       <>digital strategies and campaigns that connect with the right audience and turn ideas into measurable results.</>
     ),
     images: [fran1, fran2],
-    innerImage: { src: fran3, orientation: "landscape", aspectRatio: "16 / 9", width: "100%" },
+    innerImage: {
+      image: fran3,
+      orientation: "landscape",
+      aspectRatio: "16 / 9",
+      containerWidth: "100%",
+    },
     dropdownText: (
       <>
         I love collaborating with creative teams to combine authentic storytelling with data-driven marketing. Together,
@@ -221,10 +237,18 @@ const Collective = () => {
                 >
                   <div className="collective-profile__gallery">
                     <div className="collective-profile__image collective-profile__image--primary">
-                      <img src={profile.images[0]} alt={`${profile.name} — ${profile.role}`} loading="lazy" />
+                      <ResponsiveImage
+                        image={profile.images[0]}
+                        sizes={GALLERY_SIZES}
+                        alt={`${profile.name} — ${profile.role}`}
+                      />
                     </div>
                     <div className="collective-profile__image collective-profile__image--secondary">
-                      <img src={profile.images[1]} alt={`${profile.name} — ${profile.role}`} loading="lazy" />
+                      <ResponsiveImage
+                        image={profile.images[1]}
+                        sizes={GALLERY_SIZES}
+                        alt={`${profile.name} — ${profile.role}`}
+                      />
                     </div>
                   </div>
 
@@ -262,10 +286,18 @@ const Collective = () => {
                                   className={`collective-profile__image collective-profile__image--tertiary collective-profile__image--${profile.innerImage.orientation ?? "portrait"} collective-profile__image--${profile.innerImage.side ?? "left"}`}
                                   style={{
                                     aspectRatio: profile.innerImage.aspectRatio,
-                                    width: profile.innerImage.width,
+                                    width: profile.innerImage.containerWidth,
                                   }}
                                 >
-                                  <img src={profile.innerImage.src} alt={`${profile.name} — ${profile.role}`} loading="lazy" />
+                                  <ResponsiveImage
+                                    image={profile.innerImage.image}
+                                    sizes={
+                                      profile.innerImage.orientation === "landscape"
+                                        ? INNER_LANDSCAPE_SIZES
+                                        : INNER_PORTRAIT_SIZES
+                                    }
+                                    alt={`${profile.name} — ${profile.role}`}
+                                  />
                                 </div>
                                 {profile.dropdownText && (
                                   <p className="collective-profile__dropdown-text">{profile.dropdownText}</p>

@@ -8,7 +8,7 @@ export const EVENT_WEBHOOK_ENDPOINT =
  * and adds `is-visible` when they scroll into view.
  * Call once at the App level.
  */
-export function useReveal() {
+export function useReveal(refreshKey?: unknown) {
   useEffect(() => {
     const selector = ".reveal:not(.reveal--manual)";
 
@@ -32,5 +32,5 @@ export function useReveal() {
     document.querySelectorAll(selector).forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+  }, [refreshKey]);
 }

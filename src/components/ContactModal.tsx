@@ -176,7 +176,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
           <>
             <div className="contact-modal__header">
               <h2 className="contact-modal__title">Get in Touch</h2>
-              <p className="contact-modal__subtitle">Tell us about your project. We'll get back to you shortly.</p>
+              <p className="contact-modal__subtitle">We'll get back to you shortly.</p>
             </div>
 
             <form className="contact-form" onSubmit={handleSubmit} noValidate>
