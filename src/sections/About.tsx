@@ -1,6 +1,6 @@
 // import imgAbout from "../assets/IFwebsite_PWI.jpg";
 import advertisingLuxury from "../assets/Advertisingluxury.jpeg";
-import brandHeadshotPWI from "../assets/BrandHeadshotPWI.jpeg";
+import brandHeadshotPWI from "../assets/cinema-body-shot.jpg";
 import businessHeadshotPWI from "../assets/BusinessheadshotPWI.jpeg";
 import contentCreatorPWI from "../assets/ContenCreatorPWI.jpg";
 import creativePhotographyPWI from "../assets/CreativePhotographyPWI.jpg";
