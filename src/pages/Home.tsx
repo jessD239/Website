@@ -1,5 +1,6 @@
 import About from "../sections/About";
 import Contact from "../sections/Contact";
+import FAQs from "../sections/FAQs";
 import Hero from "../sections/Hero";
 import Services from "../sections/Services";
 import Showcase from "../sections/Showcase";
@@ -18,6 +19,7 @@ const Home = ({ onOpenContact }: HomeProps) => {
       <Services />
       <About />
       <Showcase />
+      <FAQs />
       <Testimonials />
       <Contact onOpenContact={onOpenContact} />
     </>

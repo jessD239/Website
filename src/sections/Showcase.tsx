@@ -8,8 +8,8 @@ const Showcase = () => {
           <p className="section-label">Portfolio</p>
           <h2 className="showcase__title">Thinking visually?</h2>
           <p className="showcase__subtitle">
-            A small selection of some of our recent video, storytelling and Ad creation work. Looking for other types of marketing material? Maybe commercial photography 
-            or perhaps explainer videos or 2D animation? Get in touch.
+            A small selection of some of our recent video, storytelling and Ad creation work. Looking for other types of
+            marketing material? Maybe commercial photography or perhaps explainer videos or 2D animation? Get in touch.
           </p>
         </div>
 
@@ -19,14 +19,14 @@ const Showcase = () => {
             <div className="showcase__thumb showcase__thumb--featured reveal">
               <div className="showcase__pad showcase__pad--16x9">
                 <iframe
-                  src="https://player.vimeo.com/video/1185082291?badge=0&autopause=0&player_id=0&app_id=58479"
+                  src="https://player.vimeo.com/video/1218781562?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
-                  title="Twenty Eight"
-                  loading="lazy"
-                />
+                  // style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                  title="Southward Distilling - Wellington's First Whisky"
+                ></iframe>
               </div>
-              <span className="showcase__thumb-label">Twenty Eight - Hero Video</span>
+              <span className="showcase__thumb-label">Southward Distilling - Wellington's First Whisky</span>
             </div>
 
             <div className="showcase__thumb showcase__thumb--portrait reveal">
@@ -40,6 +40,34 @@ const Showcase = () => {
                 />
               </div>
               <span className="showcase__thumb-label">French Tech - Adeline</span>
+            </div>
+
+            {/* Placeholders: swap each .showcase__placeholder for an <iframe> like the others */}
+            <div className="showcase__thumb showcase__thumb--a reveal">
+              <div className="showcase__pad showcase__pad--16x9">
+                <iframe
+                  src="https://player.vimeo.com/video/1185082291?badge=0&autopause=0&player_id=0&app_id=58479"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  title="Twenty Eight - Coffee, Vibes & More"
+                  loading="lazy"
+                />
+              </div>
+              <span className="showcase__thumb-label">Twenty Eight - Coffee, Vibes & More</span>
+            </div>
+
+            <div className="showcase__thumb showcase__thumb--b reveal">
+              <div className="showcase__pad showcase__pad--16x9">
+                <iframe
+                  src="https://player.vimeo.com/video/1219062294?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                  // frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  // style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                  title="QT_A Secret Worth Keeping Highlights _30sec"
+                ></iframe>
+              </div>
+              <span className="showcase__thumb-label">QT - A Secret Worth Keeping</span>
             </div>
           </div>
 

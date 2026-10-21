@@ -1,11 +1,18 @@
-import imgTwentyEight from "../assets/TwentyEight_imageV2.jpg";
-import imgRealTalk from "../assets/RealTalk.png";
-import imgAlex from "../assets/Alex_Image.jpg";
-import imgAdeline from "../assets/Adeline_FrenchTech_Final.jpeg";
-import imgAnna from "../assets/Anna.jpeg";
-import imgSamsBigBrainRun from "../assets/images/in-progress/sams_big_brain_run.png";
-import imgTedXWellington from "../assets/images/in-progress/tedx_wellington.jpg";
+import ResponsiveImage from "../components/ResponsiveImage";
+import southward from "../assets/images/featured/southward.jpg?preset=feature";
+import realTalk from "../assets/RealTalk.png?preset=wide";
+import alex from "../assets/Alex_Image.jpg?preset=card";
+import adeline from "../assets/Adeline_FrenchTech_Final.jpeg?position=bottom&preset=card";
+import anna from "../assets/Anna.jpeg?preset=card";
+import sams from "../assets/images/in-progress/big_brain_run.png?preset=wide";
+import tedx from "../assets/images/in-progress/tedx_wellington.jpg?preset=wide";
 import "./Work.css";
+
+// Container: max 1320px, 32px side padding. Grid gaps: feature 64px, small row / stories 32px.
+const FEATURE_SIZES = "(max-width: 1024px) calc(100vw - 64px), (max-width: 1320px) calc((100vw - 128px) / 2), 596px";
+const SMALL_SIZES =
+  "(max-width: 768px) calc(100vw - 64px), (max-width: 1024px) calc((100vw - 96px) / 2), (max-width: 1320px) calc((100vw - 128px) / 3), 397px";
+const STORY_SIZES = "(max-width: 1024px) calc(100vw - 64px), (max-width: 1320px) calc((100vw - 96px) / 2), 612px";
 
 const Work = () => {
   return (
@@ -25,14 +32,16 @@ const Work = () => {
           {/* Featured project 1 (large) */}
           <div className="work__item--feature reveal">
             <div className="work__thumbnail">
-              <img src={imgTwentyEight} alt="Twenty Eight" loading="lazy" />
+              <ResponsiveImage image={southward} sizes={FEATURE_SIZES} alt="Southward Distillery" loading="eager" />
             </div>
             <div className="work__info">
-              <p className="work__category">"Best coffee in the Hutt"</p>
-              <h3 className="work__name">Twenty Eight - Coffee, Vibes &amp; More</h3>
+              <p className="work__category">BORN TO DISRUPT</p>
+              <h3 className="work__name">Southward Distilling - Whisky, But Not as You Know It</h3>
               <p className="work__desc">
-                It's more than just a cafe, it's a hidden gem. Such a good shoot and loved the "retro" video style we
-                went for. It reflected the establishment's vibe perfectly.
+                Frankie wanted Southward Whisky to have an identity of its own; distinct from the gin brand she had
+                already built. Sophisticated and considered, but still bold, honest and unmistakably her, with a
+                feminine edge. We brought that idea to life through cinematic storytelling, rich colour and a little
+                theatre, creating a world that feels less like traditional whisky and more like Southward.
               </p>
               <a href="#showcase" className="work__link">
                 View Project →
@@ -43,7 +52,7 @@ const Work = () => {
           {/* Featured project 2 (large) */}
           <div className="work__item--feature reveal">
             <div className="work__thumbnail" style={{ aspectRatio: "16/9" }}>
-              <img src={imgRealTalk} alt="RealTalk" loading="lazy" />
+              <ResponsiveImage image={realTalk} sizes={FEATURE_SIZES} alt="RealTalk" />
             </div>
             <div className="work__info">
               <p className="work__category">A one word story</p>
@@ -70,15 +79,23 @@ const Work = () => {
           <div className="work__stories-grid">
             <article className="work__story reveal">
               <div className="work__story-image">
-                <img src={imgSamsBigBrainRun} alt="Sam's Big Brain Run" loading="lazy" style={{ objectPosition: "50% 30%" }} />
+                <ResponsiveImage
+                  image={sams}
+                  sizes={STORY_SIZES}
+                  alt="Sam's Big Brain Run"
+                  style={{ objectPosition: "50% 30%" }}
+                />
               </div>
               <div className="work__story-info">
                 <p className="work__category">Feature Documentary | Community Movement</p>
                 <h3 className="work__name">Sam’s Big Brain Run</h3>
-                <p className="work__story-tagline">One run. Twenty-five days. One opportunity to change lives.</p>
+                <p className="work__story-tagline">
+                  1,250 kilometres. 25 days. One young New Zealander running the length of the North Island.
+                </p>
                 <p className="work__desc">
-                  Over 25 consecutive days, Sam will run the length of New Zealand's North Island to raise awareness and
-                  vital funds for NANOS, while helping build New Zealand's first Brain Cancer Registry.
+                  What begins as an extraordinary endurance challenge becomes the catalyst for a much bigger national
+                  conversation about brain tumours, the data New Zealand is missing and what we could build for the
+                  future.
                 </p>
                 <p className="work__story-status">Status: In production</p>
                 <a
@@ -94,7 +111,12 @@ const Work = () => {
 
             <article className="work__story reveal">
               <div className="work__story-image">
-                <img src={imgTedXWellington} alt="TedX Wellington" loading="lazy" style={{ objectPosition: "50% 50%" }} />
+                <ResponsiveImage
+                  image={tedx}
+                  sizes={STORY_SIZES}
+                  alt="TedX Wellington"
+                  style={{ objectPosition: "50% 50%" }}
+                />
               </div>
               <div className="work__story-info">
                 <p className="work__category">Mini documentary series | Official sponsor</p>
@@ -118,7 +140,7 @@ const Work = () => {
         <div className="work__row">
           <div className="work__item--small reveal">
             <div className="work__thumbnail">
-              <img src={imgAlex} alt="Alex" loading="lazy" />
+              <ResponsiveImage image={alex} sizes={SMALL_SIZES} alt="Alex" />
             </div>
             <p className="work__category">Photography</p>
             <h3 className="work__name">Elevate your Content library.</h3>
@@ -130,7 +152,12 @@ const Work = () => {
 
           <div className="work__item--small reveal">
             <div className="work__thumbnail">
-              <img src={imgAdeline} alt="Adeline - French Tech" loading="lazy" style={{ objectPosition: "center bottom" }} />
+              <ResponsiveImage
+                image={adeline}
+                sizes={SMALL_SIZES}
+                alt="Adeline - French Tech"
+                style={{ objectPosition: "center bottom" }}
+              />
             </div>
             <p className="work__category">Social Media, Podcast or TV</p>
             <h3 className="work__name">Knowing your Audience is key.</h3>
@@ -141,7 +168,7 @@ const Work = () => {
 
           <div className="work__item--small reveal">
             <div className="work__thumbnail">
-              <img src={imgAnna} alt="Anna" loading="lazy" />
+              <ResponsiveImage image={anna} sizes={SMALL_SIZES} alt="Anna" />
             </div>
             <p className="work__category">Creative Strategy</p>
             <h3 className="work__name">Think ahead.</h3>

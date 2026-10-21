@@ -128,24 +128,28 @@
 
 /* Outer wrapper: stack main row + secondary row */
 .showcase__thumbs {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* Top row: featured (2/3) beside portrait (1/3) */
-.showcase__main-row {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-}
-
-/* Bottom row: 3 equal videos */
-.showcase__secondary-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "featured featured portrait"
+    "a        b        portrait"
+    "s1       s2       s3";
   gap: 2rem;
 }
+
+/* Row wrappers are transparent so every thumb is placed by the grid areas */
+.showcase__main-row,
+.showcase__secondary-row {
+  display: contents;
+}
+
+.showcase__thumb--featured { grid-area: featured; }
+.showcase__thumb--portrait { grid-area: portrait; }
+.showcase__thumb--a { grid-area: a; }
+.showcase__thumb--b { grid-area: b; }
+.showcase__secondary-row > :nth-child(1) { grid-area: s1; }
+.showcase__secondary-row > :nth-child(2) { grid-area: s2; }
+.showcase__secondary-row > :nth-child(3) { grid-area: s3; }
 
 /* Base thumb - height comes from the inner pad wrapper, not aspect-ratio */
 .showcase__thumb {
@@ -170,18 +174,39 @@
   }
 }
 
-/* Featured takes 2/3 of the flex main row */
-.showcase__thumb--featured {
-  flex: 2;
-}
-
 .showcase__thumb--featured:hover {
   transform: scale(1.015);
 }
 
-/* Portrait takes 1/3 of the flex main row */
+/* Portrait fills the height of the two rows, with the tile itself kept at 9:16
+   and centred so its rounded corners hug the video */
 .showcase__thumb--portrait {
-  flex: 1;
+  justify-self: center;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: 9 / 16;
+}
+
+.showcase__thumb--portrait .showcase__pad {
+  position: absolute;
+  inset: 0;
+  padding-top: 0;
+}
+
+/* Placeholder for videos not yet added */
+.showcase__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1d1d1d, #141414);
+  border: 1px dashed rgba(246, 244, 240, 0.25);
+  border-radius: 0.375rem;
+  color: rgba(246, 244, 240, 0.5);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .showcase__thumb--portrait:hover {
@@ -283,21 +308,36 @@
    RESPONSIVE
    ============================================ */
 @media (max-width: 1024px) {
-  .showcase__secondary-row {
-    grid-template-columns: repeat(2, 1fr);
+  .showcase__thumbs {
     gap: 1.5rem;
+    grid-template-areas:
+      "featured featured portrait"
+      "a        b        portrait"
+      "s1       s2       s3";
   }
 }
 
 @media (max-width: 768px) {
-  .showcase__main-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1.5rem;
+  .showcase__thumbs {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "featured"
+      "portrait"
+      "a"
+      "b"
+      "s1"
+      "s2"
+      "s3";
   }
 
-  .showcase__secondary-row {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .showcase__thumb--portrait {
+    height: auto;
+    width: 100%;
+  }
+
+  .showcase__thumb--portrait .showcase__pad {
+    position: relative;
+    inset: auto;
+    padding-top: 177.78%;
   }
 }
