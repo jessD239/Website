@@ -36,7 +36,7 @@ const Work = () => {
             </div>
             <div className="work__info">
               <p className="work__category">BORN TO DISRUPT</p>
-              <h3 className="work__name">Southward Distilling - Whisky, But Not as You Know It</h3>
+              <h3 className="work__name">Southward Distilling<br />Whisky, But Not as You Know It</h3>
               <p className="work__desc">
                 Frankie wanted Southward Whisky to have an identity of its own; distinct from the gin brand she had
                 already built. Sophisticated and considered, but still bold, honest and unmistakably her, with a
@@ -56,7 +56,7 @@ const Work = () => {
             </div>
             <div className="work__info">
               <p className="work__category">A one word story</p>
-              <h3 className="work__name">RealTalk - An impactful message</h3>
+              <h3 className="work__name">RealTalk<br />An impactful message</h3>
               <p className="work__desc">
                 Content can be more than just another video, reel or post. For RealTalk, we created a distinct look and
                 feel to capture the attention of their audience and make sure the message created an impact.
