@@ -42,6 +42,7 @@ function CollectivePage() {
     <>
       <Navbar onOpenContact={() => setContactOpen(true)} forceDark />
       <Collective />
+      <Footer />
       <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
     </>
   );

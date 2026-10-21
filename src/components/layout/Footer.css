@@ -70,6 +70,22 @@
   color: var(--color-text-muted);
 }
 
+.footer__privacy {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.3s ease;
+}
+
+.footer__privacy:hover {
+  color: var(--color-text);
+}
+
 @media (max-width: 768px) {
   .footer__social {
     width: 100%;
