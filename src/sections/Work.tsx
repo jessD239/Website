@@ -25,7 +25,7 @@ const Work = () => {
           {/* Featured project 1 (large) */}
           <div className="work__item--feature reveal">
             <div className="work__thumbnail">
-              <img src={imgTwentyEight} alt="Twenty Eight" />
+              <img src={imgTwentyEight} alt="Twenty Eight" loading="lazy" />
             </div>
             <div className="work__info">
               <p className="work__category">"Best coffee in the Hutt"</p>
@@ -43,7 +43,7 @@ const Work = () => {
           {/* Featured project 2 (large) */}
           <div className="work__item--feature reveal">
             <div className="work__thumbnail" style={{ aspectRatio: "16/9" }}>
-              <img src={imgRealTalk} alt="RealTalk" />
+              <img src={imgRealTalk} alt="RealTalk" loading="lazy" />
             </div>
             <div className="work__info">
               <p className="work__category">A one word story</p>
@@ -70,7 +70,7 @@ const Work = () => {
           <div className="work__stories-grid">
             <article className="work__story reveal">
               <div className="work__story-image">
-                <img src={imgSamsBigBrainRun} alt="Sam's Big Brain Run" style={{ objectPosition: "50% 30%" }} />
+                <img src={imgSamsBigBrainRun} alt="Sam's Big Brain Run" loading="lazy" style={{ objectPosition: "50% 30%" }} />
               </div>
               <div className="work__story-info">
                 <p className="work__category">Feature Documentary | Community Movement</p>
@@ -94,7 +94,7 @@ const Work = () => {
 
             <article className="work__story reveal">
               <div className="work__story-image">
-                <img src={imgTedXWellington} alt="TedX Wellington" style={{ objectPosition: "50% 50%" }} />
+                <img src={imgTedXWellington} alt="TedX Wellington" loading="lazy" style={{ objectPosition: "50% 50%" }} />
               </div>
               <div className="work__story-info">
                 <p className="work__category">Mini documentary series | Official sponsor</p>
@@ -118,7 +118,7 @@ const Work = () => {
         <div className="work__row">
           <div className="work__item--small reveal">
             <div className="work__thumbnail">
-              <img src={imgAlex} alt="Alex" />
+              <img src={imgAlex} alt="Alex" loading="lazy" />
             </div>
             <p className="work__category">Photography</p>
             <h3 className="work__name">Elevate your Content library.</h3>
@@ -130,7 +130,7 @@ const Work = () => {
 
           <div className="work__item--small reveal">
             <div className="work__thumbnail">
-              <img src={imgAdeline} alt="Adeline - French Tech" style={{ objectPosition: "center bottom" }} />
+              <img src={imgAdeline} alt="Adeline - French Tech" loading="lazy" style={{ objectPosition: "center bottom" }} />
             </div>
             <p className="work__category">Social Media, Podcast or TV</p>
             <h3 className="work__name">Knowing your Audience is key.</h3>
@@ -141,7 +141,7 @@ const Work = () => {
 
           <div className="work__item--small reveal">
             <div className="work__thumbnail">
-              <img src={imgAnna} alt="Anna" />
+              <img src={imgAnna} alt="Anna" loading="lazy" />
             </div>
             <p className="work__category">Creative Strategy</p>
             <h3 className="work__name">Think ahead.</h3>

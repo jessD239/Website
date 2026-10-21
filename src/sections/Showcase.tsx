@@ -23,6 +23,7 @@ const Showcase = () => {
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   title="Twenty Eight"
+                  loading="lazy"
                 />
               </div>
               <span className="showcase__thumb-label">Twenty Eight - Hero Video</span>
@@ -35,6 +36,7 @@ const Showcase = () => {
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   title="French Tech MiniStories - Adeline"
+                  loading="lazy"
                 />
               </div>
               <span className="showcase__thumb-label">French Tech - Adeline</span>
@@ -50,6 +52,7 @@ const Showcase = () => {
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   title="Real Talk - Inspirational Video"
+                  loading="lazy"
                 />
               </div>
               <span className="showcase__thumb-label">Real Talk - Inspirational Video</span>
@@ -62,6 +65,7 @@ const Showcase = () => {
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   title="Mama Says (Breaking Rules) Music Video"
+                  loading="lazy"
                 />
               </div>
               <span className="showcase__thumb-label">Mama Says - Ainslie Allen</span>
@@ -74,6 +78,7 @@ const Showcase = () => {
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   title="TeamCloud - Showcase"
+                  loading="lazy"
                 />
               </div>
               <span className="showcase__thumb-label">TeamCloud - Showcase</span>

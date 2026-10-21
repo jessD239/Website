@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Hero.css";
 import showreelVideo from "../assets/video/People WIth Ideas Showreel 2026_10MB Compressed.mp4";
 
@@ -90,9 +91,9 @@ const Hero = ({ onOpenContact }: HeroProps) => {
           </p>
 
           <div className="intro__actions">
-            <a href="/collective" className="btn btn--primary">
+            <Link to="/collective" className="btn btn--primary">
               Our Collective <span className="btn__arrow">→</span>
-            </a>
+            </Link>
             <button onClick={onOpenContact} className="btn btn--outline">
               Get in Touch
             </button>

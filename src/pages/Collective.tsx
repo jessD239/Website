@@ -221,10 +221,10 @@ const Collective = () => {
                 >
                   <div className="collective-profile__gallery">
                     <div className="collective-profile__image collective-profile__image--primary">
-                      <img src={profile.images[0]} alt={`${profile.name} — ${profile.role}`} />
+                      <img src={profile.images[0]} alt={`${profile.name} — ${profile.role}`} loading="lazy" />
                     </div>
                     <div className="collective-profile__image collective-profile__image--secondary">
-                      <img src={profile.images[1]} alt={`${profile.name} — ${profile.role}`} />
+                      <img src={profile.images[1]} alt={`${profile.name} — ${profile.role}`} loading="lazy" />
                     </div>
                   </div>
 
@@ -265,7 +265,7 @@ const Collective = () => {
                                     width: profile.innerImage.width,
                                   }}
                                 >
-                                  <img src={profile.innerImage.src} alt={`${profile.name} — ${profile.role}`} />
+                                  <img src={profile.innerImage.src} alt={`${profile.name} — ${profile.role}`} loading="lazy" />
                                 </div>
                                 {profile.dropdownText && (
                                   <p className="collective-profile__dropdown-text">{profile.dropdownText}</p>

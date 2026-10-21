@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /subscribe
+Disallow: /unsubscribe
+
+Sitemap: https://peoplewithideas.co.nz/sitemap.xml

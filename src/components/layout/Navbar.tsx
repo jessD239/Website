@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import HamburgerButton from "../ui/HamburgerButton";
 import PWILogo from "../ui/PWILogo";
@@ -80,9 +80,9 @@ const Navbar = ({ onOpenContact, forceDark = false }: NavbarProps) => {
               Contact
             </a>
             <span className="header__divider" aria-hidden="true" />
-            <a href="/collective" className="header__link">
+            <Link to="/collective" className="header__link">
               Collective
-            </a>
+            </Link>
           </nav>
 
           <HamburgerButton isOpen={navOpen} onClick={() => setNavOpen((prev) => !prev)} />
@@ -112,9 +112,9 @@ const Navbar = ({ onOpenContact, forceDark = false }: NavbarProps) => {
         >
           Contact
         </a>
-        <a href="/collective" className="mobile-nav__link" onClick={closeNav}>
+        <Link to="/collective" className="mobile-nav__link" onClick={closeNav}>
           Collective
-        </a>
+        </Link>
       </div>
     </>
   );
