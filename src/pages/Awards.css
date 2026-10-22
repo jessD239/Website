@@ -227,23 +227,22 @@
   }
 }
 
-.awards-video-placeholder {
+.awards-video {
   aspect-ratio: 16 / 9;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
-  background-color: var(--color-bg-dark);
-  color: rgba(246, 244, 240, 0.7);
+  box-sizing: border-box;
+  /* background-color: var(--color-bg-dark); */
+  /* color: rgba(246, 244, 240, 0.7); */
   font-size: var(--fs-sm);
   text-align: center;
-}
 
-.awards-video-placeholder__mark {
-  color: var(--color-accent);
-  font-family: var(--font-serif);
-  font-size: 2rem;
+  > * {
+    border: none;
+  }
 }
 
 .awards-contact {

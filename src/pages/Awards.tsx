@@ -2,6 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useReveal } from "../functions/Utility";
 import "./Awards.css";
+import {
+  SmallBusinessVideo,
+  DiversityInclusionVideo,
+  SustainabilityVideo,
+  HealthSafetyVideo,
+  TechnologyInnovationVideo,
+  ServiceSupportVideo,
+  ManufacturingVideo,
+  ConstructionTradesVideo,
+  HospitalityRetailTourismVideo,
+} from "./AwardsVideos";
 
 interface AwardsProps {
   onOpenContact: () => void;
@@ -12,15 +23,19 @@ const SESSION_UNLOCK_KEY = "pwi_awards_unlocked";
 const ACCESS_CODE = "AWARDS2026";
 
 const categories = [
-  { id: "small-business", name: "Best Small Business" },
-  { id: "diversity-inclusion", name: "Celebrating Diversity, Inclusion, and Growing People" },
-  { id: "sustainability", name: "Excellence in Sustainable and Environmental Practices" },
-  { id: "health-safety", name: "Excellence in Health, Safety, and Wellbeing Innovation" },
-  { id: "technology-innovation", name: "Technology and Innovation" },
-  { id: "service-support", name: "Service and Support" },
-  { id: "manufacturing", name: "Manufacturing" },
-  { id: "construction-trades", name: "Construction, Trades, and Infrastructure" },
-  { id: "hospitality-retail-tourism", name: "Hospitality, Retail, and Tourism" },
+  { id: "small-business", name: "Best Small Business", video: SmallBusinessVideo },
+  {
+    id: "diversity-inclusion",
+    name: "Celebrating Diversity, Inclusion, and Growing People",
+    video: DiversityInclusionVideo,
+  },
+  { id: "sustainability", name: "Excellence in Sustainable and Environmental Practices", video: SustainabilityVideo },
+  { id: "health-safety", name: "Excellence in Health, Safety, and Wellbeing Innovation", video: HealthSafetyVideo },
+  { id: "technology-innovation", name: "Technology and Innovation", video: TechnologyInnovationVideo },
+  { id: "service-support", name: "Service and Support", video: ServiceSupportVideo },
+  { id: "manufacturing", name: "Manufacturing", video: ManufacturingVideo },
+  { id: "construction-trades", name: "Construction, Trades, and Infrastructure", video: ConstructionTradesVideo },
+  { id: "hospitality-retail-tourism", name: "Hospitality, Retail, and Tourism", video: HospitalityRetailTourismVideo },
 ];
 
 const Awards = ({ onOpenContact }: AwardsProps) => {
@@ -198,12 +213,7 @@ const Awards = ({ onOpenContact }: AwardsProps) => {
                   </svg>
                 </h2>
               </div>
-              <div className="awards-video-placeholder">
-                <span className="awards-video-placeholder__mark" aria-hidden="true">
-                  PwI
-                </span>
-                <p>Video examples coming soon</p>
-              </div>
+              <div className="awards-video">{category.video && <category.video />}</div>
             </section>
           ))}
         </div>
