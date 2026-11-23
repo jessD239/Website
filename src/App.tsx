@@ -9,6 +9,7 @@ import Collective from "./pages/Collective";
 import Subscribe from "./pages/Subscribe";
 import Unsubscribe from "./pages/Unsubscribe";
 import Awards from "./pages/Awards";
+import Workshops from "./pages/Workshops";
 import { useReveal } from "./functions/Utility";
 import "./App.css";
 
@@ -61,12 +62,32 @@ function AwardsPage() {
   );
 }
 
+function WorkshopsPage() {
+  const [contactOpen, setContactOpen] = useState(false);
+  const [topic, setTopic] = useState<string | undefined>();
+
+  const openContact = (nextTopic?: string) => {
+    setTopic(nextTopic);
+    setContactOpen(true);
+  };
+
+  return (
+    <>
+      <Navbar onOpenContact={() => openContact()} forceDark />
+      <Workshops onEnquire={openContact} />
+      <Footer />
+      <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} topic={topic} />
+    </>
+  );
+}
+
 function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/collective" element={<CollectivePage />} />
       <Route path="/awards" element={<AwardsPage />} />
+      <Route path="/workshops" element={<WorkshopsPage />} />
 
       <Route path="/subscribe" element={<Subscribe />} />
       <Route path="/unsubscribe" element={<Unsubscribe />} />

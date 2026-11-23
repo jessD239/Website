@@ -83,6 +83,9 @@ const Navbar = ({ onOpenContact, forceDark = false }: NavbarProps) => {
               Contact
             </a>
             <span className="header__divider" aria-hidden="true" />
+            <Link to="/workshops" className="header__link">
+              Workshops
+            </Link>
             <Link to="/collective" className="header__link">
               Collective
             </Link>
@@ -121,6 +124,9 @@ const Navbar = ({ onOpenContact, forceDark = false }: NavbarProps) => {
         >
           Contact
         </a>
+        <Link to="/workshops" className="mobile-nav__link" onClick={closeNav}>
+          Workshops
+        </Link>
         <Link to="/collective" className="mobile-nav__link" onClick={closeNav}>
           Collective
         </Link>
