@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 import Footer from "./components/layout/Footer";
 import Navbar from "./components/layout/Navbar";
 import ContactModal from "./components/ContactModal";
@@ -12,6 +12,31 @@ import Awards from "./pages/Awards";
 import Workshops from "./pages/Workshops";
 import { useReveal } from "./functions/Utility";
 import "./App.css";
+
+/**
+ * Client-side routing keeps the previous page's scroll position, so reset it on navigation.
+ * - New page with a #hash: jump to that element.
+ * - New page without one: start at the top.
+ * - Back/forward (POP): leave it alone so the browser restores where you were.
+ */
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
+  const navigationType = useNavigationType();
+
+  useLayoutEffect(() => {
+    if (navigationType === "POP") return;
+    const target = hash ? document.getElementById(hash.slice(1)) : null;
+    if (target) {
+      target.scrollIntoView({ behavior: "instant" });
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+    // Only on page changes; same-page hash links are handled by the page itself.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  return null;
+}
 
 function HomePage() {
   useReveal();
@@ -83,18 +108,21 @@ function WorkshopsPage() {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/collective" element={<CollectivePage />} />
-      <Route path="/awards" element={<AwardsPage />} />
-      <Route path="/workshops" element={<WorkshopsPage />} />
+    <>
+      <ScrollManager />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/collective" element={<CollectivePage />} />
+        <Route path="/awards" element={<AwardsPage />} />
+        <Route path="/workshops" element={<WorkshopsPage />} />
 
-      <Route path="/subscribe" element={<Subscribe />} />
-      <Route path="/unsubscribe" element={<Unsubscribe />} />
+        <Route path="/subscribe" element={<Subscribe />} />
+        <Route path="/unsubscribe" element={<Unsubscribe />} />
 
-      {/* <Route path="/event" element={<EventSignup />} /> */}
-      {/* <Route path="/event-draw" element={<EventDraw />} /> */}
-    </Routes>
+        {/* <Route path="/event" element={<EventSignup />} /> */}
+        {/* <Route path="/event-draw" element={<EventDraw />} /> */}
+      </Routes>
+    </>
   );
 }
 
