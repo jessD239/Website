@@ -124,10 +124,6 @@
   background-color: #1d1d1d;
 }
 
-.format-card--featured {
-  background-color: #1a1a1a;
-}
-
 .format-card__top {
   display: flex;
   justify-content: space-between;
@@ -142,14 +138,16 @@
   opacity: 0.3;
 }
 
-.format-card__badge {
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  border: 1px solid rgba(200, 168, 124, 0.4);
-  padding: 0.3rem 0.65rem;
+/* Accordion parts: on desktop the body is always shown and fills the card so the footer sits at the bottom. */
+.format-card__body,
+.format-card__body-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.format-card__toggle {
+  display: none;
 }
 
 .format-card__audience {
@@ -428,6 +426,69 @@
   .workshops-custom {
     padding: var(--space-md) var(--space-sm);
   }
+
+  /* Format cards collapse to an accordion: head (tag, title, summary) always visible, details on tap. */
+  .format-card__head {
+    cursor: pointer;
+  }
+
+  .format-card__top {
+    margin-bottom: var(--space-sm);
+  }
+
+  .format-card__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: -0.6rem;
+    background: none;
+    border: none;
+    color: var(--color-accent);
+    cursor: pointer;
+  }
+
+  .format-card__toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 0.4s ease;
+  }
+
+  .format-card[data-open="true"] .format-card__toggle svg {
+    transform: rotate(180deg);
+  }
+
+  .format-card__summary {
+    margin-bottom: 0;
+  }
+
+  .format-card__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease;
+  }
+
+  .format-card[data-open="true"] .format-card__body {
+    grid-template-rows: 1fr;
+  }
+
+  .format-card__body-inner {
+    display: block;
+    min-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: visibility 0s linear 0.4s;
+  }
+
+  .format-card[data-open="true"] .format-card__body-inner {
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .format-card__meta {
+    margin-top: var(--space-md);
+  }
 }
 
 /* ---------- Reduced motion ---------- */
@@ -438,7 +499,9 @@
     transition: none;
   }
 
-  .topic-item__title::after {
+  .topic-item__title::after,
+  .format-card__body,
+  .format-card__toggle svg {
     transition: none;
   }
 }

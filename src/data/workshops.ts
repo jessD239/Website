@@ -17,30 +17,9 @@ export interface WorkshopFormat {
   includes: string[];
   outcome: string;
   price?: string;
-  featured?: boolean;
 }
 
 export const workshopFormats: WorkshopFormat[] = [
-  {
-    slug: "group",
-    audience: "For teams",
-    title: "Group Workshop",
-    enquiryName: "Group Workshop",
-    summary:
-      "A hands-on session for your whole team. We look at what you're making, why it's not landing, and leave everyone with a shared plan.",
-    meta: [
-      { label: "Length", value: "Half or full day" },
-      { label: "Group size", value: "4 – 20 people" },
-      { label: "Where", value: "Your space or ours" },
-    ],
-    includes: [
-      "Pre-session chat and content review",
-      "Interactive, practical workshop",
-      "Team exercises built around your real content",
-      "Written action plan afterwards",
-    ],
-    outcome: "A team pulling in the same direction, with clear next steps.",
-  },
   {
     slug: "personal-2hr",
     audience: "For individuals",
@@ -57,17 +36,17 @@ export const workshopFormats: WorkshopFormat[] = [
       "Short brief before we meet",
       "Review of one channel, campaign or idea",
       "Practical recommendations on the spot",
-      "Summary of next steps",
+      "Action plan: 5 priorities, 3 content ideas and 1 clear message",
     ],
     outcome: "Clarity on one thing, and exactly what to do next.",
   },
   {
     slug: "personal-4hr",
-    audience: "For individuals",
+    audience: "For individuals & small teams",
     title: "4-Hour Deep Dive",
     enquiryName: "4-Hour Deep Dive",
     summary:
-      "Room to go properly deep. We review your content end to end, upskill you where it matters and build a plan you can run with.",
+      "Room to go further. We look at your content as a whole, get hands-on with how you create it and map out what to make next.",
     meta: [
       { label: "Length", value: "4 hours" },
       { label: "Group size", value: "1 – 3 people" },
@@ -75,12 +54,31 @@ export const workshopFormats: WorkshopFormat[] = [
     ],
     includes: [
       "Everything in the 2-hour session",
-      "Full review of your current content",
+      "Review of up to 3 channels before we meet",
       "Hands-on skills and tools, including AI",
-      "Content plan for the next 3 months",
+      "Session summary and a how-to guide to keep",
     ],
-    outcome: "Confidence, new skills and a plan you own.",
-    featured: true,
+    outcome: "Confidence to create, and a plan you own.",
+  },
+  {
+    slug: "content-lab",
+    audience: "For small teams",
+    title: "Content Lab",
+    enquiryName: "Content Lab",
+    summary:
+      "A hands-on session for a small team. We look at what you're making, try new ideas together and leave everyone on the same page.",
+    meta: [
+      { label: "Length", value: "Half or full day" },
+      { label: "Group size", value: "Up to 6 people" },
+      { label: "Where", value: "Workshop space, gear provided" },
+    ],
+    includes: [
+      "Establishing your unique voice, with a look at 1 or 2 competitors",
+      "Hands-on: shaping your content to suit your voice and your customers",
+      "Specialists brought in only if you need them",
+      "Session summary and a how-to guide to keep",
+    ],
+    outcome: "A team pulling in the same direction, with clear next steps.",
   },
 ];
 
@@ -103,7 +101,7 @@ export const workshopTopics: { title: string; text: string }[] = [
   },
   {
     title: "AI tools",
-    text: "Where AI genuinely helps your content, and where it gets in the way.",
+    text: "Where AI genuinely saves time, and where it creates risk around copyright, privacy and authenticity.",
   },
   {
     title: "Team upskilling",
@@ -113,12 +111,12 @@ export const workshopTopics: { title: string; text: string }[] = [
 
 export const workshopSteps: { title: string; text: string }[] = [
   {
-    title: "We talk",
-    text: "A quick chat about where you're at, what you've tried and what you want to get out of it. No brief required.",
+    title: "We listen",
+    text: "Tell us where you're at, what you've tried and what you want to get out of it. We ask questions first. No brief required.",
   },
   {
     title: "We prepare",
-    text: "We review your content and shape the session around your real situation. No templates.",
+    text: "We look at your content the way a new customer would, then shape the session around what we find.",
   },
   {
     title: "We work",
@@ -134,7 +132,7 @@ export const workshopFaqs: { question: string; answer: string }[] = [
   {
     question: "Which format is right for me?",
     answer:
-      "If it's about getting a team aligned, a group workshop. If it's one problem you need solved, the 2-hour session. If you want a full review and a plan to run with, the 4-hour deep dive. Not sure? Get in touch and we'll point you in the right direction.",
+      "If it's one problem you need solved, the 2-hour session. If you want to look at the bigger picture and get hands-on, the 4-hour deep dive. If you want a small team creating together, the Content Lab. Not sure? Get in touch and we'll point you in the right direction.",
   },
   {
     question: "Do I need to prepare anything?",
@@ -144,11 +142,11 @@ export const workshopFaqs: { question: string; answer: string }[] = [
   {
     question: "Can sessions be run online?",
     answer:
-      "Personal sessions work well online. Group workshops are best in person, but we can run them remotely if your team is spread out.",
+      "The 2-hour and 4-hour sessions work well online. The Content Lab is hands-on with gear in a dedicated workshop space, so it runs in person.",
   },
   {
     question: "Do you travel outside Wellington?",
-    answer: "Yes. We work with teams across New Zealand. Travel costs are quoted up front.",
+    answer: "Yes. We work with teams across New Zealand and Australia. Travel costs are quoted up front.",
   },
   {
     question: "Can you tailor the content?",

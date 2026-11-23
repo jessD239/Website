@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useReveal } from "../functions/Utility";
 import FAQs from "../sections/FAQs";
 import Contact from "../sections/Contact";
@@ -14,10 +15,21 @@ const painPoints = [
   "Your team has ideas, but no shared direction.",
   "You know you need content, but not what to make.",
   "You've tried AI tools and ended up with more noise.",
+  "You want to get more out of LinkedIn.",
 ];
 
 const Workshops = ({ onEnquire }: WorkshopsProps) => {
   useReveal();
+  /** Mobile accordion: slug of the expanded format card (ignored on desktop, where all cards are open). */
+  const [openFormat, setOpenFormat] = useState<string | null>(null);
+
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title = "Workshops & Consulting | People with Ideas";
+    return () => {
+      document.title = previousTitle;
+    };
+  }, []);
 
   return (
     <div className="workshops-page">
@@ -25,10 +37,10 @@ const Workshops = ({ onEnquire }: WorkshopsProps) => {
       <section className="workshops-hero">
         <div className="container">
           <p className="section-label reveal">Consulting &amp; Workshops</p>
-          <h1 className="workshops-hero__title reveal">Make your content work harder.</h1>
+          <h1 className="workshops-hero__title reveal">See your content the way your audience does.</h1>
           <p className="workshops-hero__text reveal">
-            Practical sessions that show you what's working, fix what isn't and give you the tools and confidence to
-            move forward. Built around your business, never a template.
+            Practical sessions that build on what you're already doing well, so the people you want to reach notice,
+            understand and remember you. Built around your business, never a template.
           </p>
           <div className="workshops-hero__actions reveal">
             <a href="#formats" className="btn btn--primary">
@@ -70,52 +82,83 @@ const Workshops = ({ onEnquire }: WorkshopsProps) => {
           </header>
 
           <div className="workshops-formats__grid">
-            {workshopFormats.map((format, i) => (
-              <article
-                key={format.slug}
-                id={format.slug}
-                className={`format-card reveal${format.featured ? " format-card--featured" : ""}`}
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <div className="format-card__top">
-                  <p className="format-card__number">{String(i + 1).padStart(2, "0")}</p>
-                  {format.featured && <span className="format-card__badge">Most popular</span>}
-                </div>
-                <p className="format-card__audience">{format.audience}</p>
-                <h3 className="format-card__title">{format.title}</h3>
-                <p className="format-card__summary">{format.summary}</p>
-
-                <dl className="format-card__meta">
-                  {format.meta.map((m) => (
-                    <div key={m.label} className="format-card__meta-row">
-                      <dt>{m.label}</dt>
-                      <dd>{m.value}</dd>
+            {workshopFormats.map((format, i) => {
+              const isOpen = openFormat === format.slug;
+              const bodyId = `${format.slug}-details`;
+              return (
+                <article
+                  key={format.slug}
+                  id={format.slug}
+                  // className must stay static: useReveal adds "is-visible" directly to the DOM,
+                  // and a changing className would make React wipe it. Open state lives in data-open.
+                  className="format-card reveal"
+                  data-open={isOpen}
+                  style={{ transitionDelay: `${i * 100}ms` }}
+                >
+                  {/* On mobile the head toggles the details; the button is the accessible control. */}
+                  <div className="format-card__head" onClick={() => setOpenFormat(isOpen ? null : format.slug)}>
+                    <div className="format-card__top">
+                      <p className="format-card__number">{String(i + 1).padStart(2, "0")}</p>
+                      <button
+                        type="button"
+                        className="format-card__toggle"
+                        aria-expanded={isOpen}
+                        aria-controls={bodyId}
+                        aria-label={`${isOpen ? "Hide" : "Show"} details for ${format.title}`}
+                      >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <polyline
+                            points="6,9 12,15 18,9"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
                     </div>
-                  ))}
-                </dl>
+                    <p className="format-card__audience">{format.audience}</p>
+                    <h3 className="format-card__title">{format.title}</h3>
+                    <p className="format-card__summary">{format.summary}</p>
+                  </div>
 
-                <p className="format-card__subhead">What's included</p>
-                <ul className="format-card__list">
-                  {format.includes.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
+                  <div className="format-card__body" id={bodyId}>
+                    <div className="format-card__body-inner">
+                      <dl className="format-card__meta">
+                        {format.meta.map((m) => (
+                          <div key={m.label} className="format-card__meta-row">
+                            <dt>{m.label}</dt>
+                            <dd>{m.value}</dd>
+                          </div>
+                        ))}
+                      </dl>
 
-                <p className="format-card__subhead">Outcome</p>
-                <p className="format-card__outcome">{format.outcome}</p>
+                      <p className="format-card__subhead">What's included</p>
+                      <ul className="format-card__list">
+                        {format.includes.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
 
-                <div className="format-card__footer">
-                  <p className="format-card__price">{format.price ?? "Pricing on enquiry"}</p>
-                  <button
-                    type="button"
-                    className="btn btn--outline-light format-card__cta"
-                    onClick={() => onEnquire(format.enquiryName)}
-                  >
-                    Enquire <span className="btn__arrow">→</span>
-                  </button>
-                </div>
-              </article>
-            ))}
+                      <p className="format-card__subhead">Outcome</p>
+                      <p className="format-card__outcome">{format.outcome}</p>
+
+                      <div className="format-card__footer">
+                        <p className="format-card__price">{format.price ?? "Pricing on enquiry"}</p>
+                        <button
+                          type="button"
+                          className="btn btn--outline-light format-card__cta"
+                          onClick={() => onEnquire(format.enquiryName)}
+                        >
+                          Enquire <span className="btn__arrow">→</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
           {/* Custom programme banner */}
@@ -146,7 +189,7 @@ const Workshops = ({ onEnquire }: WorkshopsProps) => {
             <p className="section-label">What we cover</p>
             <h2 className="workshops-section-title">Any topic, any format.</h2>
             <p className="workshops-topics__intro">
-              Mix and match. Most sessions cover two or three of these, depending on where you need the most help.
+              Mix and match. Longer sessions cover two or three of these, depending on where you need the most help.
             </p>
           </header>
           <div className="workshops-topics__grid">
