@@ -13,11 +13,13 @@ const ANIMATION_DURATION = 300;
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  /** Optional context for the enquiry (e.g. a workshop format). Prefills the message and is sent as `topic`. */
+  topic?: string;
 }
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
+const ContactModal = ({ isOpen, onClose, topic }: ContactModalProps) => {
   const [mounted, setMounted] = useState(isOpen);
   const [isVisible, setIsVisible] = useState(false);
   const [name, setName] = useState("");
@@ -43,6 +45,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     if (isOpen) {
       // ENTRY: Mount first, then fade in
       setMounted(true);
+      if (topic) setMessage((prev) => prev || `Hi, I'm interested in the ${topic}.\n\n`);
       // 10ms is enough to let the browser register the initial "hidden" state
       timer = setTimeout(() => setIsVisible(true), 10);
     } else {
@@ -56,7 +59,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
 
     // Cleanup prevents memory leaks if isOpen changes mid-animation
     return () => clearTimeout(timer);
-  }, [isOpen, ANIMATION_DURATION]);
+  }, [isOpen, topic]);
 
   useEffect(() => {
     if (mounted) {
@@ -180,6 +183,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
             </div>
 
             <form className="contact-form" onSubmit={handleSubmit} noValidate>
+              {topic && <input type="hidden" name="topic" value={topic} />}
               <TextField
                 name="name"
                 label="Name"

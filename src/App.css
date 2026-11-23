@@ -50,6 +50,15 @@ h4 {
   font-family: var(--font-serif);
   font-weight: 400;
   line-height: 1.15;
+  /* Even out line lengths so headings don't wrap with one lonely word. */
+  text-wrap: balance;
+}
+
+/* Avoid a single orphaned word on the last line of body copy. Browsers without support ignore it. */
+p,
+li,
+dd {
+  text-wrap: pretty;
 }
 
 /* ============================================

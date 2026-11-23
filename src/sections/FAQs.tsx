@@ -1,7 +1,12 @@
 import { useState } from "react";
 import "./FAQs.css";
 
-const faqs = [
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
+const defaultFaqs: FAQ[] = [
   {
     question: "What can I actually hire People with Ideas for?",
     answer:
@@ -56,15 +61,17 @@ const faqs = [
 
 const FAQItem = ({
   index,
+  idPrefix,
   question,
   answer,
 }: {
   index: number;
+  idPrefix: string;
   question: string;
   answer: string;
 }) => {
   const [open, setOpen] = useState(false);
-  const panelId = `faq-panel-${index}`;
+  const panelId = `${idPrefix}-panel-${index}`;
 
   return (
     <div className="reveal">
@@ -114,23 +121,36 @@ const FAQItem = ({
   );
 };
 
-const FAQs = () => {
+interface FAQsProps {
+  items?: FAQ[];
+  id?: string;
+  label?: string;
+  title?: string;
+  intro?: string;
+}
+
+const FAQs = ({
+  items = defaultFaqs,
+  id = "faqs",
+  label = "Frequently Asked Questions",
+  title = "Good to know.",
+  intro = "A few things you might be wondering before we get started.",
+}: FAQsProps) => {
   return (
-    <section className="faqs" id="faqs">
+    <section className="faqs" id={id}>
       <div className="container">
         <header className="faqs__header reveal">
-          <p className="section-label">Frequently Asked Questions</p>
-          <h2 className="faqs__title">Good to know.</h2>
-          <p className="faqs__intro">
-            A few things you might be wondering before we get started.
-          </p>
+          <p className="section-label">{label}</p>
+          <h2 className="faqs__title">{title}</h2>
+          <p className="faqs__intro">{intro}</p>
         </header>
 
         <div className="faqs__grid">
-          {faqs.map((faq, index) => (
+          {items.map((faq, index) => (
             <FAQItem
               key={faq.question}
               index={index}
+              idPrefix={id}
               question={faq.question}
               answer={faq.answer}
             />

@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Services.css";
 
 interface Service {
@@ -38,6 +39,11 @@ const services: Service[] = [
           <strong>Outcome</strong>
         </p>
         <p>Clear direction. Practical steps. Confidence to move forward.</p>
+        <p>
+          <Link to="/workshops" className="services__detail-link" onClick={(e) => e.stopPropagation()}>
+            See workshop formats →
+          </Link>
+        </p>
 
         {/* 
         <p>

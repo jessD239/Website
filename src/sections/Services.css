@@ -489,3 +489,15 @@
     margin-bottom: 0.7rem;
   }
 }
+
+.services__detail-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--color-accent);
+  border-bottom: 1px solid currentColor;
+  transition: opacity 0.3s ease;
+}
+
+.services__detail-link:hover {
+  opacity: 0.75;
+}
